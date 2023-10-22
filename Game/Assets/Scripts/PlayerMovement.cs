@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 { 
@@ -16,7 +14,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-
         Vector3 auxVec = Vector3.zero;
 
         //Check inputs ---------------------------------------------------------------------------------------------------
