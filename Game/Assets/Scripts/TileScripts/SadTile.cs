@@ -8,6 +8,6 @@ public class SadTile : Tile
     {
         //Update Happiness meter
         destroyParticle.Play();
-        Destroy(gameObject);
+        Destroy(this.gameObject);
     }
 }

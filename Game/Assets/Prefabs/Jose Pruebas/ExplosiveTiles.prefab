@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -3510888860683471738}
   - component: {fileID: 4045633663094572078}
   - component: {fileID: 2070417602533812408}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ExplosiveTiles
   m_TagString: Tile
   m_Icon: {fileID: 0}

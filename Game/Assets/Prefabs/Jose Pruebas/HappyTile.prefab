@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -2505510572446237590}
   - component: {fileID: 8253099729607431073}
   - component: {fileID: -429804548836035226}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: HappyTile
   m_TagString: Tile
   m_Icon: {fileID: 0}

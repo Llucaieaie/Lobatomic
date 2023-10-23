@@ -17,4 +17,9 @@ public class TileIsDiscovered : MonoBehaviour
         gameObject.GetComponent<SpriteRenderer>().sprite = disoveredTile;
         isDiscovered = true;
     }
+
+    public void DestroyTile()
+    {
+        gameObject.SendMessage("OnOnExplosion");
+    }
 }

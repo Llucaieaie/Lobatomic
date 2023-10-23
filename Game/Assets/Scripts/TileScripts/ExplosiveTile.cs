@@ -16,7 +16,7 @@ public class ExplosiveTile : Tile
     {
         Explode();
         destroyParticle.Play();
-        Destroy(gameObject, 0.5f);
+        Destroy(this.gameObject, 0.5f);
     }
 
     void Explode()
