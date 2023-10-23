@@ -31,7 +31,7 @@ public class MapGenerator : MonoBehaviour
     public TileBase tileBase;
 
 
-    public List<GameObject> tiles = new List<GameObject>();
+    public List<TileStruct> tiles = new List<TileStruct>();
     List<Vector3Int> occupied = new List<Vector3Int>();
     HashSet<Vector3Int> positionsFromTileFrame = new HashSet<Vector3Int>();
     BoundsInt bounds;
@@ -109,7 +109,8 @@ public class MapGenerator : MonoBehaviour
     public void PaintTiles(Vector3Int position, TileStruct tile)
     {
         occupied.Add(position);
-        tiles.Add(Instantiate(tile.tile, new Vector3(position.x, position.y, 0), Quaternion.Euler(180, 0, 0)));
+        Instantiate(tile.tile, new Vector3(position.x, position.y, 0), Quaternion.Euler(180, 0, 0));
+        tiles.Add(tile);
     }
 
     private bool IsInRate(TileStruct tile)
@@ -151,23 +152,23 @@ public class MapGenerator : MonoBehaviour
         GetComponentInParent<EdgeCollider2D>().points = points;
     }
 
-    void RestartLvl()
+    public void RestartLvl()
     {
         occupied.Clear();
         for (int i = 0; i < tiles.Count; i++)
         {
-            tiles[i].SendMessage("OnExplosion");
+            tiles[i].tile.SendMessage("OnExplosion");
         }
         tiles.Clear();
 
         GenerateMap(sizeX, sizeY);
     }
-    void CleanUp()
+    public void CleanUp()
     {
         occupied.Clear();
         for (int i = 0; i < tiles.Count; i++)
         {
-            tiles[i].SendMessage("OnExplosion");
+            tiles[i].tile.SendMessage("OnExplosion");
         }
         tiles.Clear();
     }
