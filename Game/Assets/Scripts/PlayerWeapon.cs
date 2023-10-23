@@ -55,27 +55,25 @@ public class PlayerWeapon : MonoBehaviour
         BoxCollider2D weaponCollider = TargetCollider();
         List<GameObject> tilesInside = new List<GameObject>(); //New list with the tiles inside weaponCollider
 
-        foreach (GameObject tile in mapGenerator.tiles) //Add all the tiles that are inside the colldier in tilesInside
+        GameObject tile = null;
+        for (int i = 0; i < mapGenerator.tiles.Count; i++) //Add all the tiles that are inside the colldier in tilesInside
         {
-            if (tile.GetComponent<BoxCollider2D>().IsTouching(weaponCollider)) { tilesInside.Add(tile); }
+            tile = mapGenerator.tiles[i];
+            if (tile.name != "VoidTile(Clone)" || tile.name != "InmuneTile(Clone)")
+            {
+                if (tile.GetComponent<BoxCollider2D>().IsTouching(weaponCollider)) { tilesInside.Add(tile); }
+            }
         }
-        foreach (GameObject targetTile in tilesInside) //Call "OnExplosion" on every tile of tilesInside
+        for (int i = 0; i < tilesInside.Count; i++) //Call "OnExplosion" on every tile of tilesInside
         {
-            targetTile.SendMessage("OnExplosion");
+            tilesInside[i].SendMessage("OnExplosion");
         }
     }
 
     //Start & Update -----------------------------------------------------------------------------------------
     void Start()
     {
-        mapGenerator = GameObject.FindGameObjectWithTag("MapGenerator").GetComponent<MapGenerator>();
-
-        colliders = new BoxCollider2D[4];
-
-        colliders[0] = GameObject.FindGameObjectWithTag("Col_UP").GetComponent<BoxCollider2D>();
-        colliders[1] = GameObject.FindGameObjectWithTag("Col_DOWN").GetComponent<BoxCollider2D>();
-        colliders[2] = GameObject.FindGameObjectWithTag("Col_LEFT").GetComponent<BoxCollider2D>();
-        colliders[3] = GameObject.FindGameObjectWithTag("Col_RIGHT").GetComponent<BoxCollider2D>();
+        canAttack = true;
     }
 
     void Update()

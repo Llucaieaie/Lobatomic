@@ -9,7 +9,7 @@ public class CameraManager : MonoBehaviour
 
     void Start()
     {
-        cam = GetComponent<Camera>();
+        //cam = GetComponent<Camera>();
     }
 
     void Update()
