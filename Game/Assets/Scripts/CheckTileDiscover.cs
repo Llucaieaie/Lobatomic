@@ -9,11 +9,11 @@ public class CheckTileDiscover : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        RaycastHit2D[] hit = Physics2D.CircleCastAll((Vector2)transform.position, DisoverRad, Vector2.zero);
+        RaycastHit2D[] hit = Physics2D.CircleCastAll(transform.position, DisoverRad, Vector2.zero);
 
         for (int i = 0; i < hit.Length; i++)
         {
-            if (hit[i].transform.gameObject.tag == "Tile" && hit[i].transform.gameObject.GetComponent<TileIsDiscovered>().isDiscovered)
+            if (hit[i].transform.gameObject.tag == "Tile" && !hit[i].transform.gameObject.GetComponent<TileIsDiscovered>().isDiscovered)
             {
                 hit[i].transform.gameObject.GetComponent<TileIsDiscovered>().TileIsDisovered();
             }

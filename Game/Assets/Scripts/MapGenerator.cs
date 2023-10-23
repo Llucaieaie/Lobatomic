@@ -47,16 +47,17 @@ public class MapGenerator : MonoBehaviour
         this.sizeX = sizeX;
         this.sizeY = sizeY;
 
-        bounds = new BoundsInt(new Vector3Int(0,0,0) - new Vector3Int(sizeX/2, sizeY/2, 0),
+        bounds = new BoundsInt(new Vector3Int(0, 0, 0) - new Vector3Int(sizeX / 2, sizeY / 2, 0),
                                             new Vector3Int(sizeX, sizeY, 0));
 
         SaveZone();
+        GenerateExternalCollider();
 
         positionsFromTileFrame = CreateRoom(bounds);
 
         for (int i = 0; i < tileStruct.Length; i++)
         {
-            tileStruct[i].maxNum = (tileStruct[i].maxNum*(sizeX*sizeY))/100;
+            tileStruct[i].maxNum = (tileStruct[i].maxNum * (sizeX * sizeY)) / 100;
         }
 
         foreach (var position in positionsFromTileFrame)
@@ -115,7 +116,7 @@ public class MapGenerator : MonoBehaviour
     {
         bool ret = false;
 
-        if (Random.Range(0,101) <= (tile.appearRate + (tile.maxNum/(tile.maxNum-tile.tileCount+1))/10))
+        if (Random.Range(0, 101) <= (tile.appearRate + (tile.maxNum / (tile.maxNum - tile.tileCount + 1)) / 10))
         {
             ret = true;
         }
@@ -137,6 +138,19 @@ public class MapGenerator : MonoBehaviour
         return ret;
     }
 
+    void GenerateExternalCollider()
+    {
+        Vector2[] points = new Vector2[5];
+
+        points[0] = new Vector2(bounds.xMin - 2, bounds.yMax - 1);
+        points[1] = new Vector2(bounds.xMax - 2, bounds.yMax - 1);
+        points[2] = new Vector2(bounds.xMax - 2, bounds.yMin - 1);
+        points[3] = new Vector2(bounds.xMin - 2, bounds.yMin - 1);
+
+        points[4] = points[0];
+        GetComponentInParent<EdgeCollider2D>().points = points;
+    }
+
     void RestartLvl()
     {
         occupied.Clear();
@@ -148,7 +162,6 @@ public class MapGenerator : MonoBehaviour
 
         GenerateMap(sizeX, sizeY);
     }
-
     void CleanUp()
     {
         occupied.Clear();
