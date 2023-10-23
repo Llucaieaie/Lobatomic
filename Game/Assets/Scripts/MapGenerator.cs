@@ -142,10 +142,10 @@ public class MapGenerator : MonoBehaviour
     {
         Vector2[] points = new Vector2[5];
 
-        points[0] = new Vector2(bounds.xMin, bounds.yMax);
-        points[1] = new Vector2(bounds.xMax, bounds.yMax);
-        points[2] = new Vector2(bounds.xMax, bounds.yMin);
-        points[3] = new Vector2(bounds.xMin, bounds.yMin);
+        points[0] = new Vector2(bounds.xMin - 2, bounds.yMax - 1);
+        points[1] = new Vector2(bounds.xMax - 2, bounds.yMax - 1);
+        points[2] = new Vector2(bounds.xMax - 2, bounds.yMin - 1);
+        points[3] = new Vector2(bounds.xMin - 2, bounds.yMin - 1);
 
         points[4] = points[0];
         GetComponentInParent<EdgeCollider2D>().points = points;
