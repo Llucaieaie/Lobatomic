@@ -192,6 +192,7 @@ MonoBehaviour:
     appearRate: 20
   tileMap: {fileID: 1400730073}
   tileBase: {fileID: 11400000, guid: 3b6c80b11ffc6944aba3aad2e14034d7, type: 2}
+  tiles: []
 --- !u!4 &456126062
 Transform:
   m_ObjectHideFlags: 0
@@ -301,6 +302,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 43102812682024401, guid: e2ef161a6c483ec49958629b21f10e3d, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 43102812682024402, guid: e2ef161a6c483ec49958629b21f10e3d, type: 3}
       propertyPath: m_Name
       value: Player
@@ -323,7 +328,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 43102812682024406, guid: e2ef161a6c483ec49958629b21f10e3d, type: 3}
       propertyPath: maxSpeed
-      value: 5
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 43102812682024406, guid: e2ef161a6c483ec49958629b21f10e3d, type: 3}
+      propertyPath: acceleration
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 43102812682024407, guid: e2ef161a6c483ec49958629b21f10e3d, type: 3}
       propertyPath: DisoverRad
@@ -606,3 +615,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!58 &1478739249
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1478739237}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.64

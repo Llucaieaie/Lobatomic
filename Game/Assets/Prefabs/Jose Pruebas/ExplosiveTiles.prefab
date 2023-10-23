@@ -99,9 +99,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecf2faf8122133b47967604606317d0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyParticle: {fileID: 0}
+  destroyParticle: {fileID: 3554707439890499294, guid: 7faeff4e00bee71498155b7d2757a7d3, type: 3}
   explosionRadius: 0
-  explosionParticle: {fileID: 0}
+  explosionParticle: {fileID: 3326132218919308049, guid: 631bd03dd976d2b428d29c0318852e8c, type: 3}
 --- !u!61 &4045633663094572078
 BoxCollider2D:
   m_ObjectHideFlags: 0
