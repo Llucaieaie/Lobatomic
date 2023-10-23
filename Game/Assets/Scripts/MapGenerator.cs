@@ -151,7 +151,7 @@ public class MapGenerator : MonoBehaviour
         GetComponentInParent<EdgeCollider2D>().points = points;
     }
 
-    void RestartLvl()
+    public void RestartLvl()
     {
         occupied.Clear();
         for (int i = 0; i < tiles.Count; i++)
@@ -162,7 +162,7 @@ public class MapGenerator : MonoBehaviour
 
         GenerateMap(sizeX, sizeY);
     }
-    void CleanUp()
+    public void CleanUp()
     {
         occupied.Clear();
         for (int i = 0; i < tiles.Count; i++)
