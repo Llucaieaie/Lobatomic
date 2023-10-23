@@ -7,6 +7,7 @@ public class TimerController : MonoBehaviour
 {
     public float TimeCount;
     [SerializeField] TextMeshProUGUI timer;
+    [SerializeField] GameObject MapGenerator;
 
     // Update is called once per frame
     void Update()
@@ -18,7 +19,8 @@ public class TimerController : MonoBehaviour
         if (TimeCount <= 0)
         {
             Debug.Log("LOSE");
-            GameObject.Find("MapGenerator").GetComponent<MapGenerator>().CleanUp();
+            MapGenerator.GetComponent<MapGenerator>().CleanUp();
+            Destroy(this.gameObject);
         }
     }
 }

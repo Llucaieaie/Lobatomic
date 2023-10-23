@@ -12,8 +12,8 @@ public enum TileType
     NORMAL,
     POWER_UP,
     SAD,
-    VOID,
     EXPLOSIVE,
+    VOID,
 }
 
 [System.Serializable]
@@ -31,9 +31,9 @@ public class MapGenerator : MonoBehaviour
     public TileBase tileBase;
 
 
-    public List<TileStruct> tiles = new List<TileStruct>();
-    List<Vector3Int> occupied = new List<Vector3Int>();
+    public List<GameObject> tiles = new List<GameObject>();
     HashSet<Vector3Int> positionsFromTileFrame = new HashSet<Vector3Int>();
+    List<Vector3Int> occupied = new List<Vector3Int>();
     BoundsInt bounds;
     int sizeX, sizeY;
 
@@ -109,8 +109,7 @@ public class MapGenerator : MonoBehaviour
     public void PaintTiles(Vector3Int position, TileStruct tile)
     {
         occupied.Add(position);
-        Instantiate(tile.tile, new Vector3(position.x, position.y, 0), Quaternion.Euler(180, 0, 0));
-        tiles.Add(tile);
+        tiles.Add(Instantiate(tile.tile, new Vector3(position.x, position.y, 0), Quaternion.Euler(180, 0, 0)));
     }
 
     private bool IsInRate(TileStruct tile)
@@ -157,7 +156,27 @@ public class MapGenerator : MonoBehaviour
         occupied.Clear();
         for (int i = 0; i < tiles.Count; i++)
         {
-            tiles[i].tile.SendMessage("OnExplosion");
+            if (tiles[i] != null)
+            {
+                switch (tiles[i].layer)
+                {
+                    case 6:
+                        tiles[i].GetComponent<HappyTile>().OnExplosion();
+                        break;
+                    case 7:
+                        tiles[i].GetComponent<SadTile>().OnExplosion();
+                        break;
+                    case 8:
+                        tiles[i].GetComponent<ExplosiveTile>().OnExplosion();
+                        break;
+                    case 9:
+                        //powerUp
+                        break;
+                    case 10:
+                        //Normal
+                        break;
+                }
+            }
         }
         tiles.Clear();
 
@@ -168,7 +187,27 @@ public class MapGenerator : MonoBehaviour
         occupied.Clear();
         for (int i = 0; i < tiles.Count; i++)
         {
-            tiles[i].tile.SendMessage("OnExplosion");
+            if (tiles[i] != null)
+            {
+                switch (tiles[i].layer)
+                {
+                    case 6:
+                        tiles[i].GetComponent<HappyTile>().OnExplosion();
+                        break;
+                    case 7:
+                        tiles[i].GetComponent<SadTile>().OnExplosion();
+                        break;
+                    case 8:
+                        tiles[i].GetComponent<ExplosiveTile>().OnExplosion();
+                        break;
+                    case 9:
+                        //powerUp
+                        break;
+                    case 10:
+                        //Normal
+                        break;
+                }
+            }
         }
         tiles.Clear();
     }
