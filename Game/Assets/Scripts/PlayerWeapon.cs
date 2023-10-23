@@ -55,17 +55,28 @@ public class PlayerWeapon : MonoBehaviour
         BoxCollider2D weaponCollider = TargetCollider();
         List<GameObject> tilesInside = new List<GameObject>(); //New list with the tiles inside weaponCollider
 
-        GameObject tile = null;
-        for (int i = 0; i < mapGenerator.tiles.Count; i++) //Add all the tiles that are inside the colldier in tilesInside
+        TileStruct targetTile;
+
+        //Add all the tiles that are inside the colldier in tilesInside --------------------------------------
+        for (int i = 0; i < mapGenerator.tiles.Count; i++) 
         {
-            tile = mapGenerator.tiles[i];
-            if (tile.name != "VoidTile(Clone)" || tile.name != "InmuneTile(Clone)")
+            targetTile = mapGenerator.tiles[i];
+            if (targetTile.tileType != TileType.VOID && targetTile.tileType != TileType.INMUNE)
             {
-                if (tile.GetComponent<BoxCollider2D>().IsTouching(weaponCollider)) { tilesInside.Add(tile); }
+                Debug.Log("This is not void or inmune");
+                if (targetTile.tile.GetComponent<BoxCollider2D>().IsTouching(weaponCollider))
+                {
+                    Debug.Log("Passes the if");
+                    tilesInside.Add(targetTile.tile);
+                }
+                else Debug.Log("Doesent pass the if");
             }
         }
-        for (int i = 0; i < tilesInside.Count; i++) //Call "OnExplosion" on every tile of tilesInside
+
+        //Call "OnExplosion" on every tile of tilesInside ----------------------------------------------------
+        for (int i = 0; i < tilesInside.Count; i++) 
         {
+            Debug.Log("Trigger SendMessage");
             tilesInside[i].SendMessage("OnExplosion");
         }
     }
