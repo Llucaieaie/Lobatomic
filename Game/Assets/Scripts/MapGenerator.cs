@@ -31,7 +31,7 @@ public class MapGenerator : MonoBehaviour
     public TileBase tileBase;
 
 
-    List<GameObject> tiles = new List<GameObject>();
+    public List<GameObject> tiles = new List<GameObject>();
     List<Vector3Int> occupied = new List<Vector3Int>();
     HashSet<Vector3Int> positionsFromTileFrame = new HashSet<Vector3Int>();
     BoundsInt bounds;
