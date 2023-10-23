@@ -12,15 +12,16 @@ enum direction
 
 public class PlayerWeapon : MonoBehaviour
 {
-    public GameObject weapon;
-    public BoxCollider2D[] colliders;
+    //public GameObject weapon;
     public MapGenerator mapGenerator;
 
-    [SerializeField] private bool canAttack;
     public float attackCoolDown;
+    [SerializeField] private bool canAttack;
 
     [SerializeField] private direction direction;
+    public BoxCollider2D[] colliders;
 
+    //Functions ----------------------------------------------------------------------------------------------
     public IEnumerator StartCooldown(float cd)
     {
         canAttack = false;
@@ -64,8 +65,11 @@ public class PlayerWeapon : MonoBehaviour
         }
     }
 
+    //Start & Update -----------------------------------------------------------------------------------------
     void Start()
     {
+        mapGenerator = GameObject.FindGameObjectWithTag("MapGenerator").GetComponent<MapGenerator>();
+
         colliders = new BoxCollider2D[4];
 
         colliders[0] = GameObject.FindGameObjectWithTag("Col_UP").GetComponent<BoxCollider2D>();
