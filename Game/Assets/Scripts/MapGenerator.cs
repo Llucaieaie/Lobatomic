@@ -35,6 +35,7 @@ public class MapGenerator : MonoBehaviour
     List<Vector3Int> occupied = new List<Vector3Int>();
     HashSet<Vector3Int> positionsFromTileFrame = new HashSet<Vector3Int>();
     BoundsInt bounds;
+    int sizeX, sizeY;
 
     private void Start()
     {
@@ -43,6 +44,9 @@ public class MapGenerator : MonoBehaviour
 
     public void GenerateMap(int sizeX, int sizeY)
     {
+        this.sizeX = sizeX;
+        this.sizeY = sizeY;
+
         bounds = new BoundsInt(new Vector3Int(0,0,0) - new Vector3Int(sizeX/2, sizeY/2, 0),
                                             new Vector3Int(sizeX, sizeY, 0));
 
@@ -131,5 +135,27 @@ public class MapGenerator : MonoBehaviour
             }
         }
         return ret;
+    }
+
+    void RestartLvl()
+    {
+        occupied.Clear();
+        for (int i = 0; i < tiles.Count; i++)
+        {
+            tiles[i].SendMessage("OnExplosion");
+        }
+        tiles.Clear();
+
+        GenerateMap(sizeX, sizeY);
+    }
+
+    void CleanUp()
+    {
+        occupied.Clear();
+        for (int i = 0; i < tiles.Count; i++)
+        {
+            tiles[i].SendMessage("OnExplosion");
+        }
+        tiles.Clear();
     }
 }
