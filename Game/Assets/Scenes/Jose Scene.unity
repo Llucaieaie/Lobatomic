@@ -273,6 +273,11 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 1}
+--- !u!61 &206776773 stripped
+BoxCollider2D:
+  m_CorrespondingSourceObject: {fileID: 6534468340282388142, guid: e2ef161a6c483ec49958629b21f10e3d, type: 3}
+  m_PrefabInstance: {fileID: 458554499}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &456126060
 GameObject:
   m_ObjectHideFlags: 0
@@ -492,6 +497,30 @@ PrefabInstance:
       propertyPath: mapGenerator
       value: 
       objectReference: {fileID: 456126061}
+    - target: {fileID: 7063358760495409454, guid: e2ef161a6c483ec49958629b21f10e3d, type: 3}
+      propertyPath: attackCoolDown
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063358760495409454, guid: e2ef161a6c483ec49958629b21f10e3d, type: 3}
+      propertyPath: colliders.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063358760495409454, guid: e2ef161a6c483ec49958629b21f10e3d, type: 3}
+      propertyPath: colliders.Array.data[0]
+      value: 
+      objectReference: {fileID: 1885979377}
+    - target: {fileID: 7063358760495409454, guid: e2ef161a6c483ec49958629b21f10e3d, type: 3}
+      propertyPath: colliders.Array.data[1]
+      value: 
+      objectReference: {fileID: 1498391696}
+    - target: {fileID: 7063358760495409454, guid: e2ef161a6c483ec49958629b21f10e3d, type: 3}
+      propertyPath: colliders.Array.data[2]
+      value: 
+      objectReference: {fileID: 1230113373}
+    - target: {fileID: 7063358760495409454, guid: e2ef161a6c483ec49958629b21f10e3d, type: 3}
+      propertyPath: colliders.Array.data[3]
+      value: 
+      objectReference: {fileID: 206776773}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2ef161a6c483ec49958629b21f10e3d, type: 3}
 --- !u!1 &700610136
@@ -692,8 +721,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93a37438cd9b9c44a8dd9c4fab64a18a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  cam: {fileID: 0}
+  player: {fileID: 1478739237}
+  cam: {fileID: 757215351}
 --- !u!1 &1173507198
 GameObject:
   m_ObjectHideFlags: 0
@@ -739,6 +768,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &1230113373 stripped
+BoxCollider2D:
+  m_CorrespondingSourceObject: {fileID: 2355365025971627386, guid: e2ef161a6c483ec49958629b21f10e3d, type: 3}
+  m_PrefabInstance: {fileID: 458554499}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1400730070
 GameObject:
   m_ObjectHideFlags: 0
@@ -885,22 +919,11 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!58 &1478739249
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+--- !u!61 &1498391696 stripped
+BoxCollider2D:
+  m_CorrespondingSourceObject: {fileID: 6585532278832340762, guid: e2ef161a6c483ec49958629b21f10e3d, type: 3}
+  m_PrefabInstance: {fileID: 458554499}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1478739237}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.64
 --- !u!1 &1501074747
 GameObject:
   m_ObjectHideFlags: 0
@@ -1016,3 +1039,8 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &1885979377 stripped
+BoxCollider2D:
+  m_CorrespondingSourceObject: {fileID: 8153734903118873960, guid: e2ef161a6c483ec49958629b21f10e3d, type: 3}
+  m_PrefabInstance: {fileID: 458554499}
+  m_PrefabAsset: {fileID: 0}

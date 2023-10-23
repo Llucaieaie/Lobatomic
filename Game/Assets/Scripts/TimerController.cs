@@ -19,7 +19,7 @@ public class TimerController : MonoBehaviour
         if (TimeCount <= 0)
         {
             Debug.Log("LOSE");
-            MapGenerator.GetComponent<MapGenerator>().CleanUp();
+            //MapGenerator.GetComponent<MapGenerator>().CleanUp();
             Destroy(this.gameObject);
         }
     }

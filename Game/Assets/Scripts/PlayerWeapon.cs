@@ -21,6 +21,8 @@ public class PlayerWeapon : MonoBehaviour
     [SerializeField] private direction direction;
     public BoxCollider2D[] colliders;
 
+    List<GameObject> tilesInside = new List<GameObject>(); //New list with the tiles inside weaponCollider
+
     //Functions ----------------------------------------------------------------------------------------------
     public IEnumerator StartCooldown(float cd)
     {
@@ -29,89 +31,123 @@ public class PlayerWeapon : MonoBehaviour
         canAttack = true;
     }
 
-    private BoxCollider2D TargetCollider()
+    private void EnableTargetCollider()
     {
-        BoxCollider2D target = null;
         switch (direction)
         {
             case direction.UP:
-                target = colliders[0];
+                colliders[0].enabled=true;
                 break;
             case direction.DOWN:
-                target = colliders[1];
+                colliders[1].enabled = true;
                 break;
             case direction.LEFT:
-                target = colliders[2];
+                colliders[2].enabled = true;
                 break;
             case direction.RIGHT:
-                target = colliders[3];
+                colliders[3].enabled = true;
                 break;
         }
-        return target;
+    }
+    private void DisableTargetCollider()
+    {
+        switch (direction)
+        {
+            case direction.UP:
+                colliders[0].enabled = false;
+                break;
+            case direction.DOWN:
+                colliders[1].enabled = false;
+                break;
+            case direction.LEFT:
+                colliders[2].enabled = false;
+                break;
+            case direction.RIGHT:
+                colliders[3].enabled = false;
+                break;
+        }
     }
 
-    private void Attack()
+    private IEnumerator Attack()
     {
-        BoxCollider2D weaponCollider = TargetCollider();
-        List<GameObject> tilesInside = new List<GameObject>(); //New list with the tiles inside weaponCollider
+        EnableTargetCollider();
+        yield return new WaitForSeconds(0.1f);
 
-        TileStruct targetTile;
+        StartCoroutine(StartCooldown(attackCoolDown));
 
-        //Add all the tiles that are inside the colldier in tilesInside --------------------------------------
-        for (int i = 0; i < mapGenerator.tiles.Count; i++) 
-        {
-            targetTile = mapGenerator.tiles[i];
-            if (targetTile.tileType != TileType.VOID && targetTile.tileType != TileType.INMUNE)
-            {
-                Debug.Log("This is not void or inmune");
-                if (targetTile.tile.GetComponent<BoxCollider2D>().IsTouching(weaponCollider))
-                {
-                    Debug.Log("Passes the if");
-                    tilesInside.Add(targetTile.tile);
-                }
-                else Debug.Log("Doesent pass the if");
-            }
-        }
+        DisableTargetCollider();
 
         //Call "OnExplosion" on every tile of tilesInside ----------------------------------------------------
-        for (int i = 0; i < tilesInside.Count; i++) 
+        for (int i = 0; i < tilesInside.Count; i++)
         {
-            Debug.Log("Trigger SendMessage");
-            tilesInside[i].SendMessage("OnExplosion");
+            switch (tilesInside[i].layer)
+            {
+                case 6:
+                    tilesInside[i].GetComponent<HappyTile>().OnExplosion();
+                    break;
+                case 7:
+                    tilesInside[i].GetComponent<SadTile>().OnExplosion();
+                    break;
+                case 8:
+                    tilesInside[i].GetComponent<ExplosiveTile>().OnExplosion();
+                    break;
+                case 9:
+                    //powerUp
+                    break;
+                case 10:
+                    //Normal
+                    break;
+            }
+
         }
+
+        tilesInside.Clear();
     }
 
     //Start & Update -----------------------------------------------------------------------------------------
     void Start()
     {
         canAttack = true;
+        for (int i = 0; i < colliders.Length; i++)
+        {
+            colliders[i].enabled = false;
+        }
     }
 
     void Update()
     {
-        if(Input.GetKey(KeyCode.UpArrow) && canAttack) 
+        if(Input.GetKeyDown(KeyCode.UpArrow) && canAttack) 
         {
             direction = direction.UP;
-            Attack();
-            StartCooldown(attackCoolDown);
+            StartCoroutine(Attack());
+            canAttack = false;
         }
-        if(Input.GetKey(KeyCode.DownArrow) && canAttack) 
+        if(Input.GetKeyDown(KeyCode.DownArrow) && canAttack) 
         {
             direction = direction.DOWN;
-            Attack();
-            StartCooldown(attackCoolDown);
+            StartCoroutine(Attack());
+            canAttack = false;
         }
-        if(Input.GetKey(KeyCode.LeftArrow) && canAttack) 
+        if (Input.GetKeyDown(KeyCode.LeftArrow) && canAttack) 
         {
             direction = direction.LEFT;
-            Attack();
-            StartCooldown(attackCoolDown);
+            StartCoroutine(Attack());
+            canAttack = false;
         }
-        if(Input.GetKey(KeyCode.RightArrow) && canAttack) 
+        if (Input.GetKeyDown(KeyCode.RightArrow) && canAttack) 
         {
             direction = direction.RIGHT;
-            Attack();
-            StartCooldown(attackCoolDown);
+            StartCoroutine(Attack());
+            canAttack = false;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer != 0 && collision.gameObject.tag == "Tile")
+        {
+            tilesInside.Add(collision.gameObject);
+            Debug.Log(collision.name);
         }
     }
 }

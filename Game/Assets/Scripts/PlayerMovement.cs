@@ -61,7 +61,5 @@ public class PlayerMovement : MonoBehaviour
         //transform.position += new Vector3(Xmove, Ymove, 0);
 
         GetComponent<Rigidbody2D>().MovePosition(GetComponent<Rigidbody2D>().position + new Vector2(Xmove, Ymove));
-
-        Debug.DrawLine(transform.position, Vector3.forward, Color.red);
     }
 }
