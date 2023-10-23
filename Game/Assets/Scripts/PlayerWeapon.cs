@@ -55,10 +55,10 @@ public class PlayerWeapon : MonoBehaviour
         BoxCollider2D weaponCollider = TargetCollider();
         List<GameObject> tilesInside = new List<GameObject>(); //New list with the tiles inside weaponCollider
 
-        foreach (GameObject tile in mapGenerator.tiles) //Add all the tiles that are inside the colldier in tilesInside
-        {
-            if (tile.GetComponent<BoxCollider2D>().IsTouching(weaponCollider)) { tilesInside.Add(tile); }
-        }
+        //foreach (GameObject tile in mapGenerator.tiles) //Add all the tiles that are inside the colldier in tilesInside
+        //{
+        //    if (tile.GetComponent<BoxCollider2D>().IsTouching(weaponCollider)) { tilesInside.Add(tile); }
+        //}
         foreach (GameObject targetTile in tilesInside) //Call "OnExplosion" on every tile of tilesInside
         {
             targetTile.SendMessage("OnExplosion");
