@@ -12,6 +12,8 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private Vector3 directionVector = Vector3.zero;
 
+    float Xmove, Ymove;
+
     void Update()
     {
         Vector3 auxVec = Vector3.zero;
@@ -52,6 +54,12 @@ public class PlayerMovement : MonoBehaviour
         if (isMovingX == false && directionVector.x > -acceleration && directionVector.x < acceleration) directionVector.x = 0;
         if (isMovingY == false && directionVector.y > -acceleration && directionVector.y < acceleration) directionVector.y = 0;
 
-        transform.position += directionVector * Time.deltaTime;
+        //transform.position += directionVector * Time.deltaTime;
+
+        Xmove = Input.GetAxis("Horizontal") * maxSpeed * Time.deltaTime;
+        Ymove = Input.GetAxis("Vertical") * maxSpeed * Time.deltaTime;
+        //transform.position += new Vector3(Xmove, Ymove, 0);
+
+        GetComponent<Rigidbody2D>().MovePosition(GetComponent<Rigidbody2D>().position + new Vector2(Xmove, Ymove));
     }
 }
