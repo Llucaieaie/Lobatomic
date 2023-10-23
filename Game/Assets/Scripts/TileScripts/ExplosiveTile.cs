@@ -6,11 +6,17 @@ public class ExplosiveTile : Tile
 {
     [Range(0, 10)] public int explosionRadius;
     public ParticleSystem explosionParticle;
+
+    void Start()
+    {
+        OnExplosion();
+    }
+
     public override void OnExplosion()
     {
         Explode();
         destroyParticle.Play();
-        Destroy(gameObject);
+        Destroy(gameObject, 0.5f);
     }
 
     void Explode()
@@ -18,4 +24,5 @@ public class ExplosiveTile : Tile
         //Destroy neighbouring tiles
         explosionParticle.Play();
     }
+
 }
