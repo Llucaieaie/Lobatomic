@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 { 
-    public float maxSpeed = 10f;
-    public float acceleration = 0.05f;
+    public float maxSpeed;
+    public float acceleration;
 
     [SerializeField] private bool isMovingX = false;
     [SerializeField] private bool isMovingY = false;
