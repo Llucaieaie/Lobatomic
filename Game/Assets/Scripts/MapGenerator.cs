@@ -28,8 +28,8 @@ public class MapGenerator : MonoBehaviour
 {
     [SerializeField] TileStruct[] tileStruct;
     public Tilemap tileMap;
-    public TileBase tileBase;
 
+    public Camera camera;
 
     public List<GameObject> tiles = new List<GameObject>();
     HashSet<Vector3Int> positionsFromTileFrame = new HashSet<Vector3Int>();
@@ -184,6 +184,8 @@ public class MapGenerator : MonoBehaviour
     }
     public void CleanUp()
     {
+        camera.GetComponent<CameraManager>().MapDestroy();
+
         occupied.Clear();
         for (int i = 0; i < tiles.Count; i++)
         {

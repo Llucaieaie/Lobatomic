@@ -30,4 +30,9 @@ public class CameraManager : MonoBehaviour
         }
         yield return null;
     }
+
+    public void MapDestroy()
+    {
+       cam.orthographicSize = 20;
+    }
 }
