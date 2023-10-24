@@ -16,6 +16,8 @@ public class PlayerWeapon : MonoBehaviour
     public MapGenerator mapGenerator;
     public Camera camera;
 
+    [Range(0.1f, 1f)] public float attackingTime;
+
     public float attackCoolDown;
     [SerializeField] private bool canAttack;
 
@@ -72,37 +74,11 @@ public class PlayerWeapon : MonoBehaviour
     private IEnumerator Attack()
     {
         EnableTargetCollider();
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(attackingTime);
 
         StartCoroutine(StartCooldown(attackCoolDown));
 
         DisableTargetCollider();
-
-        //Call "OnExplosion" on every tile of tilesInside ----------------------------------------------------
-        for (int i = 0; i < tilesInside.Count; i++)
-        {
-            switch (tilesInside[i].layer)
-            {
-                case 6:
-                    tilesInside[i].GetComponent<HappyTile>().OnExplosion();
-                    break;
-                case 7:
-                    tilesInside[i].GetComponent<SadTile>().OnExplosion();
-                    break;
-                case 8:
-                    tilesInside[i].GetComponent<ExplosiveTile>().OnExplosion();
-                    break;
-                case 9:
-                    //powerUp
-                    break;
-                case 10:
-                    //Normal
-                    break;
-            }
-
-        }
-        StartCoroutine(camera.GetComponent<CameraManager>().StartShake(5, 0.3f));
-
         tilesInside.Clear();
     }
 
@@ -150,6 +126,33 @@ public class PlayerWeapon : MonoBehaviour
         {
             tilesInside.Add(collision.gameObject);
             Debug.Log(collision.name);
+
+
+            //Call "OnExplosion" instantaneously 
+            switch (collision.gameObject.layer)
+            {
+                case 6:
+                    collision.gameObject.GetComponent<HappyTile>().OnExplosion();
+                    StartCoroutine(camera.GetComponent<CameraManager>().StartShake(5, 0.3f));
+                    break;
+                case 7:
+                    collision.gameObject.GetComponent<SadTile>().OnExplosion();
+                    StartCoroutine(camera.GetComponent<CameraManager>().StartShake(5, 0.3f));
+                    break;
+                case 8:
+                    collision.gameObject.GetComponent<ExplosiveTile>().OnExplosion();
+                    StartCoroutine(camera.GetComponent<CameraManager>().StartShake(5, 0.3f));
+                    break;
+                case 9:
+                    //powerUp
+                    StartCoroutine(camera.GetComponent<CameraManager>().StartShake(5, 0.3f));
+                    break;
+                case 10:
+                    //Normal
+                    StartCoroutine(camera.GetComponent<CameraManager>().StartShake(5, 0.3f));
+                    break;
+
+            }
         }
     }
 }
