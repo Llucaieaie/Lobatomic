@@ -116,25 +116,25 @@ public class PlayerWeapon : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.UpArrow) && canAttack) 
+        if((Input.GetKeyDown(KeyCode.UpArrow) || Input.GetButtonDown("UP")) && canAttack) 
         {
             direction = direction.UP;
             StartCoroutine(Attack());
             canAttack = false;
         }
-        if(Input.GetKeyDown(KeyCode.DownArrow) && canAttack) 
+        if((Input.GetKeyDown(KeyCode.DownArrow) || Input.GetButtonDown("DOWN")) && canAttack) 
         {
             direction = direction.DOWN;
             StartCoroutine(Attack());
             canAttack = false;
         }
-        if (Input.GetKeyDown(KeyCode.LeftArrow) && canAttack) 
+        if ((Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetButtonDown("LEFT")) && canAttack) 
         {
             direction = direction.LEFT;
             StartCoroutine(Attack());
             canAttack = false;
         }
-        if (Input.GetKeyDown(KeyCode.RightArrow) && canAttack) 
+        if ((Input.GetKeyDown(KeyCode.RightArrow) || Input.GetButtonDown("RIGHT")) && canAttack) 
         {
             direction = direction.RIGHT;
             StartCoroutine(Attack());
