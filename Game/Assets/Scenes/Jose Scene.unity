@@ -636,7 +636,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7063358760495409454, guid: e2ef161a6c483ec49958629b21f10e3d, type: 3}
       propertyPath: attackCoolDown
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2ef161a6c483ec49958629b21f10e3d, type: 3}

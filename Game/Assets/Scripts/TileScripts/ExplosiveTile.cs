@@ -15,9 +15,10 @@ public class ExplosiveTile : Tile
     public override void OnExplosion()
     {
         Score(20);
+
         //Destroy neighbouring tiles
-        destroyParticle.Play();
-        explosionParticle.Play();
+        Instantiate(explosionParticle, transform.position, Quaternion.identity);
+        Instantiate(destroyParticle, transform.position, Quaternion.identity);
 
         StartCoroutine(Explode());
     }

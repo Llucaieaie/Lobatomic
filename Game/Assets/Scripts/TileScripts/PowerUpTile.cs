@@ -20,7 +20,7 @@ public class PowerUpTile : Tile
     public override void OnExplosion()
     {
         Score(20);
-        destroyParticle.Play();
+        Instantiate(destroyParticle, transform.position, Quaternion.identity);
         Destroy(this.gameObject);
     }
 

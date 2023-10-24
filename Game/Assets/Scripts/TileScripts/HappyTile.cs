@@ -12,7 +12,7 @@ public class HappyTile : Tile
     {
         //Update Happiness meter
         Score(-50);
-        destroyParticle.Play();
+        Instantiate(destroyParticle, transform.position, Quaternion.identity);
         Destroy(this.gameObject);
     }
 }
