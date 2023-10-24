@@ -5,6 +5,7 @@ using UnityEngine;
 public class Tile : MonoBehaviour
 {
     public ParticleSystem destroyParticle;
+    [HideInInspector]
     public GameObject scoreController;
 
     public virtual void OnExplosion()

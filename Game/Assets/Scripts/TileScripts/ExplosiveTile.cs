@@ -7,7 +7,11 @@ public class ExplosiveTile : Tile
     [Range(0, 10)] public float explosionRadius;
     public ParticleSystem explosionParticle;
     public LayerMask layerMask;
-   
+
+    private void Start()
+    {
+        scoreController = GameObject.Find("ScoreController");
+    }
     public override void OnExplosion()
     {
         Score(20);

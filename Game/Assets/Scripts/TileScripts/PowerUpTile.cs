@@ -13,6 +13,10 @@ public enum PowerUps
 }
 public class PowerUpTile : Tile
 {
+    private void Start()
+    {
+        scoreController = GameObject.Find("ScoreController");
+    }
     public override void OnExplosion()
     {
         Score(20);
