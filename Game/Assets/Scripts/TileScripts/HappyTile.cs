@@ -4,10 +4,15 @@ using UnityEngine;
 
 public class HappyTile : Tile
 {
+    private void Start()
+    {
+        scoreController = GameObject.Find("ScoreController");
+    }
     public override void OnExplosion()
     {
         //Update Happiness meter
-        destroyParticle.Play();
+        Score(-50);
+        Instantiate(destroyParticle, transform.position, Quaternion.identity);
         Destroy(this.gameObject);
     }
 }

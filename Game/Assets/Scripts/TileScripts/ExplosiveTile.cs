@@ -7,12 +7,18 @@ public class ExplosiveTile : Tile
     [Range(0, 10)] public float explosionRadius;
     public ParticleSystem explosionParticle;
     public LayerMask layerMask;
-   
+
+    private void Start()
+    {
+        scoreController = GameObject.Find("ScoreController");
+    }
     public override void OnExplosion()
     {
+        Score(20);
+
         //Destroy neighbouring tiles
-        destroyParticle.Play();
-        explosionParticle.Play();
+        Instantiate(explosionParticle, transform.position, Quaternion.identity);
+        Instantiate(destroyParticle, transform.position, Quaternion.identity);
 
         StartCoroutine(Explode());
     }
