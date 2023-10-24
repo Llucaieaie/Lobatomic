@@ -170,7 +170,7 @@ public class MapGenerator : MonoBehaviour
                         //powerUp
                         break;
                     case 10:
-                        //Normal
+                        tiles[i].GetComponent<NormalTile>().OnExplosion();
                         break;
                 }
             }
@@ -203,7 +203,7 @@ public class MapGenerator : MonoBehaviour
                         //powerUp
                         break;
                     case 10:
-                        //Normal
+                        tiles[i].GetComponent<NormalTile>().OnExplosion();
                         break;
                 }
             }

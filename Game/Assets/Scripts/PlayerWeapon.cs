@@ -14,7 +14,7 @@ public class PlayerWeapon : MonoBehaviour
 {
     //public GameObject weapon;
     public MapGenerator mapGenerator;
-    public Camera camera;
+    public GameObject camera;
 
     [Range(0.1f, 1f)] public float attackingTime;
 
