@@ -7,10 +7,10 @@ public class ExplosiveTile : Tile
     [Range(0, 10)] public int explosionRadius;
     public ParticleSystem explosionParticle;
 
-    void Start()
-    {
-        OnExplosion();
-    }
+    //void Start()
+    //{
+    //    OnExplosion();
+    //}
 
     public override void OnExplosion()
     {
