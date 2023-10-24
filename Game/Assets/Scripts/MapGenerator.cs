@@ -109,7 +109,7 @@ public class MapGenerator : MonoBehaviour
     public void PaintTiles(Vector3Int position, TileStruct tile)
     {
         occupied.Add(position);
-        tiles.Add(Instantiate(tile.tile, new Vector3(position.x, position.y, 0), Quaternion.Euler(180, 0, 0)));
+        tiles.Add(Instantiate(tile.tile, new Vector3(position.x, position.y, 0), Quaternion.identity));
     }
 
     private bool IsInRate(TileStruct tile)
