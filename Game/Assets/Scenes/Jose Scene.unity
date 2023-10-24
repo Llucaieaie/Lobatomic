@@ -340,10 +340,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 43102812682024406, guid: e2ef161a6c483ec49958629b21f10e3d, type: 3}
+      propertyPath: maxSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063358760495409454, guid: e2ef161a6c483ec49958629b21f10e3d, type: 3}
+      propertyPath: camera
+      value: 
+      objectReference: {fileID: 757215351}
     - target: {fileID: 7063358760495409454, guid: e2ef161a6c483ec49958629b21f10e3d, type: 3}
       propertyPath: mapGenerator
       value: 
       objectReference: {fileID: 456126061}
+    - target: {fileID: 7063358760495409454, guid: e2ef161a6c483ec49958629b21f10e3d, type: 3}
+      propertyPath: attackingTime
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063358760495409454, guid: e2ef161a6c483ec49958629b21f10e3d, type: 3}
+      propertyPath: attackCoolDown
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
