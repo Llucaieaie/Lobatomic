@@ -148,7 +148,7 @@ public class PlayerWeapon : MonoBehaviour
                     StartCoroutine(camera.GetComponent<CameraManager>().StartShake(5, 0.3f));
                     break;
                 case 10:
-                    //Normal
+                    collision.gameObject.GetComponent<NormalTile>().OnExplosion();
                     StartCoroutine(camera.GetComponent<CameraManager>().StartShake(5, 0.3f));
                     break;
 
