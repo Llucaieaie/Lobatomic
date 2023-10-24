@@ -35,18 +35,15 @@ public class MapGenerator : MonoBehaviour
     HashSet<Vector3Int> positionsFromTileFrame = new HashSet<Vector3Int>();
     List<Vector3Int> occupied = new List<Vector3Int>();
     BoundsInt bounds;
-    int sizeX, sizeY;
+    [SerializeField] int sizeX, sizeY;
 
     private void Start()
     {
-        GenerateMap(50, 80);
+        GenerateMap(sizeX, sizeX);
     }
 
     public void GenerateMap(int sizeX, int sizeY)
     {
-        this.sizeX = sizeX;
-        this.sizeY = sizeY;
-
         bounds = new BoundsInt(new Vector3Int(0, 0, 0) - new Vector3Int(sizeX / 2, sizeY / 2, 0),
                                             new Vector3Int(sizeX, sizeY, 0));
 
