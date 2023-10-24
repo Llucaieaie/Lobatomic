@@ -15,14 +15,19 @@ public class CameraManager : MonoBehaviour
     void Update()
     {
         transform.position = new Vector3(player.transform.position.x, player.transform.position.y, transform.position.z);
-        //StartCoroutine(StartShake(10));
     }
 
-    IEnumerator StartShake(int Intensity)
+    public IEnumerator StartShake(int Intensity, float timeShaking)
     {
-        Vector2 startPos = transform.position;
 
-        transform.position = new Vector3(startPos.x + Random.insideUnitCircle.x * Intensity * Time.deltaTime, startPos.y + Random.insideUnitCircle.y * Intensity * Time.deltaTime, - 10);
+        while (timeShaking >= 0)
+        {
+            timeShaking -= Time.deltaTime;
+
+            Vector2 startPos = transform.position;
+            transform.position = new Vector3(startPos.x + Random.insideUnitCircle.x * Intensity * Time.deltaTime, startPos.y + Random.insideUnitCircle.y * Intensity * Time.deltaTime, -10);
+            yield return new WaitForSeconds(0.01f);
+        }
         yield return null;
     }
 }

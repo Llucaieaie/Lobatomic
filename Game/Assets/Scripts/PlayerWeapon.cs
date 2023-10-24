@@ -14,6 +14,7 @@ public class PlayerWeapon : MonoBehaviour
 {
     //public GameObject weapon;
     public MapGenerator mapGenerator;
+    public Camera camera;
 
     public float attackCoolDown;
     [SerializeField] private bool canAttack;
@@ -100,6 +101,7 @@ public class PlayerWeapon : MonoBehaviour
             }
 
         }
+        StartCoroutine(camera.GetComponent<CameraManager>().StartShake(5, 0.3f));
 
         tilesInside.Clear();
     }
