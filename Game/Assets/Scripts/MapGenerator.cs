@@ -167,7 +167,7 @@ public class MapGenerator : MonoBehaviour
                         tiles[i].GetComponent<ExplosiveTile>().OnExplosion();
                         break;
                     case 9:
-                        //powerUp
+                        tiles[i].GetComponent<PowerUpTile>().OnExplosion();
                         break;
                     case 10:
                         tiles[i].GetComponent<NormalTile>().OnExplosion();
@@ -200,7 +200,7 @@ public class MapGenerator : MonoBehaviour
                         tiles[i].GetComponent<ExplosiveTile>().OnExplosion();
                         break;
                     case 9:
-                        //powerUp
+                        tiles[i].GetComponent<PowerUpTile>().OnExplosion();
                         break;
                     case 10:
                         tiles[i].GetComponent<NormalTile>().OnExplosion();

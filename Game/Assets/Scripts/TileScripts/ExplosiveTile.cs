@@ -39,7 +39,7 @@ public class ExplosiveTile : Tile
                         tiles[i].transform.gameObject.GetComponent<ExplosiveTile>().OnExplosion();
                         break;
                     case 9:
-                        //powerUp
+                        tiles[i].transform.gameObject.GetComponent<PowerUpTile>().OnExplosion();
                         break;
                     case 10:
                         tiles[i].transform.gameObject.GetComponent<NormalTile>().OnExplosion();

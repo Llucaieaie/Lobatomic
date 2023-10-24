@@ -13,6 +13,7 @@ enum direction
 public class PlayerWeapon : MonoBehaviour
 {
     //public GameObject weapon;
+    public PowerUpManager powerUpManager;
     public MapGenerator mapGenerator;
     public GameObject camera;
 
@@ -144,7 +145,8 @@ public class PlayerWeapon : MonoBehaviour
                     StartCoroutine(camera.GetComponent<CameraManager>().StartShake(5, 0.3f));
                     break;
                 case 9:
-                    //powerUp
+                    powerUpManager.NewPowerUp();
+                    collision.gameObject.GetComponent<PowerUpTile>().OnExplosion();
                     StartCoroutine(camera.GetComponent<CameraManager>().StartShake(5, 0.3f));
                     break;
                 case 10:
