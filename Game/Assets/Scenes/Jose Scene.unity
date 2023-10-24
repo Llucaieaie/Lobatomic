@@ -841,7 +841,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ebadba7c9091e344a87e8e29fff324a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TimeCount: 5
+  TimeCount: 100
   timer: {fileID: 184455646}
   MapGenerator: {fileID: 456126060}
 --- !u!4 &1781434486
@@ -911,6 +911,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MapGenerator
       objectReference: {fileID: 0}
+    - target: {fileID: 6813662151487980450, guid: ad5b0a86853370140a7605bfaa8e71cb, type: 3}
+      propertyPath: camera
+      value: 
+      objectReference: {fileID: 757215351}
     - target: {fileID: 6813662151487980450, guid: ad5b0a86853370140a7605bfaa8e71cb, type: 3}
       propertyPath: tileMap
       value: 

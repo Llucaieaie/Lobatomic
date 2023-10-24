@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 227559541}
   - component: {fileID: 227559540}
   - component: {fileID: 227559539}
+  - component: {fileID: 227559542}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -215,6 +216,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &227559542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 227559538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93a37438cd9b9c44a8dd9c4fab64a18a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1766412879}
+  cam: {fileID: 227559540}
 --- !u!1001 &1269022678
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -308,6 +323,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad5b0a86853370140a7605bfaa8e71cb, type: 3}
+--- !u!1 &1766412879 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 43102812682024402, guid: e2ef161a6c483ec49958629b21f10e3d, type: 3}
+  m_PrefabInstance: {fileID: 1914940292}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1914940292
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -362,12 +382,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 43102812682024407, guid: e2ef161a6c483ec49958629b21f10e3d, type: 3}
       propertyPath: DisoverRad
-      value: 50
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 252172727448673980, guid: e2ef161a6c483ec49958629b21f10e3d, type: 3}
       propertyPath: m_GravityScale
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1753066871916047385, guid: e2ef161a6c483ec49958629b21f10e3d, type: 3}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8293314411931541255, guid: e2ef161a6c483ec49958629b21f10e3d, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: a4d1038be9479594a93ad682851912e7, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

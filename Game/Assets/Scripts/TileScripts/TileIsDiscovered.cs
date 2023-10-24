@@ -16,7 +16,10 @@ public class TileIsDiscovered : MonoBehaviour
     {
         gameObject.GetComponent<SpriteRenderer>().sprite = disoveredTile;
         isDiscovered = true;
-        GetComponent<Animator>().SetBool("IsDiscovered", true);
+        if (GetComponent<Animator>() != null)
+        {
+            GetComponent<Animator>().SetBool("IsDiscovered", true);
+        }
     }
 
     public void DestroyTile()
