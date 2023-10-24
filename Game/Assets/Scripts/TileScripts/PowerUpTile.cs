@@ -15,7 +15,7 @@ public class PowerUpTile : Tile
 {
     public override void OnExplosion()
     {
-        //Update Happiness meter
+        Score(20);
         destroyParticle.Play();
         Destroy(this.gameObject);
     }

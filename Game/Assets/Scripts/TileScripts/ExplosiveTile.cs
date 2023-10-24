@@ -14,9 +14,10 @@ public class ExplosiveTile : Tile
 
     public override void OnExplosion()
     {
+        Score(20);
         Explode();
         destroyParticle.Play();
-        Destroy(this.gameObject, 0.5f);
+        Destroy(this.gameObject);
     }
 
     void Explode()

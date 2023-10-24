@@ -102,6 +102,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyParticle: {fileID: 3554707439890499294, guid: 7faeff4e00bee71498155b7d2757a7d3, type: 3}
+  scoreController: {fileID: 3535218080669343677, guid: 7d1ca9eb936701847a166de8c164daaa, type: 3}
   explosionRadius: 0
   explosionParticle: {fileID: 7906640572707777680, guid: 03aa0f7bdd461f1469889ca56fecbe2e, type: 3}
 --- !u!61 &4045633663094572078
