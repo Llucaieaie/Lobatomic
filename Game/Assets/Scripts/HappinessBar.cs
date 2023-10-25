@@ -43,7 +43,7 @@ public class HappinessBar : MonoBehaviour
     public void destroyHappyTile()
     {
         current -= 8;
-        if (current <= min) { current = min; StartCoroutine(mapGenerator.CleanUp()); }
+        if (current < min) { current = min; StartCoroutine(mapGenerator.CleanUp()); }
         UpdateBar();
     }
 
