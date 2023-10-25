@@ -564,7 +564,6 @@ MonoBehaviour:
   TimeCount: 100
   timer: {fileID: 0}
   MapGenerator: {fileID: 923452297}
-  camera: {fileID: 2133258644}
 --- !u!4 &713843836
 Transform:
   m_ObjectHideFlags: 0
@@ -723,6 +722,18 @@ PrefabInstance:
     - target: {fileID: 43102812682024402, guid: e2ef161a6c483ec49958629b21f10e3d, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 43102812682024406, guid: e2ef161a6c483ec49958629b21f10e3d, type: 3}
+      propertyPath: acceleration
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1753066871916047385, guid: e2ef161a6c483ec49958629b21f10e3d, type: 3}
+      propertyPath: m_Mass
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1753066871916047385, guid: e2ef161a6c483ec49958629b21f10e3d, type: 3}
+      propertyPath: m_AngularDrag
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 8293314411931541255, guid: e2ef161a6c483ec49958629b21f10e3d, type: 3}
       propertyPath: m_Radius
