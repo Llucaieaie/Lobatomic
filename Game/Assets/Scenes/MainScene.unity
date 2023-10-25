@@ -477,6 +477,18 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 246468047}
     - target: {fileID: 6813662151487980450, guid: ad5b0a86853370140a7605bfaa8e71cb, type: 3}
+      propertyPath: groundTiles.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6813662151487980450, guid: ad5b0a86853370140a7605bfaa8e71cb, type: 3}
+      propertyPath: groundTiles.Array.data[0]
+      value: 
+      objectReference: {fileID: 7123767876524449978, guid: 4438e18e05ea7ec4e8e089267374757f, type: 3}
+    - target: {fileID: 6813662151487980450, guid: ad5b0a86853370140a7605bfaa8e71cb, type: 3}
+      propertyPath: groundTiles.Array.data[1]
+      value: 
+      objectReference: {fileID: 2761505256534072843, guid: e7d5c2a44b73c6b489e7579aafa2faf8, type: 3}
+    - target: {fileID: 6813662151487980450, guid: ad5b0a86853370140a7605bfaa8e71cb, type: 3}
       propertyPath: tileStruct.Array.data[0].tile
       value: 
       objectReference: {fileID: 1122887553982079625, guid: b1738e47081d6664397e45a9a04b68a1, type: 3}

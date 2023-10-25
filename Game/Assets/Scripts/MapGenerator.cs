@@ -42,6 +42,7 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] int sizeX, sizeY;
 
     [SerializeField] GameObject button, note;
+    public GameObject[] groundTiles;
 
     private void Start()
     {
@@ -67,10 +68,14 @@ public class MapGenerator : MonoBehaviour
         {
             for (int i = 0; i < tileStruct.Length; i++)
             {
+                PaintGroundTiles(position);
+
                 if (!IsTiledOcccupied(position) && IsInRate(tileStruct[i]) && tileStruct[i].maxNum > tileStruct[i].tileCount)
                 {
                     PaintTiles(position, tileStruct[i]);
                     tileStruct[i].tileCount++;
+
+                    
                 }
             }
         }
@@ -107,6 +112,12 @@ public class MapGenerator : MonoBehaviour
             }
         }
         return floor;
+    }
+
+    private void PaintGroundTiles(Vector3Int position)
+    {
+        int rand = Random.Range(0, 2);
+        tiles.Add(Instantiate(groundTiles[rand], new Vector3(position.x, position.y, 1), Quaternion.identity));
     }
 
     public void PaintTiles(Vector3Int position, TileStruct tile)
