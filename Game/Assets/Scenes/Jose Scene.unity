@@ -1253,11 +1253,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ebadba7c9091e344a87e8e29fff324a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< Updated upstream
   TimeCount: 100
-=======
-  TimeCount: 60
->>>>>>> Stashed changes
   timer: {fileID: 184455646}
   MapGenerator: {fileID: 456126060}
   camera: {fileID: 757215351}
