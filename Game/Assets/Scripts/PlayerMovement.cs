@@ -16,6 +16,8 @@ public class PlayerMovement : MonoBehaviour
 
     float Xmove, Ymove;
 
+    public Animator animator;
+
     private void Start()
     {
         canMove = true;
@@ -67,6 +69,15 @@ public class PlayerMovement : MonoBehaviour
         Ymove = Input.GetAxis("Vertical") * maxSpeed * Time.deltaTime;
         //transform.position += new Vector3(Xmove, Ymove, 0);
 
-        GetComponent<Rigidbody2D>().MovePosition(GetComponent<Rigidbody2D>().position + new Vector2(Xmove, Ymove));
+        Vector2 movement = new Vector2(Xmove, Ymove);
+
+        GetComponent<Rigidbody2D>().MovePosition(GetComponent<Rigidbody2D>().position + movement);
+
+
+        movement = movement.normalized;
+
+        animator.SetFloat("Horizontal", movement.x);
+        animator.SetFloat("Vertical", movement.y);
+        animator.SetFloat("Magnitude", movement.magnitude);
     }
 }
