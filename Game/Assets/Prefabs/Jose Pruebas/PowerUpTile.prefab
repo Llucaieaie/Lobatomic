@@ -128,7 +128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae38f07ab5492c549a3623d834a56885, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  undisoveredTile: {fileID: -487958434, guid: 857ad761ef5f42f41b8e457539b418eb, type: 3}
+  undisoveredTile: {fileID: 841688088, guid: abd1bf4f4a691dc46ac2195958fc0133, type: 3}
   disoveredTile: {fileID: 841688088, guid: abd1bf4f4a691dc46ac2195958fc0133, type: 3}
   isDiscovered: 0
 --- !u!114 &-4262284146785080047
