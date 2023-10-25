@@ -154,8 +154,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerMovement: {fileID: 1478739241}
   PlayerWeapon: {fileID: 1478739240}
-  cam: {fileID: 0}
-  appearPercentage: 100
+  cam: {fileID: 757215351}
+  appearPercentage: 25
   FrenesiTime: 5
   LabGlassesTime: 15
   DoublePointsTime: 20
@@ -572,6 +572,18 @@ PrefabInstance:
       propertyPath: maxSpeed
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 2355365025971627386, guid: e2ef161a6c483ec49958629b21f10e3d, type: 3}
+      propertyPath: m_Size.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6534468340282388142, guid: e2ef161a6c483ec49958629b21f10e3d, type: 3}
+      propertyPath: m_Size.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6585532278832340762, guid: e2ef161a6c483ec49958629b21f10e3d, type: 3}
+      propertyPath: m_Size.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7063358760495409454, guid: e2ef161a6c483ec49958629b21f10e3d, type: 3}
       propertyPath: camera
       value: 
@@ -592,6 +604,10 @@ PrefabInstance:
       propertyPath: powerUpManager
       value: 
       objectReference: {fileID: 36608958}
+    - target: {fileID: 8153734903118873960, guid: e2ef161a6c483ec49958629b21f10e3d, type: 3}
+      propertyPath: m_Size.y
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2ef161a6c483ec49958629b21f10e3d, type: 3}
 --- !u!1 &700610136
@@ -795,6 +811,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1478739237}
   cam: {fileID: 757215351}
+  DefaultSize: 5
 --- !u!1 &877577969
 GameObject:
   m_ObjectHideFlags: 0

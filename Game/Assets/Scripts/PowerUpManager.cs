@@ -40,20 +40,32 @@ public class PowerUpManager : MonoBehaviour
                 case PowerUps.UNKNOWN:
                     break;
                 case PowerUps.FRENESI: // -----------------------------------------------
-                    PowerUpFeedback();
-                    StartCoroutine(ApplyFrenesi(FrenesiTime));
+                    if (!activeFrenesi)
+                    {
+                        PowerUpFeedback();
+                        StartCoroutine(ApplyFrenesi(FrenesiTime));
+                    }
                     break;
                 case PowerUps.LAB_GOOGLES: // -------------------------------------------
-                    PowerUpFeedback();
-                    StartCoroutine(ApplyLabG(LabGlassesTime));
+                    if (!activeLabG)
+                    {
+                        PowerUpFeedback();
+                        StartCoroutine(ApplyLabG(LabGlassesTime));
+                    }
                     break;
                 case PowerUps.DOUBLE_POINTS: // -----------------------------------------
-                    PowerUpFeedback();
-                    StartCoroutine(ApplyDoubleP(DoublePointsTime));
+                    if (!activeDoubleP)
+                    {
+                        PowerUpFeedback();
+                        StartCoroutine(ApplyDoubleP(DoublePointsTime));
+                    }
                     break;
                 case PowerUps.STOP_TIME: // ---------------------------------------------
-                    PowerUpFeedback();
-                    StartCoroutine(ApplyStopT(StopTimeTime));
+                    if (!activeStopT)
+                    {
+                        PowerUpFeedback();
+                        StartCoroutine(ApplyStopT(StopTimeTime));
+                    }
                     break;
                 default:
                     break;
@@ -66,12 +78,33 @@ public class PowerUpManager : MonoBehaviour
         //Should give some visual and sound feedback to the player
     }
 
+    private IEnumerator ShowInUI(PowerUps type)
+    {
+
+        yield return new WaitForEndOfFrame();
+    }
+
     private IEnumerator ApplyFrenesi(float time)
     {
         Debug.Log("Pop Frenesi");
 
         activeFrenesi = true;
+
+        StartCoroutine(cam.GetComponent<CameraManager>().ChangeZoom(4, 0.5f));
+
+        float auxSpeed = PlayerMovement.maxSpeed;
+        PlayerMovement.maxSpeed += PlayerMovement.maxSpeed;
+
+        float auxCd = PlayerWeapon.attackCoolDown;
+        PlayerWeapon.attackCoolDown = 0.1f;
+
         yield return new WaitForSeconds(time);
+
+        PlayerMovement.maxSpeed = auxSpeed;
+        PlayerWeapon.attackCoolDown = auxCd;
+
+        StartCoroutine(cam.GetComponent<CameraManager>().ChangeZoom(cam.GetComponent<CameraManager>().DefaultSize, 0.5f));
+
         activeFrenesi = false;
     }
     private IEnumerator ApplyLabG(float time)
