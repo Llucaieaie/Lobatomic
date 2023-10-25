@@ -45,6 +45,7 @@ public class GeneratePatient : MonoBehaviour
 
     public void UpdateExpression(float current)
     {
+        Rect size = new Rect(0, 0, expressionLayer[0].width, expressionLayer[0].height);
         if (current > 80)
         {
             expressionRenderer.sprite = Sprite.Create(expressionLayer[0], size, Vector2.zero);
