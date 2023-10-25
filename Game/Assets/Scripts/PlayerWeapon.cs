@@ -142,7 +142,7 @@ public class PlayerWeapon : MonoBehaviour
                     break;
                 case 8:
                     collision.gameObject.GetComponent<ExplosiveTile>().OnExplosion();
-                    StartCoroutine(camera.GetComponent<CameraManager>().StartShake(5, 0.3f));
+                    StartCoroutine(camera.GetComponent<CameraManager>().StartShake(20, 0.3f));
                     break;
                 case 9:
                     powerUpManager.NewPowerUp();

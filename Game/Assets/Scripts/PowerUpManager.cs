@@ -15,6 +15,7 @@ public class PowerUpManager : MonoBehaviour
 {
     public PlayerMovement PlayerMovement;
     public PlayerWeapon PlayerWeapon;
+    public ScoreController ScoreController;
     public Camera cam;
 
     [Range(0, 100)] public int appearPercentage;
@@ -144,12 +145,21 @@ public class PowerUpManager : MonoBehaviour
         Debug.Log("Pop DoublePoints");
 
         activeDoubleP = true;
+
+        int auxScore = ScoreController.scoreMultiplier;
+        ScoreController.scoreMultiplier += ScoreController.scoreMultiplier;
+
         yield return new WaitForSeconds(time);
+
+        ScoreController.scoreMultiplier = auxScore;
         activeDoubleP = false;
     }
     private IEnumerator ApplyStopT(float time)
     {
         Debug.Log("Pop StopTime");
+
+        //Time.timescale
+        //
 
         activeStopT = true;
         yield return new WaitForSeconds(time);
