@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ad59127e03d45f747b1718f0d1548a1b
+guid: 9913b9f3bc07cef4fb0daad66096781f
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -47,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 128
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -105,13 +105,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: GoodFace_Tile128px_0
+      name: UI_sprite_final_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 128
-        height: 128
+        width: 1000
+        height: 563
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -119,20 +119,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d6b1d7054d656b74199eeecd9be07b46
-      internalID: 167682481
+      spriteID: 904ad93acd8d6324fb4a07802ae293e2
+      internalID: -1567887488
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GoodFace_Tile128px_1
+      name: UI_sprite_final_1
       rect:
         serializedVersion: 2
-        x: 128
+        x: 1000
         y: 0
-        width: 128
-        height: 128
+        width: 1000
+        height: 563
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -140,20 +140,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 23d7381d78100eb4d85ed9e47111d393
-      internalID: 1398567235
+      spriteID: c6d7e9c5afb28034ea24847e58d5481a
+      internalID: 297106789
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GoodFace_Tile128px_2
+      name: UI_sprite_final_2
       rect:
         serializedVersion: 2
-        x: 256
+        x: 2000
         y: 0
-        width: 128
-        height: 128
+        width: 1000
+        height: 563
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -161,20 +161,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5c5d7780cf9f6714aa7531715e169314
-      internalID: 26442930
+      spriteID: c7016b77394de6c4bb8793b7062e037e
+      internalID: -1146638296
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: GoodFace_Tile128px_3
+      name: UI_sprite_final_3
       rect:
         serializedVersion: 2
-        x: 384
+        x: 3000
         y: 0
-        width: 128
-        height: 128
+        width: 1000
+        height: 563
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -182,8 +182,92 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 199fc2177a19a2447aa41d88ad39a056
-      internalID: 1995793867
+      spriteID: b88c99b6191421f4bbae976d6d40f1c6
+      internalID: 82149455
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_sprite_final_4
+      rect:
+        serializedVersion: 2
+        x: 4000
+        y: 0
+        width: 1000
+        height: 563
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bd739ecbb87c2ab4aba8a4e228c45b38
+      internalID: -1500860380
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_sprite_final_5
+      rect:
+        serializedVersion: 2
+        x: 5000
+        y: 0
+        width: 1000
+        height: 563
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d1be7ba3fb97b274aa415d77bd9e5ffb
+      internalID: 1199532047
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_sprite_final_6
+      rect:
+        serializedVersion: 2
+        x: 6000
+        y: 0
+        width: 1000
+        height: 563
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a4a106aa8e37ca4ea2494f3bba83786
+      internalID: 1889069686
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_sprite_final_7
+      rect:
+        serializedVersion: 2
+        x: 7000
+        y: 0
+        width: 1000
+        height: 563
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a5211ec2fcc33024da16a228c54b965a
+      internalID: 686656984
       vertices: []
       indices: 
       edges: []
@@ -199,10 +283,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      GoodFace_Tile128px_0: 167682481
-      GoodFace_Tile128px_1: 1398567235
-      GoodFace_Tile128px_2: 26442930
-      GoodFace_Tile128px_3: 1995793867
+      UI_sprite_final_0: -1567887488
+      UI_sprite_final_1: 297106789
+      UI_sprite_final_2: -1146638296
+      UI_sprite_final_3: 82149455
+      UI_sprite_final_4: -1500860380
+      UI_sprite_final_5: 1199532047
+      UI_sprite_final_6: 1889069686
+      UI_sprite_final_7: 686656984
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

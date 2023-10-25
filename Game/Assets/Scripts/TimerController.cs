@@ -2,15 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using UnityEngine.SceneManagement;
 
 public class TimerController : MonoBehaviour
 {
     public float TimeCount;
     [SerializeField] TextMeshProUGUI timer;
     [SerializeField] GameObject MapGenerator;
-
-    public Camera camera;
 
     // Update is called once per frame
     void Update()
@@ -23,20 +20,15 @@ public class TimerController : MonoBehaviour
         if (TimeCount <= 0)
         {
             TimeCount = 0;
-            StartCoroutine(CleanMap());
+            CleanMap();
         }
     }
 
-    private IEnumerator CleanMap()
+    private void CleanMap()
     {
         Debug.Log("LOSE");
-        camera.GetComponent<CameraManager>().MapDestroy();
 
-        yield return new WaitForSeconds(0.1f);
-
-        MapGenerator.GetComponent<MapGenerator>().CleanUp();
-        yield return new WaitForSeconds(2.5f);
-        SceneManager.LoadScene("DeathScene");
+        StartCoroutine(MapGenerator.GetComponent<MapGenerator>().CleanUp());
         Destroy(this.gameObject);
     }
 }

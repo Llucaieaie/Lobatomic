@@ -16,6 +16,9 @@ public class PlayerWeapon : MonoBehaviour
     public PowerUpManager powerUpManager;
     public MapGenerator mapGenerator;
     public GameObject camera;
+    public HappinessBar happiness;
+
+    private AudioSource attackAudio;
 
     [Range(0.1f, 1f)] public float attackingTime;
 
@@ -31,7 +34,7 @@ public class PlayerWeapon : MonoBehaviour
     public IEnumerator StartCooldown(float cd)
     {
         canAttack = false;
-        yield return new WaitForSeconds(cd);
+        yield return new WaitForSecondsRealtime(cd);
         canAttack = true;
     }
 
@@ -74,8 +77,10 @@ public class PlayerWeapon : MonoBehaviour
 
     private IEnumerator Attack()
     {
+        attackAudio.Play();
+
         EnableTargetCollider();
-        yield return new WaitForSeconds(attackingTime);
+        yield return new WaitForSecondsRealtime(attackingTime);
 
         StartCoroutine(StartCooldown(attackCoolDown));
 
@@ -86,6 +91,8 @@ public class PlayerWeapon : MonoBehaviour
     //Start & Update -----------------------------------------------------------------------------------------
     void Start()
     {
+        attackAudio = GetComponent<AudioSource>();
+
         canAttack = true;
         for (int i = 0; i < colliders.Length; i++)
         {
@@ -133,10 +140,12 @@ public class PlayerWeapon : MonoBehaviour
             switch (collision.gameObject.layer)
             {
                 case 6:
+                    happiness.destroyHappyTile();
                     collision.gameObject.GetComponent<HappyTile>().OnExplosion();
                     StartCoroutine(camera.GetComponent<CameraManager>().StartShake(5, 0.3f));
                     break;
                 case 7:
+                    happiness.destroySadTile();
                     collision.gameObject.GetComponent<SadTile>().OnExplosion();
                     StartCoroutine(camera.GetComponent<CameraManager>().StartShake(5, 0.3f));
                     break;

@@ -17,7 +17,7 @@ public class CameraManager : MonoBehaviour
         CurrentSize = DefaultSize;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         transform.position = new Vector3(player.transform.position.x, player.transform.position.y, transform.position.z);
     }
@@ -27,7 +27,7 @@ public class CameraManager : MonoBehaviour
 
         while (timeShaking >= 0)
         {
-            timeShaking -= Time.deltaTime;
+            timeShaking -= Time.unscaledDeltaTime;
 
             Vector2 startPos = transform.position;
             transform.position = new Vector3(startPos.x + Random.insideUnitCircle.x * Intensity * Time.deltaTime, startPos.y + Random.insideUnitCircle.y * Intensity * Time.deltaTime, -10);

@@ -165,6 +165,7 @@ MonoBehaviour:
   activeLabG: 0
   activeDoubleP: 0
   activeStopT: 0
+  powerUpIcons: []
 --- !u!4 &36608959
 Transform:
   m_ObjectHideFlags: 0
