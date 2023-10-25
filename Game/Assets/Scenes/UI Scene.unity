@@ -155,6 +155,7 @@ MonoBehaviour:
   PlayerMovement: {fileID: 0}
   PlayerWeapon: {fileID: 0}
   ScoreController: {fileID: 0}
+  TimerController: {fileID: 0}
   cam: {fileID: 2133258644}
   appearPercentage: 25
   FrenesiTime: 5
@@ -562,6 +563,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TimeCount: 100
+  stopTime: 0
   timer: {fileID: 0}
   MapGenerator: {fileID: 923452297}
 --- !u!4 &713843836
@@ -724,6 +726,10 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 43102812682024406, guid: e2ef161a6c483ec49958629b21f10e3d, type: 3}
+      propertyPath: canMove
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 43102812682024406, guid: e2ef161a6c483ec49958629b21f10e3d, type: 3}
       propertyPath: acceleration
       value: 0
       objectReference: {fileID: 0}
@@ -735,13 +741,33 @@ PrefabInstance:
       propertyPath: m_AngularDrag
       value: 0.05
       objectReference: {fileID: 0}
+    - target: {fileID: 7063358760495409454, guid: e2ef161a6c483ec49958629b21f10e3d, type: 3}
+      propertyPath: camera
+      value: 
+      objectReference: {fileID: 1007562615}
+    - target: {fileID: 7063358760495409454, guid: e2ef161a6c483ec49958629b21f10e3d, type: 3}
+      propertyPath: mapGenerator
+      value: 
+      objectReference: {fileID: 6813662151487980450, guid: ad5b0a86853370140a7605bfaa8e71cb, type: 3}
+    - target: {fileID: 7063358760495409454, guid: e2ef161a6c483ec49958629b21f10e3d, type: 3}
+      propertyPath: attackCoolDown
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063358760495409454, guid: e2ef161a6c483ec49958629b21f10e3d, type: 3}
+      propertyPath: powerUpManager
+      value: 
+      objectReference: {fileID: 213632215}
     - target: {fileID: 8293314411931541255, guid: e2ef161a6c483ec49958629b21f10e3d, type: 3}
       propertyPath: m_Radius
-      value: 0.3
+      value: 0.39
       objectReference: {fileID: 0}
     - target: {fileID: 8293314411931541255, guid: e2ef161a6c483ec49958629b21f10e3d, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8293314411931541255, guid: e2ef161a6c483ec49958629b21f10e3d, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.14
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2ef161a6c483ec49958629b21f10e3d, type: 3}
@@ -1136,6 +1162,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3c6400cd4e4c224889c10f22937682e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1637998589 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 43102812682024402, guid: e2ef161a6c483ec49958629b21f10e3d, type: 3}
+  m_PrefabInstance: {fileID: 1000125844}
+  m_PrefabAsset: {fileID: 0}
+--- !u!61 &1637998599
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1637998589}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.52, y: 0.85}
+  m_EdgeRadius: 0
 --- !u!1 &1813090833
 GameObject:
   m_ObjectHideFlags: 0
