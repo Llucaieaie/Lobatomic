@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class TimerController : MonoBehaviour
 {
@@ -21,6 +22,7 @@ public class TimerController : MonoBehaviour
             Debug.Log("LOSE");
             MapGenerator.GetComponent<MapGenerator>().CleanUp();
             Destroy(this.gameObject);
+            SceneManager.LoadScene("DeathScene");
         }
     }
 }
