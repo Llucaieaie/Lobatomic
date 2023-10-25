@@ -173,24 +173,28 @@ public class MapGenerator : MonoBehaviour
         {
             if (tiles[i] != null)
             {
-                switch (tiles[i].layer)
+                if (timerController.loose)
                 {
-                    case 6:
-                        tiles[i].GetComponent<HappyTile>().OnExplosion();
-                        break;
-                    case 7:
-                        tiles[i].GetComponent<SadTile>().OnExplosion();
-                        break;
-                    case 8:
-                        tiles[i].GetComponent<ExplosiveTile>().OnExplosion();
-                        break;
-                    case 9:
-                        tiles[i].GetComponent<PowerUpTile>().OnExplosion();
-                        break;
-                    case 10:
-                        tiles[i].GetComponent<NormalTile>().OnExplosion();
-                        break;
+                    switch (tiles[i].layer)
+                    {
+                        case 6:
+                            tiles[i].GetComponent<HappyTile>().OnExplosion();
+                            break;
+                        case 7:
+                            tiles[i].GetComponent<SadTile>().OnExplosion();
+                            break;
+                        case 8:
+                            tiles[i].GetComponent<ExplosiveTile>().OnExplosion();
+                            break;
+                        case 9:
+                            tiles[i].GetComponent<PowerUpTile>().OnExplosion();
+                            break;
+                        case 10:
+                            tiles[i].GetComponent<NormalTile>().OnExplosion();
+                            break;
+                    }
                 }
+                else Destroy(tiles[i].gameObject);
             }
         }
         tiles.Clear();

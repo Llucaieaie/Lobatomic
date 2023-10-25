@@ -38,10 +38,10 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: 5970419593662859934}
-    m_Position: {x: 20, y: 330, z: 0}
+    m_Position: {x: 30, y: 310, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -5797698874398359011}
-    m_Position: {x: 20, y: 220, z: 0}
+    m_Position: {x: 30, y: 210, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -61,7 +61,7 @@ AnimatorController:
   m_Name: BadBase_Tile128px_0
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: InDiscovered
+  - m_Name: IsDiscovered
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -115,7 +115,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: InDiscovered
+    m_ConditionEvent: IsDiscovered
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 5970419593662859934}
