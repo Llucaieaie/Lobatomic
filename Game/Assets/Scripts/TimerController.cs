@@ -6,13 +6,16 @@ using TMPro;
 public class TimerController : MonoBehaviour
 {
     public float TimeCount;
+
+    public bool stopTime = false;
+
     [SerializeField] TextMeshProUGUI timer;
     [SerializeField] GameObject MapGenerator;
 
     // Update is called once per frame
     void Update()
     {
-        TimeCount -= Time.deltaTime;
+        if (!stopTime) TimeCount -= Time.deltaTime;
         
         timer.text = Mathf.RoundToInt(TimeCount).ToString();
 
@@ -29,6 +32,5 @@ public class TimerController : MonoBehaviour
         Debug.Log("LOSE");
 
         StartCoroutine(MapGenerator.GetComponent<MapGenerator>().CleanUp());
-        Destroy(this.gameObject);
     }
 }

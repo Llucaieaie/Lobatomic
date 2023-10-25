@@ -37,13 +37,13 @@ public class HappinessBar : MonoBehaviour
     public void destroySadTile()
     {
         current += 6;
-        if (current > max) { current = max; Instantiate(succedParticle, patient.gameObject.transform.position, Quaternion.identity); StartCoroutine(mapGenerator.RestartLvl()); Regenerate(); }
+        if (current >= max) { current = max; Instantiate(succedParticle, patient.gameObject.transform.position, Quaternion.identity); StartCoroutine(mapGenerator.RestartLvl()); Regenerate(); }
         UpdateBar();
     }
     public void destroyHappyTile()
     {
         current -= 8;
-        if (current < min) { current = min; StartCoroutine(mapGenerator.CleanUp()); }
+        if (current <= min) { current = min; StartCoroutine(mapGenerator.CleanUp()); }
         UpdateBar();
     }
 

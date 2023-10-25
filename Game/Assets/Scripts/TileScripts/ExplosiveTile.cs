@@ -36,9 +36,11 @@ public class ExplosiveTile : Tile
                 switch (tiles[i].transform.gameObject.layer)
                 {
                     case 6:
+                        GameObject.Find("HappinessManager").GetComponent<HappinessBar>().destroyHappyTile();
                         tiles[i].transform.gameObject.GetComponent<HappyTile>().OnExplosion();
                         break;
                     case 7:
+                        GameObject.Find("HappinessManager").GetComponent<HappinessBar>().destroySadTile();
                         tiles[i].transform.gameObject.GetComponent<SadTile>().OnExplosion();
                         break;
                     case 8:
