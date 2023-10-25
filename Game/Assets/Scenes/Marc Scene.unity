@@ -311,6 +311,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1914605952}
   cam: {fileID: 0}
+  DefaultSize: 0
+  CurrentSize: 0
 --- !u!1001 &43102813989233746
 PrefabInstance:
   m_ObjectHideFlags: 0

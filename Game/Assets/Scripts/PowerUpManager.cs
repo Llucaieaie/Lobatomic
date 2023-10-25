@@ -30,6 +30,7 @@ public class PowerUpManager : MonoBehaviour
     [SerializeField] public bool activeDoubleP;
     [SerializeField] public bool activeStopT;
 
+    public GameObject[] powerUpIcons;
 
     public void NewPowerUp()
     {
@@ -79,8 +80,9 @@ public class PowerUpManager : MonoBehaviour
         //Should give some visual and sound feedback to the player
     }
 
-    private IEnumerator ShowInUI(PowerUps type)
+    private IEnumerator ShowInUI(GameObject icon, float duration)
     {
+        //icon.transform.position = new Vector3(icon.transform.position.x, icon.transform.position.y, )
 
         yield return new WaitForEndOfFrame();
     }
@@ -125,7 +127,7 @@ public class PowerUpManager : MonoBehaviour
         
         activeLabG = true;
 
-        StartCoroutine(cam.GetComponent<CameraManager>().ChangeZoom(cam.GetComponent<CameraManager>().CurrentSize + 10, 0.5f));
+        StartCoroutine(cam.GetComponent<CameraManager>().ChangeZoom(cam.GetComponent<CameraManager>().CurrentSize + 5, 0.5f));
 
         yield return new WaitForSeconds(time);
 
