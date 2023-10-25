@@ -812,6 +812,7 @@ MonoBehaviour:
   player: {fileID: 1478739237}
   cam: {fileID: 757215351}
   DefaultSize: 5
+  CurrentSize: 0
 --- !u!1 &877577969
 GameObject:
   m_ObjectHideFlags: 0
@@ -1251,9 +1252,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ebadba7c9091e344a87e8e29fff324a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TimeCount: 100
+  TimeCount: 2
   timer: {fileID: 184455646}
   MapGenerator: {fileID: 456126060}
+  camera: {fileID: 757215351}
 --- !u!4 &1781434486
 Transform:
   m_ObjectHideFlags: 0
