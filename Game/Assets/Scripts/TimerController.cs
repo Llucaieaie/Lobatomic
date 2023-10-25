@@ -29,6 +29,5 @@ public class TimerController : MonoBehaviour
         Debug.Log("LOSE");
 
         StartCoroutine(MapGenerator.GetComponent<MapGenerator>().CleanUp());
-        Destroy(this.gameObject);
     }
 }
