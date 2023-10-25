@@ -18,6 +18,8 @@ public class PlayerWeapon : MonoBehaviour
     public GameObject camera;
     public HappinessBar happiness;
 
+    private AudioSource attackAudio;
+
     [Range(0.1f, 1f)] public float attackingTime;
 
     public float attackCoolDown;
@@ -75,6 +77,8 @@ public class PlayerWeapon : MonoBehaviour
 
     private IEnumerator Attack()
     {
+        attackAudio.Play();
+
         EnableTargetCollider();
         yield return new WaitForSecondsRealtime(attackingTime);
 
@@ -87,6 +91,8 @@ public class PlayerWeapon : MonoBehaviour
     //Start & Update -----------------------------------------------------------------------------------------
     void Start()
     {
+        attackAudio = GetComponent<AudioSource>();
+
         canAttack = true;
         for (int i = 0; i < colliders.Length; i++)
         {

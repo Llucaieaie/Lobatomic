@@ -156,7 +156,7 @@ MonoBehaviour:
   PlayerWeapon: {fileID: 395929704}
   ScoreController: {fileID: 0}
   cam: {fileID: 2133258644}
-  appearPercentage: 25
+  appearPercentage: 100
   FrenesiTime: 5
   LabGlassesTime: 10
   DoublePointsTime: 10
@@ -276,13 +276,21 @@ PrefabInstance:
       value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 6813662151487980450, guid: ad5b0a86853370140a7605bfaa8e71cb, type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 395929703}
+    - target: {fileID: 6813662151487980450, guid: ad5b0a86853370140a7605bfaa8e71cb, type: 3}
       propertyPath: camera
       value: 
-      objectReference: {fileID: 2133258644}
+      objectReference: {fileID: 2133258643}
     - target: {fileID: 6813662151487980450, guid: ad5b0a86853370140a7605bfaa8e71cb, type: 3}
       propertyPath: tileMap
       value: 
       objectReference: {fileID: 565728314}
+    - target: {fileID: 6813662151487980450, guid: ad5b0a86853370140a7605bfaa8e71cb, type: 3}
+      propertyPath: timerController
+      value: 
+      objectReference: {fileID: 713843835}
     - target: {fileID: 6813662151487980450, guid: ad5b0a86853370140a7605bfaa8e71cb, type: 3}
       propertyPath: tileStruct.Array.data[0].tile
       value: 
@@ -667,7 +675,6 @@ MonoBehaviour:
   TimeCount: 100
   timer: {fileID: 0}
   MapGenerator: {fileID: 923452297}
-  camera: {fileID: 2133258644}
 --- !u!4 &713843836
 Transform:
   m_ObjectHideFlags: 0
