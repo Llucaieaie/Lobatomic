@@ -7,12 +7,19 @@ public class PlayerMovement : MonoBehaviour
     public float maxSpeed;
     public float acceleration;
 
+    public bool canMove;
+
     [SerializeField] private bool isMovingX = false;
     [SerializeField] private bool isMovingY = false;
 
     [SerializeField] private Vector3 directionVector = Vector3.zero;
 
     float Xmove, Ymove;
+
+    private void Start()
+    {
+        canMove = true;
+    }
 
     void Update()
     {

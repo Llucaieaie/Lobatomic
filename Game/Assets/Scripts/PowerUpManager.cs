@@ -24,10 +24,10 @@ public class PowerUpManager : MonoBehaviour
     [Range(1, 20)] public float DoublePointsTime;
     [Range(1, 20)] public float StopTimeTime;
 
-    [SerializeField] private bool activeFrenesi;
-    [SerializeField] private bool activeLabG;
-    [SerializeField] private bool activeDoubleP;
-    [SerializeField] private bool activeStopT;
+    [SerializeField] public bool activeFrenesi;
+    [SerializeField] public bool activeLabG;
+    [SerializeField] public bool activeDoubleP;
+    [SerializeField] public bool activeStopT;
 
 
     public void NewPowerUp()
@@ -90,20 +90,31 @@ public class PowerUpManager : MonoBehaviour
 
         activeFrenesi = true;
 
-        StartCoroutine(cam.GetComponent<CameraManager>().ChangeZoom(4, 0.5f));
+        StartCoroutine(cam.GetComponent<CameraManager>().ChangeZoom(cam.GetComponent<CameraManager>().CurrentSize - 1, 0.5f));
 
         float auxSpeed = PlayerMovement.maxSpeed;
         PlayerMovement.maxSpeed += PlayerMovement.maxSpeed;
 
+        float auxAttTime = PlayerWeapon.attackingTime;
+        PlayerWeapon.attackingTime = 0;
+    
         float auxCd = PlayerWeapon.attackCoolDown;
-        PlayerWeapon.attackCoolDown = 0.1f;
+        PlayerWeapon.attackCoolDown = 0;
 
         yield return new WaitForSeconds(time);
 
         PlayerMovement.maxSpeed = auxSpeed;
         PlayerWeapon.attackCoolDown = auxCd;
+        PlayerWeapon.attackingTime = auxAttTime;
 
-        StartCoroutine(cam.GetComponent<CameraManager>().ChangeZoom(cam.GetComponent<CameraManager>().DefaultSize, 0.5f));
+        if (activeLabG)
+        {
+            StartCoroutine(cam.GetComponent<CameraManager>().ChangeZoom(cam.GetComponent<CameraManager>().DefaultSize + 10, 0.5f));
+        }
+        else
+        {
+            StartCoroutine(cam.GetComponent<CameraManager>().ChangeZoom(cam.GetComponent<CameraManager>().DefaultSize, 0.5f));
+        }
 
         activeFrenesi = false;
     }
@@ -112,7 +123,20 @@ public class PowerUpManager : MonoBehaviour
         Debug.Log("Pop LabGoogles");
         
         activeLabG = true;
+
+        StartCoroutine(cam.GetComponent<CameraManager>().ChangeZoom(cam.GetComponent<CameraManager>().CurrentSize + 10, 0.5f));
+
         yield return new WaitForSeconds(time);
+
+        if (activeFrenesi)
+        {
+            StartCoroutine(cam.GetComponent<CameraManager>().ChangeZoom(cam.GetComponent<CameraManager>().DefaultSize - 1, 0.5f));
+        }
+        else
+        {
+            StartCoroutine(cam.GetComponent<CameraManager>().ChangeZoom(cam.GetComponent<CameraManager>().DefaultSize, 0.5f));
+        }
+
         activeLabG = false;
     }
     private IEnumerator ApplyDoubleP(float time)

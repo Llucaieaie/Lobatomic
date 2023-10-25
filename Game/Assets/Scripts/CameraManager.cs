@@ -8,6 +8,7 @@ public class CameraManager : MonoBehaviour
     public Camera cam;
 
     public float DefaultSize;
+    public float CurrentSize;
 
     void Start()
     {
@@ -39,6 +40,8 @@ public class CameraManager : MonoBehaviour
         float startTime = Time.time;
         float timeElapsed = 0.0f;
 
+        CurrentSize = targetZoom;
+
         while (timeElapsed < LerpDuration)
         {
             timeElapsed = Time.time - startTime;
@@ -56,6 +59,6 @@ public class CameraManager : MonoBehaviour
 
     public void MapDestroy()
     {
-       cam.orthographicSize = 20;
+        StartCoroutine(ChangeZoom(20, 0.5f));
     }
 }

@@ -30,6 +30,7 @@ public class MapGenerator : MonoBehaviour
     public Tilemap tileMap;
 
     public Camera camera;
+    public PlayerMovement player;
 
     public List<GameObject> tiles = new List<GameObject>();
     HashSet<Vector3Int> positionsFromTileFrame = new HashSet<Vector3Int>();
@@ -179,9 +180,11 @@ public class MapGenerator : MonoBehaviour
 
         GenerateMap(sizeX, sizeY);
     }
-    public void CleanUp()
+    public IEnumerator CleanUp()
     {
         camera.GetComponent<CameraManager>().MapDestroy();
+
+        yield return new WaitForSeconds(2f);
 
         occupied.Clear();
         for (int i = 0; i < tiles.Count; i++)
