@@ -10,6 +10,16 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene("Jose Scene");
     }
 
+    public void PlayCredits()
+    {
+        SceneManager.LoadScene("CreditsScene");
+    }
+
+    public void TurntoMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+
     public void QuitGame()
     {
         Application.Quit();
