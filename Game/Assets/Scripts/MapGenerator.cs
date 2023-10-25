@@ -2,10 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Tilemaps;
 using Random = UnityEngine.Random;
 using UnityEngine.SceneManagement;
-
+using TMPro;
 
 public enum TileType
 {
@@ -39,6 +40,8 @@ public class MapGenerator : MonoBehaviour
     List<Vector3Int> occupied = new List<Vector3Int>();
     BoundsInt bounds;
     [SerializeField] int sizeX, sizeY;
+
+    [SerializeField] GameObject button, note;
 
     private void Start()
     {
@@ -181,17 +184,25 @@ public class MapGenerator : MonoBehaviour
         }
         tiles.Clear();
 
-        Player.transform.position = Vector3.zero;
-
         timerController.TimeCount += 20;
+        if (SceneManager.GetActiveScene().name == "SadTutotial")
+        {
+            note.SetActive(true);
+            button.SetActive(true);
+        }
+        else
+        {
+            yield return new WaitForSeconds(0.5f);
 
-        yield return new WaitForSeconds(0.5f);
+            Player.transform.position = Vector3.zero;
 
-        GenerateMap(sizeX, sizeY);
+            GenerateMap(sizeX, sizeY);
+        }
     }
     public IEnumerator CleanUp()
     {
         camera.GetComponent<CameraManager>().MapDestroy();
+
         yield return new WaitForSeconds(0.1f);
 
         occupied.Clear();
@@ -221,8 +232,16 @@ public class MapGenerator : MonoBehaviour
         }
         tiles.Clear();
 
-        yield return new WaitForSeconds(2.5f);
+        if (SceneManager.GetActiveScene().name == "HappyTutotial")
+        {
+            note.SetActive(true);
+            button.SetActive(true);
+        }
+        else
+        {
+            yield return new WaitForSeconds(2.5f);
 
-        SceneManager.LoadScene("DeathScene");
+            SceneManager.LoadScene("DeathScene");
+        }
     }
 }
