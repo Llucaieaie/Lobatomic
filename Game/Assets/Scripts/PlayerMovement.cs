@@ -21,7 +21,7 @@ public class PlayerMovement : MonoBehaviour
         canMove = true;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         Vector3 auxVec = Vector3.zero;
 
@@ -63,8 +63,8 @@ public class PlayerMovement : MonoBehaviour
 
         //transform.position += directionVector * Time.deltaTime;
 
-        Xmove = Input.GetAxis("Horizontal") * maxSpeed * Time.deltaTime;
-        Ymove = Input.GetAxis("Vertical") * maxSpeed * Time.deltaTime;
+        Xmove = Input.GetAxis("Horizontal") * maxSpeed * Time.unscaledDeltaTime;
+        Ymove = Input.GetAxis("Vertical") * maxSpeed * Time.unscaledDeltaTime;
         //transform.position += new Vector3(Xmove, Ymove, 0);
 
         GetComponent<Rigidbody2D>().MovePosition(GetComponent<Rigidbody2D>().position + new Vector2(Xmove, Ymove));

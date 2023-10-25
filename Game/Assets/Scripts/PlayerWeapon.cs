@@ -31,7 +31,7 @@ public class PlayerWeapon : MonoBehaviour
     public IEnumerator StartCooldown(float cd)
     {
         canAttack = false;
-        yield return new WaitForSeconds(cd);
+        yield return new WaitForSecondsRealtime(cd);
         canAttack = true;
     }
 
@@ -75,7 +75,7 @@ public class PlayerWeapon : MonoBehaviour
     private IEnumerator Attack()
     {
         EnableTargetCollider();
-        yield return new WaitForSeconds(attackingTime);
+        yield return new WaitForSecondsRealtime(attackingTime);
 
         StartCoroutine(StartCooldown(attackCoolDown));
 

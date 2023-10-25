@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum PowerUps
 {
@@ -30,7 +31,7 @@ public class PowerUpManager : MonoBehaviour
     [SerializeField] public bool activeDoubleP;
     [SerializeField] public bool activeStopT;
 
-    public GameObject[] powerUpIcons;
+    public Image[] powerUpIcons;
 
     public void NewPowerUp()
     {
@@ -80,18 +81,12 @@ public class PowerUpManager : MonoBehaviour
         //Should give some visual and sound feedback to the player
     }
 
-    private IEnumerator ShowInUI(GameObject icon, float duration)
-    {
-        //icon.transform.position = new Vector3(icon.transform.position.x, icon.transform.position.y, )
-
-        yield return new WaitForEndOfFrame();
-    }
-
     private IEnumerator ApplyFrenesi(float time)
     {
         Debug.Log("Pop Frenesi");
 
         activeFrenesi = true;
+        powerUpIcons[0].enabled = true;
 
         StartCoroutine(cam.GetComponent<CameraManager>().ChangeZoom(cam.GetComponent<CameraManager>().CurrentSize - 1, 0.5f));
 
@@ -104,7 +99,7 @@ public class PowerUpManager : MonoBehaviour
         float auxCd = PlayerWeapon.attackCoolDown;
         PlayerWeapon.attackCoolDown = 0;
 
-        yield return new WaitForSeconds(time);
+        yield return new WaitForSecondsRealtime(time);
 
         PlayerMovement.maxSpeed = auxSpeed;
         PlayerWeapon.attackCoolDown = auxCd;
@@ -112,13 +107,14 @@ public class PowerUpManager : MonoBehaviour
 
         if (activeLabG)
         {
-            StartCoroutine(cam.GetComponent<CameraManager>().ChangeZoom(cam.GetComponent<CameraManager>().DefaultSize + 10, 0.5f));
+            StartCoroutine(cam.GetComponent<CameraManager>().ChangeZoom(cam.GetComponent<CameraManager>().DefaultSize + 2.5f, 0.5f));
         }
         else
         {
             StartCoroutine(cam.GetComponent<CameraManager>().ChangeZoom(cam.GetComponent<CameraManager>().DefaultSize, 0.5f));
         }
 
+        powerUpIcons[0].enabled = false;
         activeFrenesi = false;
     }
     private IEnumerator ApplyLabG(float time)
@@ -126,10 +122,11 @@ public class PowerUpManager : MonoBehaviour
         Debug.Log("Pop LabGoogles");
         
         activeLabG = true;
+        powerUpIcons[1].enabled = true;
 
-        StartCoroutine(cam.GetComponent<CameraManager>().ChangeZoom(cam.GetComponent<CameraManager>().CurrentSize + 5, 0.5f));
+        StartCoroutine(cam.GetComponent<CameraManager>().ChangeZoom(cam.GetComponent<CameraManager>().CurrentSize + 2.5f, 0.5f));
 
-        yield return new WaitForSeconds(time);
+        yield return new WaitForSecondsRealtime(time);
 
         if (activeFrenesi)
         {
@@ -140,6 +137,7 @@ public class PowerUpManager : MonoBehaviour
             StartCoroutine(cam.GetComponent<CameraManager>().ChangeZoom(cam.GetComponent<CameraManager>().DefaultSize, 0.5f));
         }
 
+        powerUpIcons[1].enabled = false;
         activeLabG = false;
     }
     private IEnumerator ApplyDoubleP(float time)
@@ -147,24 +145,33 @@ public class PowerUpManager : MonoBehaviour
         Debug.Log("Pop DoublePoints");
 
         activeDoubleP = true;
+        powerUpIcons[2].enabled = true;
 
         int auxScore = ScoreController.scoreMultiplier;
         ScoreController.scoreMultiplier += ScoreController.scoreMultiplier;
 
-        yield return new WaitForSeconds(time);
+        yield return new WaitForSecondsRealtime(time);
 
         ScoreController.scoreMultiplier = auxScore;
+
+        powerUpIcons[2].enabled = false;
         activeDoubleP = false;
     }
     private IEnumerator ApplyStopT(float time)
     {
         Debug.Log("Pop StopTime");
 
-        //Time.timescale
-        //
-
         activeStopT = true;
-        yield return new WaitForSeconds(time);
+        powerUpIcons[3].enabled = true;
+
+        float auxTimeScale = Time.timeScale;
+        Time.timeScale = Time.timeScale / 3;
+
+        yield return new WaitForSecondsRealtime(time);
+
+        Time.timeScale = auxTimeScale;
+
+        powerUpIcons[3].enabled = false;
         activeStopT = false;
     }
 }
