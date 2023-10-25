@@ -14,6 +14,8 @@ public class HappinessBar : MonoBehaviour
     public float current;
     public string percentText;
 
+    public GeneratePatient patient;
+
     void Start()
     {
         min = 0;
@@ -22,19 +24,12 @@ public class HappinessBar : MonoBehaviour
         UpdateBar();
     }
 
-
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void UpdateBar()
     {
         bar.fillAmount = current / 100;
         percentText = string.Format("{0}%", current);
         percent.text = percentText;
+        patient.UpdateExpression(current);
     }
 
     public void destroySadTile()
