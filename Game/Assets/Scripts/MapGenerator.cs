@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using Random = UnityEngine.Random;
+using UnityEngine.SceneManagement;
+
 
 public enum TileType
 {
@@ -29,6 +31,9 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] TileStruct[] tileStruct;
     public Tilemap tileMap;
 
+    public GameObject Player;
+    public GameObject camera;
+    public TimerController timerController;
     public List<GameObject> tiles = new List<GameObject>();
     HashSet<Vector3Int> positionsFromTileFrame = new HashSet<Vector3Int>();
     List<Vector3Int> occupied = new List<Vector3Int>();
@@ -146,8 +151,49 @@ public class MapGenerator : MonoBehaviour
         GetComponentInParent<EdgeCollider2D>().points = points;
     }
 
-    public void RestartLvl()
+    public IEnumerator RestartLvl()
     {
+        occupied.Clear();
+
+        for (int i = 0; i < tiles.Count; i++)
+        {
+            if (tiles[i] != null)
+            {
+                switch (tiles[i].layer)
+                {
+                    case 6:
+                        tiles[i].GetComponent<HappyTile>().OnExplosion();
+                        break;
+                    case 7:
+                        tiles[i].GetComponent<SadTile>().OnExplosion();
+                        break;
+                    case 8:
+                        tiles[i].GetComponent<ExplosiveTile>().OnExplosion();
+                        break;
+                    case 9:
+                        tiles[i].GetComponent<PowerUpTile>().OnExplosion();
+                        break;
+                    case 10:
+                        tiles[i].GetComponent<NormalTile>().OnExplosion();
+                        break;
+                }
+            }
+        }
+        tiles.Clear();
+
+        Player.transform.position = Vector3.zero;
+
+        timerController.TimeCount += 20;
+
+        yield return new WaitForSeconds(0.5f);
+
+        GenerateMap(sizeX, sizeY);
+    }
+    public IEnumerator CleanUp()
+    {
+        camera.GetComponent<CameraManager>().MapDestroy();
+        yield return new WaitForSeconds(0.1f);
+
         occupied.Clear();
         for (int i = 0; i < tiles.Count; i++)
         {
@@ -175,35 +221,8 @@ public class MapGenerator : MonoBehaviour
         }
         tiles.Clear();
 
-        GenerateMap(sizeX, sizeY);
-    }
-    public void CleanUp()
-    {
-        occupied.Clear();
-        for (int i = 0; i < tiles.Count; i++)
-        {
-            if (tiles[i] != null)
-            {
-                switch (tiles[i].layer)
-                {
-                    case 6:
-                        tiles[i].GetComponent<HappyTile>().OnExplosion();
-                        break;
-                    case 7:
-                        tiles[i].GetComponent<SadTile>().OnExplosion();
-                        break;
-                    case 8:
-                        tiles[i].GetComponent<ExplosiveTile>().OnExplosion();
-                        break;
-                    case 9:
-                        tiles[i].GetComponent<PowerUpTile>().OnExplosion();
-                        break;
-                    case 10:
-                        tiles[i].GetComponent<NormalTile>().OnExplosion();
-                        break;
-                }
-            }
-        }
-        tiles.Clear();
+        yield return new WaitForSeconds(2.5f);
+
+        SceneManager.LoadScene("DeathScene");
     }
 }

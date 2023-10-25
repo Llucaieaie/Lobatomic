@@ -15,6 +15,8 @@ public class HappinessBar : MonoBehaviour
     public string percentText;
 
     public GeneratePatient patient;
+    public GameObject succedParticle;
+    public MapGenerator mapGenerator;
 
     void Start()
     {
@@ -35,13 +37,22 @@ public class HappinessBar : MonoBehaviour
     public void destroySadTile()
     {
         current += 6;
-        if (current > max) { current = max; }
+        if (current > max) { current = max; Instantiate(succedParticle, patient.gameObject.transform.position, Quaternion.identity); StartCoroutine(mapGenerator.RestartLvl()); Regenerate(); }
         UpdateBar();
     }
     public void destroyHappyTile()
     {
         current -= 8;
-        if (current < min) { current = min; }
+        if (current < min) { current = min; StartCoroutine(mapGenerator.CleanUp()); }
+        UpdateBar();
+    }
+
+    void Regenerate()
+    {
+        min = 0;
+        max = 100;
+        current = Random.Range(33, 46);
+        patient.GenerateCharacters();
         UpdateBar();
     }
 }
