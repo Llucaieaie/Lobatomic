@@ -34,6 +34,15 @@ public class PowerUpManager : MonoBehaviour
 
     public Image[] powerUpIcons;
 
+    public AudioSource stopTAudio;
+    public AudioSource powerUpAudio;
+
+    private void Start()
+    {
+        stopTAudio.Play();
+        stopTAudio.mute = true;
+    }
+
     public void NewPowerUp()
     {
         Debug.Log("Achus");
@@ -48,24 +57,28 @@ public class PowerUpManager : MonoBehaviour
                 case PowerUps.FRENESI: // -----------------------------------------------
                     if (!activeFrenesi)
                     {
+                        powerUpAudio.Play();
                         StartCoroutine(ApplyFrenesi(FrenesiTime));
                     }
                     break;
                 case PowerUps.LAB_GOOGLES: // -------------------------------------------
                     if (!activeLabG)
                     {
+                        powerUpAudio.Play();
                         StartCoroutine(ApplyLabG(LabGlassesTime));
                     }
                     break;
                 case PowerUps.DOUBLE_POINTS: // -----------------------------------------
                     if (!activeDoubleP)
                     {
+                        powerUpAudio.Play();
                         StartCoroutine(ApplyDoubleP(DoublePointsTime));
                     }
                     break;
                 case PowerUps.STOP_TIME: // ---------------------------------------------
                     if (!activeStopT)
                     {
+                        powerUpAudio.Play();
                         StartCoroutine(ApplyStopT(StopTimeTime));
                     }
                     break;
@@ -155,6 +168,8 @@ public class PowerUpManager : MonoBehaviour
     {
         Debug.Log("Pop StopTime");
 
+        stopTAudio.mute = false;
+
         activeStopT = true;
         powerUpIcons[3].enabled = true;
 
@@ -163,6 +178,8 @@ public class PowerUpManager : MonoBehaviour
         yield return new WaitForSecondsRealtime(time);
 
         TimerController.stopTime = false;
+
+        stopTAudio.mute = true;
 
         powerUpIcons[3].enabled = false;
         activeStopT = false;
