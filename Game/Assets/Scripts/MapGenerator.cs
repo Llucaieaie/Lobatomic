@@ -29,9 +29,6 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] TileStruct[] tileStruct;
     public Tilemap tileMap;
 
-    public Camera camera;
-    public PlayerMovement player;
-
     public List<GameObject> tiles = new List<GameObject>();
     HashSet<Vector3Int> positionsFromTileFrame = new HashSet<Vector3Int>();
     List<Vector3Int> occupied = new List<Vector3Int>();

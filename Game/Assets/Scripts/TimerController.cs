@@ -22,6 +22,7 @@ public class TimerController : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Escape)) TimeCount = 0;
         if (TimeCount <= 0)
         {
+            TimeCount = 0;
             StartCoroutine(CleanMap());
         }
     }
@@ -31,10 +32,11 @@ public class TimerController : MonoBehaviour
         Debug.Log("LOSE");
         camera.GetComponent<CameraManager>().MapDestroy();
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(0.1f);
 
         MapGenerator.GetComponent<MapGenerator>().CleanUp();
-        Destroy(this.gameObject);
+        yield return new WaitForSeconds(2.5f);
         SceneManager.LoadScene("DeathScene");
+        Destroy(this.gameObject);
     }
 }
