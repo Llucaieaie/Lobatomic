@@ -25,6 +25,8 @@ public class PlayerWeapon : MonoBehaviour
     public float attackCoolDown;
     [SerializeField] private bool canAttack;
 
+    private bool attackAudioFrenesi = false;
+
     [SerializeField] private direction direction;
     public BoxCollider2D[] colliders;
 
@@ -77,8 +79,9 @@ public class PlayerWeapon : MonoBehaviour
 
     private IEnumerator Attack()
     {
-        attackAudio.Play();
-
+        if(!powerUpManager.activeFrenesi) attackAudio.Play();
+        if (powerUpManager.activeFrenesi && !attackAudioFrenesi) { attackAudio.loop = true; attackAudio.Play(); attackAudioFrenesi = true; }
+        
         EnableTargetCollider();
         yield return new WaitForSecondsRealtime(attackingTime);
 
@@ -126,6 +129,13 @@ public class PlayerWeapon : MonoBehaviour
             StartCoroutine(Attack());
             canAttack = false;
         }
+
+        if(Input.GetKeyUp(KeyCode.UpArrow))    { attackAudio.loop = false; attackAudioFrenesi = false; }
+        if(Input.GetKeyUp(KeyCode.DownArrow))  { attackAudio.loop = false; attackAudioFrenesi = false; }
+        if(Input.GetKeyUp(KeyCode.LeftArrow))  { attackAudio.loop = false; attackAudioFrenesi = false; }
+        if(Input.GetKeyUp(KeyCode.RightArrow)) { attackAudio.loop = false; attackAudioFrenesi = false; }
+
+        if (!powerUpManager.activeFrenesi) { attackAudio.loop = false; attackAudioFrenesi = false; }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

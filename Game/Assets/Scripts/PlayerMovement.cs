@@ -65,8 +65,8 @@ public class PlayerMovement : MonoBehaviour
 
         //transform.position += directionVector * Time.deltaTime;
 
-        Xmove = Input.GetAxis("Horizontal") * maxSpeed * Time.unscaledDeltaTime;
-        Ymove = Input.GetAxis("Vertical") * maxSpeed * Time.unscaledDeltaTime;
+        Xmove = Input.GetAxis("Horizontal") * maxSpeed * Time.deltaTime;
+        Ymove = Input.GetAxis("Vertical") * maxSpeed * Time.deltaTime;
         //transform.position += new Vector3(Xmove, Ymove, 0);
 
         Vector2 movement = new Vector2(Xmove, Ymove);

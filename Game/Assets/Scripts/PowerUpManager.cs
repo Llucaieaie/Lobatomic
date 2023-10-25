@@ -17,6 +17,7 @@ public class PowerUpManager : MonoBehaviour
     public PlayerMovement PlayerMovement;
     public PlayerWeapon PlayerWeapon;
     public ScoreController ScoreController;
+    public TimerController TimerController;
     public Camera cam;
 
     [Range(0, 100)] public int appearPercentage;
@@ -35,6 +36,8 @@ public class PowerUpManager : MonoBehaviour
 
     public void NewPowerUp()
     {
+        Debug.Log("Achus");
+
         if (Random.Range(0, 100) <= appearPercentage)
         {
             PowerUps powerUp = (PowerUps)Random.Range(0, 4);
@@ -45,28 +48,24 @@ public class PowerUpManager : MonoBehaviour
                 case PowerUps.FRENESI: // -----------------------------------------------
                     if (!activeFrenesi)
                     {
-                        PowerUpFeedback();
                         StartCoroutine(ApplyFrenesi(FrenesiTime));
                     }
                     break;
                 case PowerUps.LAB_GOOGLES: // -------------------------------------------
                     if (!activeLabG)
                     {
-                        PowerUpFeedback();
                         StartCoroutine(ApplyLabG(LabGlassesTime));
                     }
                     break;
                 case PowerUps.DOUBLE_POINTS: // -----------------------------------------
                     if (!activeDoubleP)
                     {
-                        PowerUpFeedback();
                         StartCoroutine(ApplyDoubleP(DoublePointsTime));
                     }
                     break;
                 case PowerUps.STOP_TIME: // ---------------------------------------------
                     if (!activeStopT)
                     {
-                        PowerUpFeedback();
                         StartCoroutine(ApplyStopT(StopTimeTime));
                     }
                     break;
@@ -74,11 +73,6 @@ public class PowerUpManager : MonoBehaviour
                     break;
             }
         }
-    }
-
-    private void PowerUpFeedback()
-    {
-        //Should give some visual and sound feedback to the player
     }
 
     private IEnumerator ApplyFrenesi(float time)
@@ -164,12 +158,11 @@ public class PowerUpManager : MonoBehaviour
         activeStopT = true;
         powerUpIcons[3].enabled = true;
 
-        float auxTimeScale = Time.timeScale;
-        Time.timeScale = Time.timeScale / 3;
-
+        TimerController.stopTime = true;
+        
         yield return new WaitForSecondsRealtime(time);
 
-        Time.timeScale = auxTimeScale;
+        TimerController.stopTime = false;
 
         powerUpIcons[3].enabled = false;
         activeStopT = false;
