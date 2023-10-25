@@ -154,6 +154,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerMovement: {fileID: 395929706}
   PlayerWeapon: {fileID: 395929704}
+  ScoreController: {fileID: 0}
   cam: {fileID: 2133258644}
   appearPercentage: 25
   FrenesiTime: 5
@@ -164,6 +165,7 @@ MonoBehaviour:
   activeLabG: 0
   activeDoubleP: 0
   activeStopT: 0
+  powerUpIcons: []
 --- !u!4 &213632216
 Transform:
   m_ObjectHideFlags: 0
@@ -354,8 +356,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 303.6951, y: 1.061}
-  m_SizeDelta: {x: 1024.1637, y: 803.4758}
+  m_AnchoredPosition: {x: 330, y: 0}
+  m_SizeDelta: {x: 1020.4668, y: 802.6578}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &536187929
 MonoBehaviour:
