@@ -561,6 +561,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TimeCount: 100
   stopTime: 0
+  loose: 0
   timer: {fileID: 1734729210}
   MapGenerator: {fileID: 199591661}
 --- !u!4 &246468048
@@ -975,15 +976,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2355365025971627386, guid: e2ef161a6c483ec49958629b21f10e3d, type: 3}
       propertyPath: m_Size.x
-      value: 1
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 2355365025971627386, guid: e2ef161a6c483ec49958629b21f10e3d, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.25
       objectReference: {fileID: 0}
     - target: {fileID: 6534468340282388142, guid: e2ef161a6c483ec49958629b21f10e3d, type: 3}
       propertyPath: m_Size.x
-      value: 1
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 6534468340282388142, guid: e2ef161a6c483ec49958629b21f10e3d, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 6585532278832340762, guid: e2ef161a6c483ec49958629b21f10e3d, type: 3}
       propertyPath: m_Size.y
-      value: 1
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 6585532278832340762, guid: e2ef161a6c483ec49958629b21f10e3d, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.25
       objectReference: {fileID: 0}
     - target: {fileID: 7063358760495409454, guid: e2ef161a6c483ec49958629b21f10e3d, type: 3}
       propertyPath: camera
@@ -1011,7 +1024,11 @@ PrefabInstance:
       objectReference: {fileID: 692437038}
     - target: {fileID: 8153734903118873960, guid: e2ef161a6c483ec49958629b21f10e3d, type: 3}
       propertyPath: m_Size.y
-      value: 1
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8153734903118873960, guid: e2ef161a6c483ec49958629b21f10e3d, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 8293314411931541255, guid: e2ef161a6c483ec49958629b21f10e3d, type: 3}
       propertyPath: m_Radius

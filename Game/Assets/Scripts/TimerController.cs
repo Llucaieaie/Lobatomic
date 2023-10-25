@@ -9,6 +9,8 @@ public class TimerController : MonoBehaviour
 
     public bool stopTime = false;
 
+    [HideInInspector] public bool loose = false;
+
     [SerializeField] TextMeshProUGUI timer;
     [SerializeField] GameObject MapGenerator;
 
@@ -22,6 +24,7 @@ public class TimerController : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Escape)) TimeCount = 0;
         if (TimeCount <= 0)
         {
+            loose = true;
             TimeCount = 0;
             CleanMap();
         }
