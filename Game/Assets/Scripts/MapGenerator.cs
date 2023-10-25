@@ -180,12 +180,8 @@ public class MapGenerator : MonoBehaviour
 
         GenerateMap(sizeX, sizeY);
     }
-    public IEnumerator CleanUp()
+    public void CleanUp()
     {
-        camera.GetComponent<CameraManager>().MapDestroy();
-
-        yield return new WaitForSeconds(2f);
-
         occupied.Clear();
         for (int i = 0; i < tiles.Count; i++)
         {

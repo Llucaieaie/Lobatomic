@@ -13,7 +13,8 @@ public class CameraManager : MonoBehaviour
     void Start()
     {
         //cam = GetComponent<Camera>();
-
+        DefaultSize = cam.orthographicSize;
+        CurrentSize = DefaultSize;
     }
 
     void Update()

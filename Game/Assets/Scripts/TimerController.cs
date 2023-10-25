@@ -10,6 +10,8 @@ public class TimerController : MonoBehaviour
     [SerializeField] TextMeshProUGUI timer;
     [SerializeField] GameObject MapGenerator;
 
+    public Camera camera;
+
     // Update is called once per frame
     void Update()
     {
@@ -17,12 +19,22 @@ public class TimerController : MonoBehaviour
         
         timer.text = Mathf.RoundToInt(TimeCount).ToString();
 
+        if(Input.GetKeyDown(KeyCode.Escape)) TimeCount = 0;
         if (TimeCount <= 0)
         {
-            Debug.Log("LOSE");
-            MapGenerator.GetComponent<MapGenerator>().CleanUp();
-            Destroy(this.gameObject);
-            SceneManager.LoadScene("DeathScene");
+            StartCoroutine(CleanMap());
         }
+    }
+
+    private IEnumerator CleanMap()
+    {
+        Debug.Log("LOSE");
+        camera.GetComponent<CameraManager>().MapDestroy();
+
+        yield return new WaitForSeconds(2f);
+
+        MapGenerator.GetComponent<MapGenerator>().CleanUp();
+        Destroy(this.gameObject);
+        SceneManager.LoadScene("DeathScene");
     }
 }
