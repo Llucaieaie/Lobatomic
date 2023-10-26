@@ -467,6 +467,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TimeCount: 100
+  stopTime: 0
+  loose: 0
   timer: {fileID: 131506538}
   MapGenerator: {fileID: 1153089290}
 --- !u!4 &150687534
@@ -1358,6 +1360,18 @@ PrefabInstance:
       propertyPath: timerController
       value: 
       objectReference: {fileID: 150687533}
+    - target: {fileID: 6813662151487980450, guid: ad5b0a86853370140a7605bfaa8e71cb, type: 3}
+      propertyPath: groundTiles.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6813662151487980450, guid: ad5b0a86853370140a7605bfaa8e71cb, type: 3}
+      propertyPath: groundTiles.Array.data[0]
+      value: 
+      objectReference: {fileID: 7123767876524449978, guid: 4438e18e05ea7ec4e8e089267374757f, type: 3}
+    - target: {fileID: 6813662151487980450, guid: ad5b0a86853370140a7605bfaa8e71cb, type: 3}
+      propertyPath: groundTiles.Array.data[1]
+      value: 
+      objectReference: {fileID: 2761505256534072843, guid: e7d5c2a44b73c6b489e7579aafa2faf8, type: 3}
     - target: {fileID: 6813662151487980450, guid: ad5b0a86853370140a7605bfaa8e71cb, type: 3}
       propertyPath: tileStruct.Array.data[0].tile
       value: 
@@ -2384,22 +2398,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 43102812682024406, guid: e2ef161a6c483ec49958629b21f10e3d, type: 3}
-      propertyPath: maxSpeed
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2355365025971627386, guid: e2ef161a6c483ec49958629b21f10e3d, type: 3}
-      propertyPath: m_Size.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6534468340282388142, guid: e2ef161a6c483ec49958629b21f10e3d, type: 3}
-      propertyPath: m_Size.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6585532278832340762, guid: e2ef161a6c483ec49958629b21f10e3d, type: 3}
-      propertyPath: m_Size.y
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7063358760495409454, guid: e2ef161a6c483ec49958629b21f10e3d, type: 3}
       propertyPath: camera
       value: 
@@ -2413,21 +2411,9 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1153089289}
     - target: {fileID: 7063358760495409454, guid: e2ef161a6c483ec49958629b21f10e3d, type: 3}
-      propertyPath: attackingTime
-      value: 0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 7063358760495409454, guid: e2ef161a6c483ec49958629b21f10e3d, type: 3}
-      propertyPath: attackCoolDown
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7063358760495409454, guid: e2ef161a6c483ec49958629b21f10e3d, type: 3}
       propertyPath: powerUpManager
       value: 
       objectReference: {fileID: 1953495451}
-    - target: {fileID: 8153734903118873960, guid: e2ef161a6c483ec49958629b21f10e3d, type: 3}
-      propertyPath: m_Size.y
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2ef161a6c483ec49958629b21f10e3d, type: 3}
 --- !u!114 &1698523698 stripped
@@ -2822,6 +2808,7 @@ MonoBehaviour:
   PlayerMovement: {fileID: 1698523699}
   PlayerWeapon: {fileID: 1698523698}
   ScoreController: {fileID: 1189139718}
+  TimerController: {fileID: 0}
   cam: {fileID: 1698177492}
   appearPercentage: 25
   FrenesiTime: 5
@@ -2833,6 +2820,8 @@ MonoBehaviour:
   activeDoubleP: 0
   activeStopT: 0
   powerUpIcons: []
+  stopTAudio: {fileID: 0}
+  powerUpAudio: {fileID: 0}
 --- !u!4 &1953495452
 Transform:
   m_ObjectHideFlags: 0
