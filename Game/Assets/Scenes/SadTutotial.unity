@@ -1933,7 +1933,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "HAS GANADO!\nLOS NUCLEOS MORADOS\nHARAN MAS FELICES A \nTUS PACIENTES"
+  m_text: "HAS GUANYAT!\nELS NUCLIS MORATS\nFARAN M\xC9S FELI\xC7OS A\nELS TEUS PACIENTS"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 71b5afedd6385884db2bc0bdd0058df1, type: 2}
   m_sharedMaterial: {fileID: -5885315602980458996, guid: 71b5afedd6385884db2bc0bdd0058df1, type: 2}
@@ -2431,6 +2431,18 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 43102812682024400, guid: e2ef161a6c483ec49958629b21f10e3d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 43102812682024400, guid: e2ef161a6c483ec49958629b21f10e3d, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 43102812682024400, guid: e2ef161a6c483ec49958629b21f10e3d, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 43102812682024400, guid: e2ef161a6c483ec49958629b21f10e3d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -2853,7 +2865,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c636fc4410f7dda4385969bb047b8880, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isTutorial: {fileID: 0}
+  isTutorial: {fileID: 11400000, guid: c3317f6f064eb68489e628a072427103, type: 2}
 --- !u!1 &1953495450
 GameObject:
   m_ObjectHideFlags: 0
