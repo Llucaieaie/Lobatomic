@@ -45,6 +45,8 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] GameObject button, note;
     public GameObject[] groundTiles;
 
+    public int padding;
+
     private void Start()
     {
         for (int i = 0; i < tileStruct.Length; i++)
@@ -78,12 +80,18 @@ public class MapGenerator : MonoBehaviour
             {
                 PaintGroundTiles(position);
 
+                if (position.x < bounds.xMin || position.x >= bounds.xMax || position.y < bounds.yMin || position.y >= bounds.yMax)
+                {
+                    occupied.Add(position);
+                    tiles.Add(Instantiate(tileStruct[3].tile, new Vector3(position.x, position.y, 0), Quaternion.identity));
+                }
+
                 if (!IsTiledOcccupied(position) && IsInRate(tileStruct[i]) && tileStruct[i].maxNum > tileStruct[i].tileCount)
                 {
+
                     PaintTiles(position, tileStruct[i]);
                     tileStruct[i].tileCount++;
 
-                    
                 }
             }
         }
@@ -111,9 +119,9 @@ public class MapGenerator : MonoBehaviour
     {
         HashSet<Vector3Int> floor = new HashSet<Vector3Int>();
 
-        for (int col = 0; col < room.size.x; col++)
+        for (int col = -padding; col < room.size.x + padding; col++)
         {
-            for (int row = 0; row < room.size.y; row++)
+            for (int row = -padding; row < room.size.y + padding; row++)
             {
                 Vector3Int position = room.min + new Vector3Int(col, row);
                 floor.Add(position);

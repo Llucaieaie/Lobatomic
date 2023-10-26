@@ -469,6 +469,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1071851898}
     - target: {fileID: 6813662151487980450, guid: ad5b0a86853370140a7605bfaa8e71cb, type: 3}
+      propertyPath: padding
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6813662151487980450, guid: ad5b0a86853370140a7605bfaa8e71cb, type: 3}
       propertyPath: tileMap
       value: 
       objectReference: {fileID: 2105069066}
@@ -1107,7 +1111,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 389c377dd7812804190c11b19faa05db, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
