@@ -498,7 +498,7 @@ PrefabInstance:
       objectReference: {fileID: 8835146293047337037, guid: 1068a678354ddf2489e9b51cebe784b2, type: 3}
     - target: {fileID: 6813662151487980450, guid: ad5b0a86853370140a7605bfaa8e71cb, type: 3}
       propertyPath: tileStruct.Array.data[0].maxNum
-      value: 30
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 6813662151487980450, guid: ad5b0a86853370140a7605bfaa8e71cb, type: 3}
       propertyPath: tileStruct.Array.data[1].maxNum
@@ -922,6 +922,10 @@ PrefabInstance:
     - target: {fileID: -8893322007101620058, guid: e2ef161a6c483ec49958629b21f10e3d, type: 3}
       propertyPath: m_Volume
       value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 813638602, guid: e2ef161a6c483ec49958629b21f10e3d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 43102812682024400, guid: e2ef161a6c483ec49958629b21f10e3d, type: 3}
       propertyPath: m_RootOrder

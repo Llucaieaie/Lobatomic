@@ -25,6 +25,7 @@ public struct TileStruct
     public GameObject tile;
     public TileType tileType;
     public int maxNum, tileCount, appearRate;
+    public int maxNumStatic;
 };
 
 public class MapGenerator : MonoBehaviour
@@ -46,6 +47,11 @@ public class MapGenerator : MonoBehaviour
 
     private void Start()
     {
+        for (int i = 0; i < tileStruct.Length; i++)
+        {
+            tileStruct[i].maxNumStatic = tileStruct[i].maxNum;
+        }
+
         GenerateMap(sizeX, sizeX);
     }
 
@@ -61,7 +67,9 @@ public class MapGenerator : MonoBehaviour
 
         for (int i = 0; i < tileStruct.Length; i++)
         {
-            tileStruct[i].maxNum = (tileStruct[i].maxNum * (sizeX * sizeY)) / 100;
+            tileStruct[i].tileCount = 0;
+            tileStruct[i].maxNum = tileStruct[i].maxNumStatic;
+            tileStruct[i].maxNum = (tileStruct[i].maxNumStatic * (sizeX * sizeY)) / 100;
         }
 
         foreach (var position in positionsFromTileFrame)
