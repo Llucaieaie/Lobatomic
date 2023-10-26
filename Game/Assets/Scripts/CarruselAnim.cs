@@ -19,26 +19,15 @@ public class CarruselAnim : MonoBehaviour
 
     IEnumerator StartCarrusel()
     {
-        yield return new WaitForSeconds(1);
 
-        if (currentCarrusel >= carrusel.Length)
+        if (isTutorial.Bool)
         {
-            if (isTutorial.Bool)
-            {
-                SceneManager.LoadScene("HappyTutotial");
-            }
-            else
-            {
-                SceneManager.LoadScene("MainScene");
-            }
+            SceneManager.LoadScene("HappyTutotial");
         }
-        else 
+        else
         {
-            StartCoroutine(StartCarrusel());
+            SceneManager.LoadScene("MainScene");
         }
-
-        currentCarrusel++;
-        GetComponent<Image>().sprite = carrusel[currentCarrusel];
 
         yield return null;
     }

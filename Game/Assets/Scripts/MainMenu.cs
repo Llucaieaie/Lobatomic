@@ -8,6 +8,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] ScriptableBool isTutorial;
     public void PlayGame()
     {
+        isTutorial.Bool = false; 
         SceneManager.LoadScene("AnimScene");
     }
 
