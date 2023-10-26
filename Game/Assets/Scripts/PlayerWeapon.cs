@@ -45,7 +45,7 @@ public class PlayerWeapon : MonoBehaviour
         switch (direction)
         {
             case direction.UP:
-                colliders[0].enabled=true;
+                colliders[0].enabled = true;
                 break;
             case direction.DOWN:
                 colliders[1].enabled = true;
@@ -79,7 +79,9 @@ public class PlayerWeapon : MonoBehaviour
 
     private IEnumerator Attack()
     {
-        if(!powerUpManager.activeFrenesi) attackAudio.Play();
+        attackAudio.pitch = Random.Range(0.75f, 1.5f);
+
+        if (!powerUpManager.activeFrenesi) attackAudio.Play();
         if (powerUpManager.activeFrenesi && !attackAudioFrenesi) { attackAudio.loop = true; attackAudio.Play(); attackAudioFrenesi = true; }
         
         EnableTargetCollider();
