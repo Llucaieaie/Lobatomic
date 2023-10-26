@@ -18,7 +18,7 @@ public class ExplosiveTile : Tile
 
         //Destroy neighbouring tiles
         Instantiate(explosionParticle, transform.position, Quaternion.identity);
-        Instantiate(destroyParticle, transform.position, Quaternion.identity);
+        //Instantiate(destroyParticle, transform.position, Quaternion.identity);
 
         StartCoroutine(Explode());
     }
