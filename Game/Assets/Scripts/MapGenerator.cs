@@ -204,7 +204,7 @@ public class MapGenerator : MonoBehaviour
         {
             yield return new WaitForSeconds(0.5f);
 
-            Player.transform.position = Vector3.zero;
+            Player.transform.position = new Vector3(0.0f,0.0f,-1.1f);
 
             GenerateMap(sizeX, sizeY);
         }
