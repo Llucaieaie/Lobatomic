@@ -1007,6 +1007,22 @@ PrefabInstance:
       propertyPath: maxSpeed
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 43102812682024406, guid: e2ef161a6c483ec49958629b21f10e3d, type: 3}
+      propertyPath: powerUpManager
+      value: 
+      objectReference: {fileID: 692437038}
+    - target: {fileID: 43830526081761434, guid: e2ef161a6c483ec49958629b21f10e3d, type: 3}
+      propertyPath: m_Pitch
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 43830526081761434, guid: e2ef161a6c483ec49958629b21f10e3d, type: 3}
+      propertyPath: m_Volume
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 43830526081761434, guid: e2ef161a6c483ec49958629b21f10e3d, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 33bdf9b3f519a504fbea29ef54830a9e, type: 3}
     - target: {fileID: 2355365025971627386, guid: e2ef161a6c483ec49958629b21f10e3d, type: 3}
       propertyPath: m_Size.x
       value: 0.25
