@@ -20,6 +20,8 @@ public class PlayerWeapon : MonoBehaviour
 
     private AudioSource attackAudio;
 
+    public AudioSource clashAudio;
+
     [Range(0.1f, 1f)] public float attackingTime;
 
     public float attackCoolDown;
@@ -170,6 +172,11 @@ public class PlayerWeapon : MonoBehaviour
                 case 10:
                     collision.gameObject.GetComponent<NormalTile>().OnExplosion();
                     StartCoroutine(camera.GetComponent<CameraManager>().StartShake(5, 0.3f));
+                    break;
+                case 11:
+                    float p = Random.Range(0.75f, 1.5f);
+                    clashAudio.pitch = p;
+                    clashAudio.Play();
                     break;
 
             }
