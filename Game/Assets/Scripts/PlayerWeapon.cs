@@ -18,7 +18,7 @@ public class PlayerWeapon : MonoBehaviour
     public GameObject camera;
     public HappinessBar happiness;
 
-    private AudioSource attackAudio;
+    public AudioSource attackAudio;
 
     public AudioSource clashAudio;
 
