@@ -29,7 +29,7 @@ public class MainMenu : MonoBehaviour
     public void Tutorial()
     {
         isTutorial.Bool = true;
-        SceneManager.LoadScene("AnimScene");
+        SceneManager.LoadScene("HappyTutotial");
     }
 
     public void NextTutorial()
