@@ -8,7 +8,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] ScriptableBool isTutorial;
     public void PlayGame()
     {
-        SceneManager.LoadScene("CarruselAnim");
+        SceneManager.LoadScene("AnimScene");
     }
 
     public void PlayCredits()
@@ -28,7 +28,7 @@ public class MainMenu : MonoBehaviour
     public void Tutorial()
     {
         isTutorial.Bool = true;
-        SceneManager.LoadScene("CarruselAnim");
+        SceneManager.LoadScene("AnimScene");
     }
 
     public void NextTutorial()

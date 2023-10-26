@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class CarruselAnim : MonoBehaviour
@@ -12,7 +13,7 @@ public class CarruselAnim : MonoBehaviour
     private void Start()
     {
         currentCarrusel = 0;
-        GetComponent<SpriteRenderer>().sprite = carrusel[currentCarrusel];
+        GetComponent<Image>().sprite = carrusel[currentCarrusel];
         StartCoroutine(StartCarrusel());
     }
 
@@ -20,7 +21,7 @@ public class CarruselAnim : MonoBehaviour
     {
         yield return new WaitForSeconds(1);
 
-        if (currentCarrusel > carrusel.Length)
+        if (currentCarrusel >= carrusel.Length)
         {
             if (isTutorial.Bool)
             {
@@ -31,11 +32,14 @@ public class CarruselAnim : MonoBehaviour
                 SceneManager.LoadScene("MainScene");
             }
         }
+        else 
+        {
+            StartCoroutine(StartCarrusel());
+        }
 
         currentCarrusel++;
-        GetComponent<SpriteRenderer>().sprite = carrusel[currentCarrusel];
+        GetComponent<Image>().sprite = carrusel[currentCarrusel];
 
-        StartCoroutine(StartCarrusel());
         yield return null;
     }
 }

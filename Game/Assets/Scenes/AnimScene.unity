@@ -343,7 +343,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0d0e37ab0aac89489fbe4059e3032bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  carrusel: []
+  carrusel:
+  - {fileID: -1567887488, guid: 9913b9f3bc07cef4fb0daad66096781f, type: 3}
+  - {fileID: 297106789, guid: 9913b9f3bc07cef4fb0daad66096781f, type: 3}
+  - {fileID: -1146638296, guid: 9913b9f3bc07cef4fb0daad66096781f, type: 3}
   isTutorial: {fileID: 11400000, guid: c3317f6f064eb68489e628a072427103, type: 2}
 --- !u!114 &1292387361
 MonoBehaviour:
