@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SadTutotial.unity
     guid: 89d01b79d8ee5164387bb685caa267d3
+  - enabled: 1
+    path: Assets/Scenes/AnimScene.unity
+    guid: 16676e04ad2a49c47878921cf514e1c4
   m_configObjects: {}

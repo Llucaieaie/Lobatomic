@@ -707,6 +707,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c636fc4410f7dda4385969bb047b8880, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isTutorial: {fileID: 11400000, guid: c3317f6f064eb68489e628a072427103, type: 2}
 --- !u!4 &796338483
 Transform:
   m_ObjectHideFlags: 0

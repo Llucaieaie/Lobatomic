@@ -5,9 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    [SerializeField] ScriptableBool isTutorial;
     public void PlayGame()
     {
-        SceneManager.LoadScene("MainScene");
+        SceneManager.LoadScene("CarruselAnim");
     }
 
     public void PlayCredits()
@@ -26,7 +27,8 @@ public class MainMenu : MonoBehaviour
     }
     public void Tutorial()
     {
-        SceneManager.LoadScene("HappyTutotial");
+        isTutorial.Bool = true;
+        SceneManager.LoadScene("CarruselAnim");
     }
 
     public void NextTutorial()
