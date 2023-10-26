@@ -14,6 +14,7 @@ public class Tile : MonoBehaviour
         Destroy(gameObject);
     }
 
+
     public void Score(int score)
     {
         scoreController.GetComponent<ScoreController>().AddScore(score);

@@ -138,13 +138,12 @@ public class PlayerWeapon : MonoBehaviour
         if (!powerUpManager.activeFrenesi) { attackAudio.loop = false; attackAudioFrenesi = false; }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.layer != 0 && collision.gameObject.tag == "Tile")
         {
             tilesInside.Add(collision.gameObject);
             Debug.Log(collision.name);
-
 
             //Call "OnExplosion" instantaneously 
             switch (collision.gameObject.layer)

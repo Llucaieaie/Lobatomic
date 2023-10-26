@@ -37,11 +37,6 @@ public class PowerUpManager : MonoBehaviour
     public AudioSource stopTAudio;
     public AudioSource powerUpAudio;
 
-    private void Start()
-    {
-        stopTAudio.Play();
-        stopTAudio.mute = true;
-    }
 
     public void NewPowerUp()
     {
@@ -168,7 +163,7 @@ public class PowerUpManager : MonoBehaviour
     {
         Debug.Log("Pop StopTime");
 
-        stopTAudio.mute = false;
+        stopTAudio.Play();
 
         activeStopT = true;
         powerUpIcons[3].enabled = true;
@@ -178,8 +173,6 @@ public class PowerUpManager : MonoBehaviour
         yield return new WaitForSecondsRealtime(time);
 
         TimerController.stopTime = false;
-
-        stopTAudio.mute = true;
 
         powerUpIcons[3].enabled = false;
         activeStopT = false;

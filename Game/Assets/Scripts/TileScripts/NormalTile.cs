@@ -11,6 +11,7 @@ public class NormalTile : Tile
     public override void OnExplosion()
     {
         //Update Happiness meter
+
         Score(10);
         Instantiate(destroyParticle, transform.position, Quaternion.identity);
         Destroy(this.gameObject);
