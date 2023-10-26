@@ -454,11 +454,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6813662151487980450, guid: ad5b0a86853370140a7605bfaa8e71cb, type: 3}
       propertyPath: sizeX
-      value: 50
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 6813662151487980450, guid: ad5b0a86853370140a7605bfaa8e71cb, type: 3}
       propertyPath: sizeY
-      value: 50
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 6813662151487980450, guid: ad5b0a86853370140a7605bfaa8e71cb, type: 3}
       propertyPath: Player
@@ -470,7 +470,7 @@ PrefabInstance:
       objectReference: {fileID: 1071851898}
     - target: {fileID: 6813662151487980450, guid: ad5b0a86853370140a7605bfaa8e71cb, type: 3}
       propertyPath: padding
-      value: 8
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6813662151487980450, guid: ad5b0a86853370140a7605bfaa8e71cb, type: 3}
       propertyPath: tileMap
