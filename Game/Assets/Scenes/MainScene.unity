@@ -498,15 +498,19 @@ PrefabInstance:
       objectReference: {fileID: 8835146293047337037, guid: 1068a678354ddf2489e9b51cebe784b2, type: 3}
     - target: {fileID: 6813662151487980450, guid: ad5b0a86853370140a7605bfaa8e71cb, type: 3}
       propertyPath: tileStruct.Array.data[0].maxNum
-      value: 100
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6813662151487980450, guid: ad5b0a86853370140a7605bfaa8e71cb, type: 3}
       propertyPath: tileStruct.Array.data[1].maxNum
       value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 6813662151487980450, guid: ad5b0a86853370140a7605bfaa8e71cb, type: 3}
+      propertyPath: tileStruct.Array.data[2].maxNum
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6813662151487980450, guid: ad5b0a86853370140a7605bfaa8e71cb, type: 3}
       propertyPath: tileStruct.Array.data[3].maxNum
-      value: 20
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 6813662151487980450, guid: ad5b0a86853370140a7605bfaa8e71cb, type: 3}
       propertyPath: tileStruct.Array.data[4].maxNum
@@ -519,6 +523,14 @@ PrefabInstance:
     - target: {fileID: 6813662151487980450, guid: ad5b0a86853370140a7605bfaa8e71cb, type: 3}
       propertyPath: tileStruct.Array.data[1].appearRate
       value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 6813662151487980450, guid: ad5b0a86853370140a7605bfaa8e71cb, type: 3}
+      propertyPath: tileStruct.Array.data[2].appearRate
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6813662151487980450, guid: ad5b0a86853370140a7605bfaa8e71cb, type: 3}
+      propertyPath: tileStruct.Array.data[3].appearRate
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 6813662151487980450, guid: ad5b0a86853370140a7605bfaa8e71cb, type: 3}
       propertyPath: tileStruct.Array.data[4].appearRate
