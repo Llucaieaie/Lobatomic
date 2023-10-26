@@ -12,6 +12,11 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene("AnimScene");
     }
 
+    public void SkipIntro()
+    {
+        SceneManager.LoadScene("MainScene");
+    }
+
     public void PlayCredits()
     {
         SceneManager.LoadScene("CreditsScene");

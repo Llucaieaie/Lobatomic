@@ -96,10 +96,10 @@ public class PowerUpManager : MonoBehaviour
         PlayerMovement.maxSpeed += PlayerMovement.maxSpeed;
 
         float auxAttTime = PlayerWeapon.attackingTime;
-        PlayerWeapon.attackingTime = 0;
+        PlayerWeapon.attackingTime = auxAttTime / 2;
     
         float auxCd = PlayerWeapon.attackCoolDown;
-        PlayerWeapon.attackCoolDown = 0;
+        PlayerWeapon.attackCoolDown = 0.01f;
 
         yield return new WaitForSecondsRealtime(time);
 
