@@ -680,6 +680,18 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1580857314}
     - target: {fileID: 6813662151487980450, guid: ad5b0a86853370140a7605bfaa8e71cb, type: 3}
+      propertyPath: groundTiles.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6813662151487980450, guid: ad5b0a86853370140a7605bfaa8e71cb, type: 3}
+      propertyPath: groundTiles.Array.data[0]
+      value: 
+      objectReference: {fileID: 7123767876524449978, guid: 4438e18e05ea7ec4e8e089267374757f, type: 3}
+    - target: {fileID: 6813662151487980450, guid: ad5b0a86853370140a7605bfaa8e71cb, type: 3}
+      propertyPath: groundTiles.Array.data[1]
+      value: 
+      objectReference: {fileID: 2761505256534072843, guid: e7d5c2a44b73c6b489e7579aafa2faf8, type: 3}
+    - target: {fileID: 6813662151487980450, guid: ad5b0a86853370140a7605bfaa8e71cb, type: 3}
       propertyPath: tileStruct.Array.data[0].tile
       value: 
       objectReference: {fileID: 8633793699519047129, guid: 4181f481df41503499302b26c4242f8e, type: 3}
@@ -1936,6 +1948,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TimeCount: 100
+  stopTime: 0
+  loose: 0
   timer: {fileID: 1851313107}
   MapGenerator: {fileID: 1566081704}
 --- !u!4 &1580857315
@@ -2522,6 +2536,7 @@ MonoBehaviour:
   PlayerMovement: {fileID: 572803667}
   PlayerWeapon: {fileID: 572803665}
   ScoreController: {fileID: 176361087}
+  TimerController: {fileID: 0}
   cam: {fileID: 423417844}
   appearPercentage: 25
   FrenesiTime: 5
@@ -2533,6 +2548,8 @@ MonoBehaviour:
   activeDoubleP: 0
   activeStopT: 0
   powerUpIcons: []
+  stopTAudio: {fileID: 0}
+  powerUpAudio: {fileID: 0}
 --- !u!4 &1835727045
 Transform:
   m_ObjectHideFlags: 0
