@@ -1431,7 +1431,7 @@ MonoBehaviour:
   ScoreController: {fileID: 876065840}
   TimerController: {fileID: 246468047}
   cam: {fileID: 1071851899}
-  appearPercentage: 25
+  appearPercentage: 100
   FrenesiTime: 5
   LabGlassesTime: 15
   DoublePointsTime: 20
