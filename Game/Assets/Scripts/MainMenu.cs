@@ -31,6 +31,7 @@ public class MainMenu : MonoBehaviour
     {
         Application.Quit();
     }
+
     public void Tutorial()
     {
         isTutorial.Bool = true;
@@ -40,5 +41,10 @@ public class MainMenu : MonoBehaviour
     public void NextTutorial()
     {
         SceneManager.LoadScene("SadTutotial");
+    }
+
+    public void PlayVersus()
+    {
+        SceneManager.LoadScene("VersusScene");
     }
 }
