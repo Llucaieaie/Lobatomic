@@ -32,4 +32,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/VersusScene.unity
     guid: 90afee45e4f2f314eae719a2c98fe6ec
+  - enabled: 1
+    path: Assets/Scenes/PlayMenu.unity
+    guid: ea8a54a726ed4ce40aabf8cdf5c09683
   m_configObjects: {}

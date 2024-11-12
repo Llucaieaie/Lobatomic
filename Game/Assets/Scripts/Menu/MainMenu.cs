@@ -6,12 +6,10 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     [SerializeField] ScriptableBool isTutorial;
-    public void PlayGame()
-    {
-        isTutorial.Bool = false; 
-        SceneManager.LoadScene("AnimScene");
-    }
 
+    /// <summary>
+    /// MainMenu
+    /// </summary>
     public void SkipIntro()
     {
         SceneManager.LoadScene("MainScene");
@@ -32,6 +30,9 @@ public class MainMenu : MonoBehaviour
         Application.Quit();
     }
 
+    /// <summary>
+    /// Tutorial stuff
+    /// </summary>
     public void Tutorial()
     {
         isTutorial.Bool = true;
@@ -41,6 +42,20 @@ public class MainMenu : MonoBehaviour
     public void NextTutorial()
     {
         SceneManager.LoadScene("SadTutotial");
+    }
+
+    /// <summary>
+    /// Play stuff
+    /// </summary>
+    public void PlayMenu()
+    {
+        SceneManager.LoadScene("PlayMenu");
+    }
+
+    public void PlayGame()
+    {
+        isTutorial.Bool = false;
+        SceneManager.LoadScene("AnimScene");
     }
 
     public void PlayVersus()
