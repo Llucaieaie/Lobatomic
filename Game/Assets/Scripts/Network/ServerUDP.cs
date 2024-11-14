@@ -62,9 +62,11 @@ public class ServerUDP : MonoBehaviour
 
     void Send(EndPoint Remote)
     {
-        string welcome = "Ping";
-        byte[] data = Encoding.UTF8.GetBytes(welcome);
+        string response = "Nombre recibido correctamente.";
+        byte[] data = Encoding.UTF8.GetBytes(response);
 
+        // Enviar la respuesta al cliente
         socket.SendTo(data, 0, data.Length, SocketFlags.None, Remote);
+        serverText += "\nRespuesta enviada al cliente.";
     }
 }

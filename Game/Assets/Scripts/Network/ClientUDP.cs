@@ -23,8 +23,9 @@ public class ClientUDP : MonoBehaviour
     {
         if (string.IsNullOrEmpty(playerName))
         {
-            Debug.LogWarning("Introduzca un nombre válido para conectar al servidor.");
-            return; // Si está vacío, termina la función
+            playerName = "Dr.Mini Mini";
+            //Debug.LogWarning("Introduzca un nombre válido para conectar al servidor.");
+            //return; // Si está vacío, termina la función
         }
         
         Thread mainThread = new Thread(Send);
@@ -38,7 +39,7 @@ public class ClientUDP : MonoBehaviour
 
     void Send()
     {
-        IPEndPoint ipep = new IPEndPoint(IPAddress.Parse("192.168.1.103"), 9050); // Ojo con enseñar la ip
+        IPEndPoint ipep = new IPEndPoint(IPAddress.Parse("192.168.56.1"), 9050); // Ojo con enseñar la ip
         socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
 
         //string handshake = "Hello World";
@@ -55,18 +56,12 @@ public class ClientUDP : MonoBehaviour
 
     void Receive()
     {
-        IPEndPoint sender;
-        EndPoint Remote = new IPEndPoint(IPAddress.Any, 0);
         byte[] data = new byte[1024];
+        IPEndPoint sender = new IPEndPoint(IPAddress.Any, 0);
+        EndPoint Remote = (EndPoint)sender;
+
         int recv = socket.ReceiveFrom(data, ref Remote);
-
-        clientText = ("Message received from {0}: " + Remote.ToString());
-        clientText = clientText += "\n" + Encoding.ASCII.GetString(data, 0, recv);
-    }
-
-    public string SetPlayerName(string pname)
-    {
-        playerName = pname;
-        return playerName;
+        string message = Encoding.ASCII.GetString(data, 0, recv);
+        clientText += $"\nMensaje recibido del servidor: {message}";
     }
 }
