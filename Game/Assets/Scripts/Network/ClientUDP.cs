@@ -10,6 +10,7 @@ public class ClientUDP : MonoBehaviour
     Socket socket;
     public GameObject UItextObj;
     TextMeshProUGUI UItext;
+    [SerializeField] public string playerName = "";
     string clientText;
 
     // Start is called before the first frame update
@@ -20,6 +21,12 @@ public class ClientUDP : MonoBehaviour
     }
     public void StartClient()
     {
+        if (string.IsNullOrEmpty(playerName))
+        {
+            Debug.LogWarning("Introduzca un nombre válido para conectar al servidor.");
+            return; // Si está vacío, termina la función
+        }
+        
         Thread mainThread = new Thread(Send);
         mainThread.Start();
     }
@@ -34,10 +41,13 @@ public class ClientUDP : MonoBehaviour
         IPEndPoint ipep = new IPEndPoint(IPAddress.Parse("192.168.1.103"), 9050); // Ojo con enseñar la ip
         socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
 
-        string handshake = "Hello World";
-        byte[] data = Encoding.UTF8.GetBytes(handshake);
+        //string handshake = "Hello World";
+
+        // Enviar nombre
+        byte[] data = Encoding.UTF8.GetBytes(playerName);
 
         socket.SendTo(data, 0, data.Length, SocketFlags.None, ipep);
+        clientText += $"\nNombre enviado al servidor: {playerName}";
 
         Thread receive = new Thread(Receive);
         receive.Start();
@@ -52,5 +62,11 @@ public class ClientUDP : MonoBehaviour
 
         clientText = ("Message received from {0}: " + Remote.ToString());
         clientText = clientText += "\n" + Encoding.ASCII.GetString(data, 0, recv);
+    }
+
+    public string SetPlayerName(string pname)
+    {
+        playerName = pname;
+        return playerName;
     }
 }

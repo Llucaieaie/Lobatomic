@@ -8,7 +8,6 @@ using TMPro;
 public class ServerUDP : MonoBehaviour
 {
     Socket socket;
-
     public GameObject UItextObj;
     TextMeshProUGUI UItext;
     string serverText;
@@ -33,7 +32,6 @@ public class ServerUDP : MonoBehaviour
     void Update()
     {
         UItext.text = serverText;
-
     }
 
 
@@ -50,9 +48,12 @@ public class ServerUDP : MonoBehaviour
         while (true)
         {
             recv = socket.ReceiveFrom(data, ref Remote);
+            string playerName = Encoding.UTF8.GetString(data, 0, recv);
 
-            serverText = serverText + "\n" + "Message received from {0}:" + Remote.ToString();
-            serverText = serverText + "\n" + Encoding.ASCII.GetString(data, 0, recv);
+            //serverText = serverText + "\n" + "Message received from {0}:" + Remote.ToString();
+            //serverText = serverText + "\n" + Encoding.ASCII.GetString(data, 0, recv);
+            serverText += $"\nNombre recibido del cliente {Remote}: {playerName}";
+
 
             Thread sendThread = new Thread(() => Send(Remote));
             sendThread.Start();
