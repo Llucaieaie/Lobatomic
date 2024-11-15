@@ -10,6 +10,7 @@ public class ServerUDP : MonoBehaviour
     // Public fields
     public GameObject UItextObj;
     public string hostName = "";
+    public LobbyManager lobbyManager;
 
     // Private fields
     Socket socket;
@@ -19,7 +20,6 @@ public class ServerUDP : MonoBehaviour
     void Start()
     {
         UItext = UItextObj.GetComponent<TextMeshProUGUI>();
-
     }
     void Update()
     {

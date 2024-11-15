@@ -16,15 +16,15 @@ public class Data
         this.playerName = playerName;
     }
 
-    byte[] Serialize(Data data)
+    byte[] Serialize()
     {
         using (MemoryStream stream = new MemoryStream())
         {
             using (BinaryWriter writer = new BinaryWriter(stream))
             {
-                writer.Write(data.id);
-                writer.Write(data.score);
-                writer.Write(data.playerName);
+                writer.Write(id);
+                writer.Write(score);
+                writer.Write(playerName);
             }
             return stream.ToArray(); // Devolvemos el array de bytes
         }

@@ -11,6 +11,7 @@ public class ClientUDP : MonoBehaviour
     public GameObject UItextObj;
     public string clientName = "";
     public string serverIP = "";  // Ojo con enseñar la ip
+    public LobbyManager lobbyManager;
 
     // Private fields
     Socket socket;
