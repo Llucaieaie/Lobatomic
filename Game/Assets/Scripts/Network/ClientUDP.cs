@@ -42,6 +42,8 @@ public class ClientUDP : MonoBehaviour
         {
             Thread mainThread = new Thread(SendConnectionRequest);
             mainThread.Start();
+
+            lobbyManager.AddPlayer();
         }
     }
 

@@ -39,6 +39,9 @@ public class ServerUDP : MonoBehaviour
 
         Thread newConnection = new Thread(ReceiveClient);
         newConnection.Start();
+
+        lobbyManager.ActivateMap();
+        lobbyManager.AddPlayer();
     }
 
     void ReceiveClient()
@@ -106,3 +109,4 @@ public class ServerUDP : MonoBehaviour
         serverText += "\nAnswer sent to client";
     }
 }
+

@@ -169,7 +169,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UItextObj: {fileID: 1681397586}
   hostName: 
-  lobbyManager: {fileID: 0}
+  lobbyManager: {fileID: 931129745}
 --- !u!1001 &14068893
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2319,7 +2319,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!20 &331336538
 Camera:
   m_ObjectHideFlags: 0
@@ -2542,7 +2542,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &359899004
 Transform:
   m_ObjectHideFlags: 0
@@ -5621,6 +5621,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1556725665}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &716934463
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8075,7 +8087,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lobbyTileMap: {fileID: 359899003}
-  playerPrefab: {fileID: 0}
+  playerPrefab: {fileID: 43102812682024402, guid: 60740275e101ade478165ad8e3db2304, type: 3}
   players: []
 --- !u!1001 &946625722
 PrefabInstance:
@@ -10317,7 +10329,7 @@ MonoBehaviour:
   UItextObj: {fileID: 1883712989}
   clientName: 
   serverIP: 
-  lobbyManager: {fileID: 0}
+  lobbyManager: {fileID: 931129745}
 --- !u!1001 &1263437881
 PrefabInstance:
   m_ObjectHideFlags: 0

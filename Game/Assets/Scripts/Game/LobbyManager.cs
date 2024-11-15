@@ -21,7 +21,7 @@ public class LobbyManager : MonoBehaviour
         
     }
 
-    void ActivateMap()
+    public void ActivateMap()
     {
         lobbyTileMap.SetActive(true);
     }
@@ -36,5 +36,10 @@ public class LobbyManager : MonoBehaviour
         {
             Debug.LogWarning($"Player ID {playerId} does not exist.");
         }
+    }
+
+    public void AddPlayer()
+    {
+        players.Add(Instantiate(playerPrefab));
     }
 }
