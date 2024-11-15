@@ -35,19 +35,17 @@ public class ClientUDP : MonoBehaviour
         if (string.IsNullOrEmpty(clientName))
         {
             clientName = "Dr.Mini Mini";
-            //Debug.LogWarning("Introduzca un nombre válido para conectar al servidor.");
-            //return; // Si está vacío, termina la función
         }
         
-        Thread mainThread = new Thread(Send);
-        mainThread.Start();
+        if (!string.IsNullOrEmpty(serverIP))
+        {
+            Thread mainThread = new Thread(SendConnectionRequest);
+            mainThread.Start();
+        }
     }
 
-    /// <summary>
-    /// Send/Recieve
-    /// </summary>
-    void Send()
-    {
+    void SendConnectionRequest()
+    { 
         // Establecer socket y endpoint
         IPEndPoint ipep = new IPEndPoint(IPAddress.Parse(serverIP), 9050);
         socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
@@ -56,13 +54,13 @@ public class ClientUDP : MonoBehaviour
         byte[] data = Encoding.UTF8.GetBytes(clientName);
         socket.SendTo(data, 0, data.Length, SocketFlags.None, ipep);
 
-        clientText += $"\nNombre enviado al servidor: {clientName}";
+        clientText += $"\nName sent to server: {clientName}";
 
-        Thread receive = new Thread(Receive);
+        Thread receive = new Thread(ReceiveServerConfirmation);
         receive.Start();
     }
 
-    void Receive()
+    void ReceiveServerConfirmation()
     {
         byte[] data = new byte[1024];
         IPEndPoint sender = new IPEndPoint(IPAddress.Any, 0);
@@ -70,6 +68,36 @@ public class ClientUDP : MonoBehaviour
 
         int recv = socket.ReceiveFrom(data, ref Remote);
         string message = Encoding.ASCII.GetString(data, 0, recv);
-        clientText += $"\nMensaje recibido del servidor: {message}";
+        clientText += $"\nConfirmation recieved from server: {message}";
+    }
+
+    /// <summary>
+    /// Send/Recieve
+    /// </summary>
+    void Send(string message)
+    {
+        // Establecer socket y endpoint
+        IPEndPoint ipep = new IPEndPoint(IPAddress.Parse(serverIP), 9050);
+        socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+
+        // Enviar mensaje
+        byte[] data = Encoding.UTF8.GetBytes(message);
+        socket.SendTo(data, 0, data.Length, SocketFlags.None, ipep);
+
+        clientText += $"\nMessage sent to server: {message}";
+
+        Thread receive = new Thread(Recieve);
+        receive.Start();
+    }
+
+    void Recieve()
+    {
+        byte[] data = new byte[1024];
+        IPEndPoint sender = new IPEndPoint(IPAddress.Any, 0);
+        EndPoint Remote = (EndPoint)sender;
+
+        int recv = socket.ReceiveFrom(data, ref Remote);
+        string message = Encoding.ASCII.GetString(data, 0, recv);
+        clientText += $"\nRecieved message from server: {message}";
     }
 }

@@ -37,14 +37,11 @@ public class ServerUDP : MonoBehaviour
         socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
         socket.Bind(ipep);
 
-        Thread newConnection = new Thread(Receive);
+        Thread newConnection = new Thread(ReceiveClient);
         newConnection.Start();
     }
 
-    /// <summary>
-    /// Send/Recieve
-    /// </summary>
-    void Receive()
+    void ReceiveClient()
     {
         int recv;
         byte[] data = new byte[1024];
@@ -59,9 +56,40 @@ public class ServerUDP : MonoBehaviour
             recv = socket.ReceiveFrom(data, ref Remote);
             string playerName = Encoding.UTF8.GetString(data, 0, recv);
 
-            //serverText = serverText + "\n" + "Message received from {0}:" + Remote.ToString();
-            //serverText = serverText + "\n" + Encoding.ASCII.GetString(data, 0, recv);
-            serverText += $"\nNombre recibido del cliente {Remote}: {playerName}";
+            serverText += $"\nNew client {Remote}: {playerName}";
+
+            Thread sendThread = new Thread(() => SendClientConfirmation(Remote));
+            sendThread.Start();
+        }
+    }
+
+    void SendClientConfirmation(EndPoint Remote)
+    {
+        string response = "Name recieved correctly";
+        byte[] data = Encoding.UTF8.GetBytes(response);
+
+        // Enviar la respuesta al cliente
+        socket.SendTo(data, 0, data.Length, SocketFlags.None, Remote);
+        serverText += "\nConfirmation sent to client";
+    }
+
+    /// <summary>
+    /// Send/Recieve
+    /// </summary>
+    void Recieve()
+    {
+        int recv;
+        byte[] data = new byte[1024];
+
+        IPEndPoint sender = new IPEndPoint(IPAddress.Any, 0);
+        EndPoint Remote = (EndPoint)(sender);
+
+        while (true)
+        {
+            recv = socket.ReceiveFrom(data, ref Remote);
+            string playerName = Encoding.UTF8.GetString(data, 0, recv);
+
+            serverText += $"\nRecieved message from client {Remote}: {playerName}";
 
             Thread sendThread = new Thread(() => Send(Remote));
             sendThread.Start();
@@ -75,6 +103,6 @@ public class ServerUDP : MonoBehaviour
 
         // Enviar la respuesta al cliente
         socket.SendTo(data, 0, data.Length, SocketFlags.None, Remote);
-        serverText += "\nRespuesta enviada al cliente.";
+        serverText += "\nAnswer sent to client";
     }
 }
