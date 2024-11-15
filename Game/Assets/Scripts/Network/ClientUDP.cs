@@ -7,23 +7,34 @@ using TMPro;
 
 public class ClientUDP : MonoBehaviour
 {
-    Socket socket;
+    // Public fields
     public GameObject UItextObj;
+    public string clientName = "";
+    public string serverIP = "";  // Ojo con enseñar la ip
+
+    // Private fields
+    Socket socket;
     TextMeshProUGUI UItext;
-    [SerializeField] public string playerName = "";
     string clientText;
 
-    // Start is called before the first frame update
     void Start()
     {
         UItext = UItextObj.GetComponent<TextMeshProUGUI>();
-
     }
+
+    void Update()
+    {
+        UItext.text = clientText;
+    }
+
+    /// <summary>
+    /// Start Client
+    /// </summary>
     public void StartClient()
     {
-        if (string.IsNullOrEmpty(playerName))
+        if (string.IsNullOrEmpty(clientName))
         {
-            playerName = "Dr.Mini Mini";
+            clientName = "Dr.Mini Mini";
             //Debug.LogWarning("Introduzca un nombre válido para conectar al servidor.");
             //return; // Si está vacío, termina la función
         }
@@ -32,23 +43,20 @@ public class ClientUDP : MonoBehaviour
         mainThread.Start();
     }
 
-    void Update()
-    {
-        UItext.text = clientText;
-    }
-
+    /// <summary>
+    /// Send/Recieve
+    /// </summary>
     void Send()
     {
-        IPEndPoint ipep = new IPEndPoint(IPAddress.Parse("192.168.56.1"), 9050); // Ojo con enseñar la ip
+        // Establecer socket y endpoint
+        IPEndPoint ipep = new IPEndPoint(IPAddress.Parse(serverIP), 9050);
         socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
 
-        //string handshake = "Hello World";
-
         // Enviar nombre
-        byte[] data = Encoding.UTF8.GetBytes(playerName);
-
+        byte[] data = Encoding.UTF8.GetBytes(clientName);
         socket.SendTo(data, 0, data.Length, SocketFlags.None, ipep);
-        clientText += $"\nNombre enviado al servidor: {playerName}";
+
+        clientText += $"\nNombre enviado al servidor: {clientName}";
 
         Thread receive = new Thread(Receive);
         receive.Start();
