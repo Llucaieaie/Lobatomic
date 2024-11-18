@@ -60,6 +60,6 @@ public class MainMenu : MonoBehaviour
 
     public void PlayVersus()
     {
-        SceneManager.LoadScene("VersusScene");
+        SceneManager.LoadScene("LobbyScene");
     }
 }
