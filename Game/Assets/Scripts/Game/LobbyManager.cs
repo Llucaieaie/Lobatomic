@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class LobbyManager : MonoBehaviour
@@ -38,8 +39,11 @@ public class LobbyManager : MonoBehaviour
         }
     }
 
-    public void AddPlayer()
+    public void AddPlayer(string name)
     {
-        players.Add(Instantiate(playerPrefab));
+        GameObject p = Instantiate(playerPrefab);
+        players.Add(p);
+
+        p.GetComponentInChildren<TMP_Text>().text = name;
     }
 }

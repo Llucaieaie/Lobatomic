@@ -12,6 +12,7 @@ public class ServerUDP : MonoBehaviour
     public GameObject UItextObj;
     public string hostName = "";
     public LobbyManager lobbyManager;
+    public GameObject createLobbyWindow;
 
     // Private fields
     Socket socket;
@@ -43,8 +44,13 @@ public class ServerUDP : MonoBehaviour
         Thread newConnection = new Thread(ReceiveClient);
         newConnection.Start();
 
+        if (string.IsNullOrEmpty(hostName))
+        {
+            hostName = "Dr. MiniMini";
+        }
+
         lobbyManager.ActivateMap();
-        lobbyManager.AddPlayer();
+        lobbyManager.AddPlayer(hostName);
     }
 
     void SendClientConfirmation(EndPoint Remote)
@@ -55,6 +61,8 @@ public class ServerUDP : MonoBehaviour
         // Enviar la respuesta al cliente
         socket.SendTo(data, 0, data.Length, SocketFlags.None, Remote);
         serverText += "\nConfirmation sent to client";
+
+        createLobbyWindow.SetActive(false);
     }
 
     /// <summary>

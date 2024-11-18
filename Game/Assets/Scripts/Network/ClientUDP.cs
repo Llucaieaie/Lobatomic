@@ -12,6 +12,7 @@ public class ClientUDP : MonoBehaviour
     public string clientName = "";
     public string serverIP = "";  // Ojo con enseñar la ip
     public LobbyManager lobbyManager;
+    public GameObject createLobbyWindow;
 
     public float maxSpeed = 10;
 
@@ -47,7 +48,7 @@ public class ClientUDP : MonoBehaviour
     {
         if (string.IsNullOrEmpty(clientName))
         {
-            clientName = "Dr.Mini Mini";
+            clientName = "Dra. MicroMicro";
         }
         
         if (!string.IsNullOrEmpty(serverIP))
@@ -55,7 +56,7 @@ public class ClientUDP : MonoBehaviour
             Thread mainThread = new Thread(SendConnectionRequest);
             mainThread.Start();
 
-            lobbyManager.AddPlayer();
+            lobbyManager.AddPlayer(clientName);
         }
     }
 
@@ -84,6 +85,9 @@ public class ClientUDP : MonoBehaviour
         int recv = socket.ReceiveFrom(data, ref Remote);
         string message = Encoding.ASCII.GetString(data, 0, recv);
         clientText += $"\nConfirmation recieved from server: {message}";
+
+        createLobbyWindow.SetActive(false);
+        lobbyManager.ActivateMap();
     }
 
     /// <summary>
