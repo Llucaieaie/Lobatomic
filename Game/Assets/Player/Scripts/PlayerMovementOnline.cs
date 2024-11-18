@@ -17,6 +17,7 @@ public class PlayerMovementOnline : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         walkAudio.Play();
+        clientUDP = GameObject.Find("ClientUDP").GetComponent<ClientUDP>();
     }
 
     void Update()
