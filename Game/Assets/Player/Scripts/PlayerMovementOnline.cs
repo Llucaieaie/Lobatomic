@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovementOnline : MonoBehaviour
 {
     public AudioSource walkAudio;
 
@@ -27,14 +27,13 @@ public class PlayerMovement : MonoBehaviour
         animator.SetFloat("Vertical", movement.y);
         animator.SetFloat("Magnitude", movement.magnitude);
 
-        GetComponent<Rigidbody2D>().MovePosition(GetComponent<Rigidbody2D>().position + movement * maxSpeed * Time.deltaTime);
-
         if (powerUpManager != null)
         {
             if (powerUpManager.activeFrenesi) walkAudio.pitch = 3;
             else walkAudio.pitch = 2;
         }
-        if(movement.magnitude != 0) walkAudio.mute = false;
+
+        if (movement.magnitude != 0) walkAudio.mute = false;
         else walkAudio.mute = true;
 
     }

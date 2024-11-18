@@ -105,41 +105,46 @@ public class PlayerWeapon : MonoBehaviour
         {
             colliders[i].enabled = false;
         }
+        //camera = GameObject.Find("Gameplay Camera");
+        camera = Camera.main.gameObject;
     }
 
     void Update()
     {
-        if((Input.GetKey(KeyCode.UpArrow) || Input.GetButton("UP")) && canAttack) 
+        if ((Input.GetKey(KeyCode.UpArrow) || Input.GetButton("UP")) && canAttack)
         {
             direction = direction.UP;
             StartCoroutine(Attack());
             canAttack = false;
         }
-        if((Input.GetKey(KeyCode.DownArrow) || Input.GetButton("DOWN")) && canAttack) 
+        if ((Input.GetKey(KeyCode.DownArrow) || Input.GetButton("DOWN")) && canAttack)
         {
             direction = direction.DOWN;
             StartCoroutine(Attack());
             canAttack = false;
         }
-        if ((Input.GetKey(KeyCode.LeftArrow) || Input.GetButton("LEFT")) && canAttack) 
+        if ((Input.GetKey(KeyCode.LeftArrow) || Input.GetButton("LEFT")) && canAttack)
         {
             direction = direction.LEFT;
             StartCoroutine(Attack());
             canAttack = false;
         }
-        if ((Input.GetKey(KeyCode.RightArrow) || Input.GetButton("RIGHT")) && canAttack) 
+        if ((Input.GetKey(KeyCode.RightArrow) || Input.GetButton("RIGHT")) && canAttack)
         {
             direction = direction.RIGHT;
             StartCoroutine(Attack());
             canAttack = false;
         }
 
-        if(Input.GetKeyUp(KeyCode.UpArrow))    { attackAudio.loop = false; attackAudioFrenesi = false; }
-        if(Input.GetKeyUp(KeyCode.DownArrow))  { attackAudio.loop = false; attackAudioFrenesi = false; }
-        if(Input.GetKeyUp(KeyCode.LeftArrow))  { attackAudio.loop = false; attackAudioFrenesi = false; }
-        if(Input.GetKeyUp(KeyCode.RightArrow)) { attackAudio.loop = false; attackAudioFrenesi = false; }
+        if (Input.GetKeyUp(KeyCode.UpArrow)) { attackAudio.loop = false; attackAudioFrenesi = false; }
+        if (Input.GetKeyUp(KeyCode.DownArrow)) { attackAudio.loop = false; attackAudioFrenesi = false; }
+        if (Input.GetKeyUp(KeyCode.LeftArrow)) { attackAudio.loop = false; attackAudioFrenesi = false; }
+        if (Input.GetKeyUp(KeyCode.RightArrow)) { attackAudio.loop = false; attackAudioFrenesi = false; }
 
-        if (!powerUpManager.activeFrenesi) { attackAudio.loop = false; attackAudioFrenesi = false; }
+        if (powerUpManager != null)
+        {
+            if (!powerUpManager.activeFrenesi) { attackAudio.loop = false; attackAudioFrenesi = false; }
+        }
     }
 
     private void OnTriggerStay2D(Collider2D collision)

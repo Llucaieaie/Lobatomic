@@ -99,7 +99,7 @@ GameObject:
   - component: {fileID: -8893322007101620058}
   - component: {fileID: 8352730051348785530}
   - component: {fileID: 43830526081761434}
-  - component: {fileID: 43102812682024406}
+  - component: {fileID: 7718844437064802265}
   - component: {fileID: 7063358760495409454}
   - component: {fileID: 43102812682024407}
   - component: {fileID: 3182081310930774328}
@@ -533,7 +533,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &43102812682024406
+--- !u!114 &7718844437064802265
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -542,7 +542,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 43102812682024402}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 294f4f9628fcff34fb68ca7e780d509e, type: 3}
+  m_Script: {fileID: 11500000, guid: c88bbacfcc9248144817de13ef6432b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   walkAudio: {fileID: 43830526081761434}
