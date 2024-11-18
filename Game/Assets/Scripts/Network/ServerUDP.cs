@@ -49,6 +49,8 @@ public class ServerUDP : MonoBehaviour
             hostName = "Dr. MiniMini";
         }
 
+        createLobbyWindow.SetActive(false);
+        lobbyManager.AddPlayer(hostName);
         lobbyManager.ActivateMap();
     }
 
@@ -60,9 +62,6 @@ public class ServerUDP : MonoBehaviour
         // Enviar la respuesta al cliente
         socket.SendTo(data, 0, data.Length, SocketFlags.None, Remote);
         serverText += "\nConfirmation sent to client";
-
-        lobbyManager.AddPlayer(hostName);
-        createLobbyWindow.SetActive(false);
     }
 
     /// <summary>

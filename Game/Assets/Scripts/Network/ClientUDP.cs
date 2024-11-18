@@ -55,6 +55,10 @@ public class ClientUDP : MonoBehaviour
         {
             Thread mainThread = new Thread(SendConnectionRequest);
             mainThread.Start();
+
+            createLobbyWindow.SetActive(false);
+            lobbyManager.AddPlayer(clientName);
+            lobbyManager.ActivateMap();
         }
     }
 
@@ -83,10 +87,6 @@ public class ClientUDP : MonoBehaviour
         int recv = socket.ReceiveFrom(data, ref Remote);
         string message = Encoding.ASCII.GetString(data, 0, recv);
         clientText += $"\nConfirmation recieved from server: {message}";
-
-        createLobbyWindow.SetActive(false);
-        lobbyManager.AddPlayer(clientName);
-        lobbyManager.ActivateMap();
     }
 
     /// <summary>
