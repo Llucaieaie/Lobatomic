@@ -50,7 +50,6 @@ public class ServerUDP : MonoBehaviour
         }
 
         lobbyManager.ActivateMap();
-        lobbyManager.AddPlayer(hostName);
     }
 
     void SendClientConfirmation(EndPoint Remote)
@@ -62,6 +61,7 @@ public class ServerUDP : MonoBehaviour
         socket.SendTo(data, 0, data.Length, SocketFlags.None, Remote);
         serverText += "\nConfirmation sent to client";
 
+        lobbyManager.AddPlayer(hostName);
         createLobbyWindow.SetActive(false);
     }
 

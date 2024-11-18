@@ -55,8 +55,6 @@ public class ClientUDP : MonoBehaviour
         {
             Thread mainThread = new Thread(SendConnectionRequest);
             mainThread.Start();
-
-            lobbyManager.AddPlayer(clientName);
         }
     }
 
@@ -87,6 +85,7 @@ public class ClientUDP : MonoBehaviour
         clientText += $"\nConfirmation recieved from server: {message}";
 
         createLobbyWindow.SetActive(false);
+        lobbyManager.AddPlayer(clientName);
         lobbyManager.ActivateMap();
     }
 
