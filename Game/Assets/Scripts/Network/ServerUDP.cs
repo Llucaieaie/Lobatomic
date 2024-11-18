@@ -4,6 +4,7 @@ using System.Text;
 using UnityEngine;
 using System.Threading;
 using TMPro;
+using System.Collections.Generic;
 
 public class ServerUDP : MonoBehaviour
 {
@@ -16,6 +17,8 @@ public class ServerUDP : MonoBehaviour
     Socket socket;
     TextMeshProUGUI UItext;
     string serverText;
+
+    private List<EndPoint> clients = new List<EndPoint>();
 
     void Start()
     {
@@ -42,28 +45,6 @@ public class ServerUDP : MonoBehaviour
 
         lobbyManager.ActivateMap();
         lobbyManager.AddPlayer();
-    }
-
-    void ReceiveClient()
-    {
-        int recv;
-        byte[] data = new byte[1024];
-
-        serverText = serverText + "\n" + "Waiting for new Client...";
-
-        IPEndPoint sender = new IPEndPoint(IPAddress.Any, 0);
-        EndPoint Remote = (EndPoint)(sender);
-
-        while (true)
-        {
-            recv = socket.ReceiveFrom(data, ref Remote);
-            string playerName = Encoding.UTF8.GetString(data, 0, recv);
-
-            serverText += $"\nNew client {Remote}: {playerName}";
-
-            Thread sendThread = new Thread(() => SendClientConfirmation(Remote));
-            sendThread.Start();
-        }
     }
 
     void SendClientConfirmation(EndPoint Remote)
@@ -107,6 +88,45 @@ public class ServerUDP : MonoBehaviour
         // Enviar la respuesta al cliente
         socket.SendTo(data, 0, data.Length, SocketFlags.None, Remote);
         serverText += "\nAnswer sent to client";
+    }
+
+    void ReceiveClient()
+    {
+        int recv;
+        byte[] data = new byte[1024];
+
+        IPEndPoint sender = new IPEndPoint(IPAddress.Any, 0);
+        EndPoint Remote = (EndPoint)(sender);
+
+        while (true)
+        {
+            recv = socket.ReceiveFrom(data, ref Remote);
+            string message = Encoding.UTF8.GetString(data, 0, recv);
+
+            if (message.StartsWith("POS:"))
+            {
+                serverText += $"\nPosition received from {Remote}: {message}";
+                BroadcastPosition(message, Remote);
+            }
+            else
+            {
+                serverText += $"\nMessage received from client {Remote}: {message}";
+            }
+        }
+    }
+
+    void BroadcastPosition(string message, EndPoint sender)
+    {
+        byte[] data = Encoding.UTF8.GetBytes(message);
+
+        foreach (EndPoint client in clients)
+        {
+            if (!client.Equals(sender))
+            {
+                socket.SendTo(data, data.Length, SocketFlags.None, client);
+                serverText += $"\nPosition broadcasted to {client}";
+            }
+        }
     }
 }
 

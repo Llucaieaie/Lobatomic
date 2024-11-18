@@ -13,6 +13,8 @@ public class ClientUDP : MonoBehaviour
     public string serverIP = "";  // Ojo con enseñar la ip
     public LobbyManager lobbyManager;
 
+    public float maxSpeed = 10;
+
     // Private fields
     Socket socket;
     TextMeshProUGUI UItext;
@@ -26,7 +28,17 @@ public class ClientUDP : MonoBehaviour
     void Update()
     {
         UItext.text = clientText;
+
+        Vector2 movement = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")) * maxSpeed * Time.deltaTime;
+
+        if (movement.magnitude != 0)
+        {
+            Vector2 newPosition = transform.position + (Vector3)movement;
+            SendPosition(newPosition);
+            transform.position = newPosition;
+        }
     }
+
 
     /// <summary>
     /// Start Client
@@ -93,6 +105,20 @@ public class ClientUDP : MonoBehaviour
         receive.Start();
     }
 
+    public void SendPosition(Vector2 position)
+    {
+        if (socket == null) return;
+
+        // Enviar datos de posición al servidor
+        string message = $"POS:{position.x},{position.y}";
+        byte[] data = Encoding.UTF8.GetBytes(message);
+
+        IPEndPoint ipep = new IPEndPoint(IPAddress.Parse(serverIP), 9050);
+        socket.SendTo(data, data.Length, SocketFlags.None, ipep);
+
+        clientText += $"\nPosition sent to server: {position}";
+    }
+
     void Recieve()
     {
         byte[] data = new byte[1024];
@@ -101,6 +127,17 @@ public class ClientUDP : MonoBehaviour
 
         int recv = socket.ReceiveFrom(data, ref Remote);
         string message = Encoding.ASCII.GetString(data, 0, recv);
-        clientText += $"\nRecieved message from server: {message}";
+        clientText += $"\nReceived message from server: {message}";
+
+        if (message.StartsWith("POS:"))
+        {
+            string[] splitMessage = message.Substring(4).Split(',');
+            float x = float.Parse(splitMessage[0]);
+            float y = float.Parse(splitMessage[1]);
+            Vector2 serverPosition = new Vector2(x, y);
+
+            // Actualizar la posición del jugador
+            transform.position = serverPosition;
+        }
     }
 }

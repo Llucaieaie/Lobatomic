@@ -5,36 +5,48 @@ using UnityEngine;
 public class PlayerMovementOnline : MonoBehaviour
 {
     public AudioSource walkAudio;
-
     public float maxSpeed;
-
-    float Xmove, Ymove;
-
     public Animator animator;
-
     public PowerUpManager powerUpManager;
+    public ClientUDP clientUDP;
+
+    private Rigidbody2D rb;
+    private Vector2 movement;
 
     private void Start()
     {
+        rb = GetComponent<Rigidbody2D>();
         walkAudio.Play();
     }
 
     void Update()
     {
-        Vector2 movement = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        // Capturamos el input del jugador
+        movement = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 
+        // Actualizamos la animación
         animator.SetFloat("Horizontal", movement.x);
         animator.SetFloat("Vertical", movement.y);
         animator.SetFloat("Magnitude", movement.magnitude);
 
+        // Cambiar el pitch del sonido dependiendo del estado del power-up
         if (powerUpManager != null)
         {
-            if (powerUpManager.activeFrenesi) walkAudio.pitch = 3;
-            else walkAudio.pitch = 2;
+            walkAudio.pitch = powerUpManager.activeFrenesi ? 3 : 2;
         }
+        walkAudio.mute = movement.magnitude == 0;
+    }
 
-        if (movement.magnitude != 0) walkAudio.mute = false;
-        else walkAudio.mute = true;
+    private void FixedUpdate()
+    {
+        // Movimiento del jugador usando Rigidbody2D
+        Vector2 newPosition = rb.position + movement * maxSpeed * Time.fixedDeltaTime;
+        rb.MovePosition(newPosition);
 
+        // Enviar posición al servidor
+        if (movement.magnitude != 0)
+        {
+            clientUDP.SendPosition(newPosition);
+        }
     }
 }
