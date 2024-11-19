@@ -33,11 +33,6 @@ public class ClientUDP : MonoBehaviour
         IPEndPoint ipep = new IPEndPoint(IPAddress.Parse(serverIP), 9050);
         socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
 
-        byte[] data = Encoding.UTF8.GetBytes(clientName);
-        socket.SendTo(data, data.Length, SocketFlags.None, ipep);
-
-        clientText += $"\nName sent to server: {clientName}";
-
         receiveThread = new Thread(ReceiveData);
         receiveThread.Start();
 
@@ -52,7 +47,7 @@ public class ClientUDP : MonoBehaviour
     void ReceiveData()
     {
         byte[] data = new byte[1024];
-        IPEndPoint sender = new IPEndPoint(IPAddress.Any, 0);
+        IPEndPoint sender = new IPEndPoint(IPAddress.Parse(serverIP), 0);
         EndPoint Remote = (EndPoint)sender;
 
         while (true)

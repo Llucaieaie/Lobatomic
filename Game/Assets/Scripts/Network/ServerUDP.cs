@@ -59,26 +59,19 @@ public class ServerUDP : MonoBehaviour
             byte[] receivedBytes = new byte[recv];
             System.Array.Copy(data, receivedBytes, recv);
 
-            PlayerData playerData = PlayerData.Deserialize(receivedBytes);
+            try
+            {
+                PlayerData playerData = PlayerData.Deserialize(receivedBytes);
 
-            Debug.Log($"Received PlayerData: Id={playerData.Id}, Name={playerData.Name}, Position={playerData.Position}");
+                Debug.Log($"Received PlayerData: Id={playerData.Id}, Name={playerData.Name}, Position={playerData.Position}");
 
-            // Enqueue PlayerData instead of just position
-            lobbyManager.EnqueuePlayerData(playerData);
-
-            //try
-            //{
-            //    PlayerData playerData = PlayerData.Deserialize(receivedBytes);
-
-            //    Debug.Log($"Received PlayerData: Id={playerData.Id}, Name={playerData.Name}, Position={playerData.Position}");
-
-            //    // Enqueue PlayerData instead of just position
-            //    lobbyManager.EnqueuePlayerData(playerData);
-            //}
-            //catch (System.Exception ex)
-            //{
-            //    Debug.LogError($"Failed to deserialize PlayerData: {ex.Message}");
-            //}
+                // Enqueue PlayerData instead of just position
+                lobbyManager.EnqueuePlayerData(playerData);
+            }
+            catch (System.Exception ex)
+            {
+                Debug.LogError($"Failed to deserialize PlayerData: {ex.Message}");
+            }
         }
     }
 

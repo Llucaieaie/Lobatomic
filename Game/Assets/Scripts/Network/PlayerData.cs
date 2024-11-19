@@ -20,7 +20,11 @@ public class PlayerData
         MemoryStream stream = new MemoryStream();
 
         serializer.Serialize(stream, data);
-        return stream.ToArray();
+        byte[] dataBuffer = stream.ToArray();
+
+        //Debug.Log("Serialized XML: " + System.Text.Encoding.UTF8.GetString(dataBuffer));
+
+        return dataBuffer;
     }
 
     // Deserialize XML to PlayerData
@@ -31,6 +35,10 @@ public class PlayerData
         
         stream.Write(bytes, 0, bytes.Length);
         stream.Seek(0, SeekOrigin.Begin);
+
+        //string receivedXml = System.Text.Encoding.UTF8.GetString(bytes);
+        //Debug.Log("Received XML: " + receivedXml);
+
         return (PlayerData)serializer.Deserialize(stream);
     }
 }
