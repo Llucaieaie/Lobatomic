@@ -66,8 +66,8 @@ public class PlayerMovementOnline : MonoBehaviour
             // Movimiento del jugador usando Rigidbody2D
             Vector2 newPosition = rb.position + movement * maxSpeed * Time.fixedDeltaTime;
             rb.MovePosition(newPosition);
-
-            data.Position = newPosition;
         }
+
+        data.Position = rb.position;
     }
 }

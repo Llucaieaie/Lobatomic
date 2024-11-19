@@ -59,6 +59,13 @@ public class ServerUDP : MonoBehaviour
             byte[] receivedBytes = new byte[recv];
             System.Array.Copy(data, receivedBytes, recv);
 
+            // Check if this Remote is already in the clients list
+            if (!clients.Contains(Remote))
+            {
+                clients.Add(Remote);
+                Debug.Log($"New client added: {Remote}");
+            }
+
             try
             {
                 PlayerData playerData = PlayerData.Deserialize(receivedBytes);
