@@ -30,15 +30,16 @@ public class ClientUDP : MonoBehaviour
 
     public void StartClient()
     {
-        IPEndPoint ipep = new IPEndPoint(IPAddress.Parse(serverIP), 9050);
+        // Configurar la dirección y el socket
+        IPEndPoint localEndPoint = new IPEndPoint(IPAddress.Any, 9051); // Cliente usa un puerto local diferente
         socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+        socket.Bind(localEndPoint); // Asociar el socket al puerto local
 
+        // Iniciar hilo de recepción
         receiveThread = new Thread(ReceiveData);
         receiveThread.Start();
 
-        // Set lobby values =======================================
-        //lobbyManager.Player2.GetComponent<PlayerMovementOnline>().data.Name = clientName;
-
+        // Configurar valores del lobby
         lobbyManager.gameObject.SetActive(true);
         lobbyManager.isHost = false;
         createLobbyWindow.SetActive(false);
@@ -47,27 +48,31 @@ public class ClientUDP : MonoBehaviour
     void ReceiveData()
     {
         byte[] data = new byte[1024];
-        IPEndPoint sender = new IPEndPoint(IPAddress.Parse(serverIP), 0);
-        EndPoint Remote = (EndPoint)sender;
+        EndPoint remoteEndPoint = new IPEndPoint(IPAddress.Any, 0);
 
         while (true)
         {
-            int recv = socket.ReceiveFrom(data, ref Remote);
-            byte[] receivedBytes = new byte[recv];
-            System.Array.Copy(data, receivedBytes, recv);
-
             try
             {
+                // Recibir datos del servidor
+                int recv = socket.ReceiveFrom(data, ref remoteEndPoint);
+                byte[] receivedBytes = new byte[recv];
+                System.Array.Copy(data, receivedBytes, recv);
+
                 PlayerData playerData = PlayerData.Deserialize(receivedBytes);
 
                 Debug.Log($"Received PlayerData: Id={playerData.Id}, Name={playerData.Name}, Position={playerData.Position}");
 
-                // Enqueue PlayerData instead of just position
                 lobbyManager.EnqueuePlayerData(playerData);
+            }
+            catch (SocketException ex)
+            {
+                Debug.LogError($"Socket error while receiving data: {ex.Message}");
+                break;
             }
             catch (System.Exception ex)
             {
-                Debug.LogError($"Failed to deserialize PlayerData: {ex.Message}");
+                Debug.LogError($"Error while processing received data: {ex.Message}");
             }
         }
     }
