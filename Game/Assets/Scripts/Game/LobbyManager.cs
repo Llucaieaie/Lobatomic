@@ -18,9 +18,8 @@ public class LobbyManager : MonoBehaviour
 
     void Start()
     {
-        // Opcional: inicializar cosas específicas
-        Player1.GetComponent<PlayerMovementOnline>().data.Id = 0;
-        Player2.GetComponent<PlayerMovementOnline>().data.Id = 1;
+        Player1.GetComponent<PlayerDataManager>().data.Id = 0;
+        Player2.GetComponent<PlayerDataManager>().data.Id = 1;
     }
 
     void Update()
@@ -34,7 +33,7 @@ public class LobbyManager : MonoBehaviour
             if (!player1Movement.isControlled) player1Movement.isControlled = true;
             if (player2Movement.isControlled) player2Movement.isControlled = false;
 
-            PlayerData playerData = player1Movement.data;
+            PlayerData playerData = Player1.GetComponent<PlayerDataManager>().data;
             serverUDP.SendPlayerData(playerData);
         }
         else
@@ -43,7 +42,7 @@ public class LobbyManager : MonoBehaviour
             if (player1Movement.isControlled) player1Movement.isControlled = false;
             if (!player2Movement.isControlled) player2Movement.isControlled = true;
 
-            PlayerData playerData = player2Movement.data;
+            PlayerData playerData = Player2.GetComponent<PlayerDataManager>().data;
             clientUDP.SendPlayerData(playerData);
         }
 
@@ -55,11 +54,11 @@ public class LobbyManager : MonoBehaviour
 
             if (playerData.Id == 0)
             {
-                Player1.transform.position = position;
+                Player1.GetComponent<PlayerDataManager>().SetPlayerValues(playerData);
             }
             else if (playerData.Id == 1)
             {
-                Player2.transform.position = position;
+                Player2.GetComponent<PlayerDataManager>().SetPlayerValues(playerData);
             }
         }
     }

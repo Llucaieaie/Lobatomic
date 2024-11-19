@@ -39,7 +39,8 @@ public class ClientUDP : MonoBehaviour
         receiveThread = new Thread(ReceiveData);
         receiveThread.Start();
 
-        // Configurar valores del lobby
+        // Set lobby values =======================================
+        lobbyManager.Player2.GetComponent<PlayerDataManager>().SetName(clientName);
         lobbyManager.gameObject.SetActive(true);
         lobbyManager.isHost = false;
         createLobbyWindow.SetActive(false);

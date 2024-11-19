@@ -18,24 +18,18 @@ public class PlayerMovementOnline : MonoBehaviour
     public bool isControlled; // If true, user controls this and sends position to remote. If false, user doesn't control this and recieves position from remote.
     [HideInInspector] public ServerUDP serverUDP;
     [HideInInspector] public ClientUDP clientUDP;
-    [HideInInspector] public PlayerData data = new PlayerData();
-
-    [HideInInspector] public TMP_Text nameTag;
+    [HideInInspector] public PlayerDataManager dataManager;
 
     private Rigidbody2D rb;
     private Vector2 movement;
 
-    private void Awake()
-    {
-        rb = GetComponent<Rigidbody2D>();
-        nameTag = GetComponentInChildren<TMP_Text>();
-    }
 
     private void Start()
     { 
         walkAudio.Play();
         serverUDP = GameObject.Find("ServerUDP").GetComponent<ServerUDP>();
         clientUDP = GameObject.Find("ClientUDP").GetComponent<ClientUDP>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     void Update()
@@ -66,8 +60,8 @@ public class PlayerMovementOnline : MonoBehaviour
             // Movimiento del jugador usando Rigidbody2D
             Vector2 newPosition = rb.position + movement * maxSpeed * Time.fixedDeltaTime;
             rb.MovePosition(newPosition);
-        }
 
-        data.Position = rb.position;
+            dataManager.data.Position = rb.position;
+        }
     }
 }

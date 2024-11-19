@@ -40,8 +40,7 @@ public class ServerUDP : MonoBehaviour
         receiveThread.Start();
 
         // Set lobby values =======================================
-        //lobbyManager.Player1.GetComponent<PlayerMovementOnline>().data.Name = hostName;
-
+        lobbyManager.Player1.GetComponent<PlayerDataManager>().SetName(hostName);
         lobbyManager.gameObject.SetActive(true);
         lobbyManager.isHost = true;
         createLobbyWindow.SetActive(false);
@@ -65,7 +64,6 @@ public class ServerUDP : MonoBehaviour
                 clients.Add(Remote);
                 Debug.Log($"New client added: {Remote}");
             }
-
             try
             {
                 PlayerData playerData = PlayerData.Deserialize(receivedBytes);
