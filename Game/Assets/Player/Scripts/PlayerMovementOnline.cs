@@ -1,6 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Xml.Serialization;
+    using TMPro;
+    using UnityEngine;
+
 
 public class PlayerMovementOnline : MonoBehaviour
 {
@@ -8,17 +12,27 @@ public class PlayerMovementOnline : MonoBehaviour
     public float maxSpeed;
     public Animator animator;
     public PowerUpManager powerUpManager;
+
+    // Network
+    public LobbyManager lobbyManager;
+    public bool isControlled; // If true, user controls this and sends position to remote. If false, user doesn't control this and recieves position from remote.
     [HideInInspector] public ServerUDP serverUDP;
     [HideInInspector] public ClientUDP clientUDP;
+    [HideInInspector] public PlayerData data = new PlayerData();
 
-    public bool isControlled; // If true, user controls this and sends position to remote. If false, user doesn't control this and recieves position from remote.
+    [HideInInspector] public TMP_Text nameTag;
 
     private Rigidbody2D rb;
     private Vector2 movement;
 
-    private void Start()
+    private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        nameTag = GetComponentInChildren<TMP_Text>();
+    }
+
+    private void Start()
+    { 
         walkAudio.Play();
         serverUDP = GameObject.Find("ServerUDP").GetComponent<ServerUDP>();
         clientUDP = GameObject.Find("ClientUDP").GetComponent<ClientUDP>();
@@ -26,7 +40,7 @@ public class PlayerMovementOnline : MonoBehaviour
 
     void Update()
     {
-        if (isControlled)
+        if (isControlled && lobbyManager.isActiveAndEnabled)
         {
             // Capturamos el input del jugador
             movement = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
@@ -47,17 +61,13 @@ public class PlayerMovementOnline : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (isControlled)
+        if (isControlled && lobbyManager.isActiveAndEnabled)
         {
             // Movimiento del jugador usando Rigidbody2D
             Vector2 newPosition = rb.position + movement * maxSpeed * Time.fixedDeltaTime;
             rb.MovePosition(newPosition);
 
-            // Enviar posición al servidor
-            if (movement.magnitude != 0)
-            {
-                clientUDP.SendPosition(newPosition);
-            }
+            data.Position = newPosition;
         }
     }
 }

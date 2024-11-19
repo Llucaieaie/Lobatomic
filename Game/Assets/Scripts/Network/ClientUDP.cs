@@ -41,6 +41,9 @@ public class ClientUDP : MonoBehaviour
         receiveThread = new Thread(ReceiveData);
         receiveThread.Start();
 
+        // Set lobby values =======================================
+        //lobbyManager.Player2.GetComponent<PlayerMovementOnline>().data.Name = clientName;
+
         lobbyManager.gameObject.SetActive(true);
         lobbyManager.isHost = false;
         createLobbyWindow.SetActive(false);
@@ -55,30 +58,33 @@ public class ClientUDP : MonoBehaviour
         while (true)
         {
             int recv = socket.ReceiveFrom(data, ref Remote);
-            string message = Encoding.UTF8.GetString(data, 0, recv);
+            byte[] receivedBytes = new byte[recv];
+            System.Array.Copy(data, receivedBytes, recv);
 
-            // Procesar posición
-            if (message.StartsWith("POS:"))
+            try
             {
-                string[] parts = message.Substring(4).Split(',');
-                float x = float.Parse(parts[0]);
-                float y = float.Parse(parts[1]);
-                Vector3 position = new Vector3(x, y, 0);
+                PlayerData playerData = PlayerData.Deserialize(receivedBytes);
 
-                lobbyManager.UpdatePlayerPosition(0, position); // Actualiza Player1
+                Debug.Log($"Received PlayerData: Id={playerData.Id}, Name={playerData.Name}, Position={playerData.Position}");
+
+                // Enqueue PlayerData instead of just position
+                lobbyManager.EnqueuePlayerData(playerData);
+            }
+            catch (System.Exception ex)
+            {
+                Debug.LogError($"Failed to deserialize PlayerData: {ex.Message}");
             }
         }
     }
 
-    public void SendPosition(Vector3 position)
+    public void SendPlayerData(PlayerData playerData)
     {
-        string message = $"POS:{position.x},{position.y}";
-        byte[] data = Encoding.UTF8.GetBytes(message);
+        byte[] data = PlayerData.Serialize(playerData);
 
         IPEndPoint ipep = new IPEndPoint(IPAddress.Parse(serverIP), 9050);
         socket.SendTo(data, data.Length, SocketFlags.None, ipep);
 
-        clientText += $"\nPosition sent: {position}";
+        clientText += $"\nPlayerData sent: {playerData.Name} at {playerData.Position}";
     }
 
     private void OnDestroy()

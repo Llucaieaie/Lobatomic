@@ -8076,7 +8076,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lobbyTileMap: {fileID: 359899003}
-  playerPrefab: {fileID: 43102812682024402, guid: 60740275e101ade478165ad8e3db2304, type: 3}
   Player1: {fileID: 1327943693}
   Player2: {fileID: 1170390203}
   serverUDP: {fileID: 13726699}
@@ -9525,6 +9524,10 @@ PrefabInstance:
       propertyPath: isControlled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7718844437064802265, guid: 60740275e101ade478165ad8e3db2304, type: 3}
+      propertyPath: lobbyManager
+      value: 
+      objectReference: {fileID: 931129745}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10714,6 +10717,10 @@ PrefabInstance:
       propertyPath: isControlled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7718844437064802265, guid: 60740275e101ade478165ad8e3db2304, type: 3}
+      propertyPath: lobbyManager
+      value: 
+      objectReference: {fileID: 931129745}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

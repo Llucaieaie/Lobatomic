@@ -39,6 +39,9 @@ public class ServerUDP : MonoBehaviour
         receiveThread = new Thread(ReceiveData);
         receiveThread.Start();
 
+        // Set lobby values =======================================
+        //lobbyManager.Player1.GetComponent<PlayerMovementOnline>().data.Name = hostName;
+
         lobbyManager.gameObject.SetActive(true);
         lobbyManager.isHost = true;
         createLobbyWindow.SetActive(false);
@@ -53,39 +56,42 @@ public class ServerUDP : MonoBehaviour
         while (true)
         {
             int recv = socket.ReceiveFrom(data, ref Remote);
-            string message = Encoding.UTF8.GetString(data, 0, recv);
+            byte[] receivedBytes = new byte[recv];
+            System.Array.Copy(data, receivedBytes, recv);
 
-            // Procesar posición o mensaje
-            if (message.StartsWith("POS:"))
-            {
-                string[] parts = message.Substring(4).Split(',');
-                float x = float.Parse(parts[0]);
-                float y = float.Parse(parts[1]);
-                Vector3 position = new Vector3(x, y, 0);
+            PlayerData playerData = PlayerData.Deserialize(receivedBytes);
 
-                lobbyManager.UpdatePlayerPosition(1, position); // Actualiza Player2
-            }
-            else if (!clients.Contains(Remote))
-            {
-                clients.Add(Remote);
-                serverText += $"\nNew client connected: {Remote}";
-            }
+            Debug.Log($"Received PlayerData: Id={playerData.Id}, Name={playerData.Name}, Position={playerData.Position}");
+
+            // Enqueue PlayerData instead of just position
+            lobbyManager.EnqueuePlayerData(playerData);
+
+            //try
+            //{
+            //    PlayerData playerData = PlayerData.Deserialize(receivedBytes);
+
+            //    Debug.Log($"Received PlayerData: Id={playerData.Id}, Name={playerData.Name}, Position={playerData.Position}");
+
+            //    // Enqueue PlayerData instead of just position
+            //    lobbyManager.EnqueuePlayerData(playerData);
+            //}
+            //catch (System.Exception ex)
+            //{
+            //    Debug.LogError($"Failed to deserialize PlayerData: {ex.Message}");
+            //}
         }
     }
 
-    public void SendPosition(Vector3 position)
+    public void SendPlayerData(PlayerData playerData)
     {
         if (clients.Count == 0) return;
 
-        string message = $"POS:{position.x},{position.y}";
-        byte[] data = Encoding.UTF8.GetBytes(message);
+        byte[] data = PlayerData.Serialize(playerData);
 
         foreach (EndPoint client in clients)
         {
             socket.SendTo(data, data.Length, SocketFlags.None, client);
         }
-
-        serverText += $"\nPosition sent: {position}";
     }
 
     private void OnDestroy()

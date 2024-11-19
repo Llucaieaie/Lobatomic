@@ -549,6 +549,12 @@ MonoBehaviour:
   maxSpeed: 10
   animator: {fileID: 3182081310930774328}
   powerUpManager: {fileID: 0}
+  lobbyManager: {fileID: 0}
+  isControlled: 0
+  serverUDP: {fileID: 0}
+  clientUDP: {fileID: 0}
+  data: {fileID: 0}
+  nameTag: {fileID: 0}
 --- !u!114 &7063358760495409454
 MonoBehaviour:
   m_ObjectHideFlags: 0
