@@ -17,20 +17,20 @@ public class PlayerData
     public static byte[] Serialize(PlayerData data)
     {
         XmlSerializer serializer = new XmlSerializer(typeof(PlayerData));
-        using (MemoryStream stream = new MemoryStream())
-        {
-            serializer.Serialize(stream, data);
-            return stream.ToArray();
-        }
+        MemoryStream stream = new MemoryStream();
+
+        serializer.Serialize(stream, data);
+        return stream.ToArray();
     }
 
     // Deserialize XML to PlayerData
     public static PlayerData Deserialize(byte[] bytes)
     {
         XmlSerializer serializer = new XmlSerializer(typeof(PlayerData));
-        using (MemoryStream stream = new MemoryStream(bytes))
-        {
-            return (PlayerData)serializer.Deserialize(stream);
-        }
+        MemoryStream stream = new MemoryStream(bytes);
+        
+        stream.Write(bytes, 0, bytes.Length);
+        stream.Seek(0, SeekOrigin.Begin);
+        return (PlayerData)serializer.Deserialize(stream);
     }
 }
