@@ -14,6 +14,8 @@ public class PlayerMovement : MonoBehaviour
 
     public PowerUpManager powerUpManager;
 
+    public Vector2 movementVector;
+
     private void Start()
     {
         walkAudio.Play();
@@ -23,6 +25,11 @@ public class PlayerMovement : MonoBehaviour
     {
         Vector2 movement = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 
+        UpdateMovement(movementVector);
+    }
+
+    void UpdateMovement(Vector2 movement)
+    {
         animator.SetFloat("Horizontal", movement.x);
         animator.SetFloat("Vertical", movement.y);
         animator.SetFloat("Magnitude", movement.magnitude);
@@ -34,8 +41,9 @@ public class PlayerMovement : MonoBehaviour
             if (powerUpManager.activeFrenesi) walkAudio.pitch = 3;
             else walkAudio.pitch = 2;
         }
-        if(movement.magnitude != 0) walkAudio.mute = false;
+        if (movement.magnitude != 0) walkAudio.mute = false;
         else walkAudio.mute = true;
 
     }
+
 }
