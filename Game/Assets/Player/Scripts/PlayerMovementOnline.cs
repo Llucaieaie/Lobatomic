@@ -8,7 +8,9 @@ public class PlayerMovementOnline : MonoBehaviour
     public float maxSpeed;
     public Animator animator;
     public PowerUpManager powerUpManager;
-    public ClientUDP clientUDP;
+    [HideInInspector] public ServerUDP serverUDP;
+    [HideInInspector] public ClientUDP clientUDP;
+    public bool isControlled;
 
     private Rigidbody2D rb;
     private Vector2 movement;
@@ -17,6 +19,7 @@ public class PlayerMovementOnline : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         walkAudio.Play();
+        serverUDP = GameObject.Find("ServerUDP").GetComponent<ServerUDP>();
         clientUDP = GameObject.Find("ClientUDP").GetComponent<ClientUDP>();
     }
 

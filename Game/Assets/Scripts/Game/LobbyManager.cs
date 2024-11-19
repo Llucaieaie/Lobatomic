@@ -22,11 +22,6 @@ public class LobbyManager : MonoBehaviour
         
     }
 
-    public void ActivateMap()
-    {
-        lobbyTileMap.SetActive(true);
-    }
-
     public void UpdatePlayerPosition(int playerId, Vector3 position)
     {
         if (playerId < players.Count)
@@ -39,11 +34,11 @@ public class LobbyManager : MonoBehaviour
         }
     }
 
-    public void AddPlayer(string name)
-    {
-        GameObject p = Instantiate(playerPrefab);
-        players.Add(p);
+    //public void AddPlayer(string name)
+    //{
+    //    GameObject p = Instantiate(playerPrefab);
+    //    players.Add(p);
 
-        p.GetComponentInChildren<TMP_Text>().text = name;
-    }
+    //    p.GetComponentInChildren<TMP_Text>().text = name;
+    //}
 }

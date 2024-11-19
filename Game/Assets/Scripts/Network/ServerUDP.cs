@@ -13,6 +13,7 @@ public class ServerUDP : MonoBehaviour
     public string hostName = "";
     public LobbyManager lobbyManager;
     public GameObject createLobbyWindow;
+    public GameObject player1;
 
     // Private fields
     Socket socket;
@@ -50,8 +51,6 @@ public class ServerUDP : MonoBehaviour
         }
 
         createLobbyWindow.SetActive(false);
-        lobbyManager.AddPlayer(hostName);
-        lobbyManager.ActivateMap();
     }
 
     void SendClientConfirmation(EndPoint Remote)

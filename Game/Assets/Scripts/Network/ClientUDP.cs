@@ -13,8 +13,7 @@ public class ClientUDP : MonoBehaviour
     public string serverIP = "";  // Ojo con enseñar la ip
     public LobbyManager lobbyManager;
     public GameObject createLobbyWindow;
-
-    public float maxSpeed = 10;
+    public GameObject player2;
 
     // Private fields
     Socket socket;
@@ -29,15 +28,6 @@ public class ClientUDP : MonoBehaviour
     void Update()
     {
         UItext.text = clientText;
-
-        Vector2 movement = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")) * maxSpeed * Time.deltaTime;
-
-        if (movement.magnitude != 0)
-        {
-            Vector2 newPosition = transform.position + (Vector3)movement;
-            SendPosition(newPosition);
-            transform.position = newPosition;
-        }
     }
 
 
@@ -57,8 +47,6 @@ public class ClientUDP : MonoBehaviour
             mainThread.Start();
 
             createLobbyWindow.SetActive(false);
-            lobbyManager.AddPlayer(clientName);
-            lobbyManager.ActivateMap();
         }
     }
 
