@@ -10,7 +10,8 @@ public class PlayerMovementOnline : MonoBehaviour
     public PowerUpManager powerUpManager;
     [HideInInspector] public ServerUDP serverUDP;
     [HideInInspector] public ClientUDP clientUDP;
-    public bool isControlled;
+
+    public bool isControlled; // If true, user controls this and sends position to remote. If false, user doesn't control this and recieves position from remote.
 
     private Rigidbody2D rb;
     private Vector2 movement;
@@ -25,32 +26,38 @@ public class PlayerMovementOnline : MonoBehaviour
 
     void Update()
     {
-        // Capturamos el input del jugador
-        movement = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-
-        // Actualizamos la animación
-        animator.SetFloat("Horizontal", movement.x);
-        animator.SetFloat("Vertical", movement.y);
-        animator.SetFloat("Magnitude", movement.magnitude);
-
-        // Cambiar el pitch del sonido dependiendo del estado del power-up
-        if (powerUpManager != null)
+        if (isControlled)
         {
-            walkAudio.pitch = powerUpManager.activeFrenesi ? 3 : 2;
+            // Capturamos el input del jugador
+            movement = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+
+            // Actualizamos la animación
+            animator.SetFloat("Horizontal", movement.x);
+            animator.SetFloat("Vertical", movement.y);
+            animator.SetFloat("Magnitude", movement.magnitude);
+
+            // Cambiar el pitch del sonido dependiendo del estado del power-up
+            if (powerUpManager != null)
+            {
+                walkAudio.pitch = powerUpManager.activeFrenesi ? 3 : 2;
+            }
+            walkAudio.mute = movement.magnitude == 0;
         }
-        walkAudio.mute = movement.magnitude == 0;
     }
 
     private void FixedUpdate()
     {
-        // Movimiento del jugador usando Rigidbody2D
-        Vector2 newPosition = rb.position + movement * maxSpeed * Time.fixedDeltaTime;
-        rb.MovePosition(newPosition);
-
-        // Enviar posición al servidor
-        if (movement.magnitude != 0)
+        if (isControlled)
         {
-            clientUDP.SendPosition(newPosition);
+            // Movimiento del jugador usando Rigidbody2D
+            Vector2 newPosition = rb.position + movement * maxSpeed * Time.fixedDeltaTime;
+            rb.MovePosition(newPosition);
+
+            // Enviar posición al servidor
+            if (movement.magnitude != 0)
+            {
+                clientUDP.SendPosition(newPosition);
+            }
         }
     }
 }

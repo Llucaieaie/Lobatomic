@@ -168,10 +168,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UItextObj: {fileID: 1681397586}
-  hostName: 
   lobbyManager: {fileID: 931129745}
   createLobbyWindow: {fileID: 1556725665}
-  player1: {fileID: 1327943693}
+  hostName: 
 --- !u!1001 &14068893
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8048,7 +8047,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &931129744
 Transform:
   m_ObjectHideFlags: 0
@@ -8078,7 +8077,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lobbyTileMap: {fileID: 359899003}
   playerPrefab: {fileID: 43102812682024402, guid: 60740275e101ade478165ad8e3db2304, type: 3}
-  players: []
+  Player1: {fileID: 1327943693}
+  Player2: {fileID: 1170390203}
+  serverUDP: {fileID: 13726699}
+  clientUDP: {fileID: 1250769887}
+  isHost: 1
 --- !u!1001 &946625722
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9484,7 +9487,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 43102812682024400, guid: 60740275e101ade478165ad8e3db2304, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 43102812682024400, guid: 60740275e101ade478165ad8e3db2304, type: 3}
       propertyPath: m_LocalRotation.w
@@ -9517,6 +9520,10 @@ PrefabInstance:
     - target: {fileID: 43102812682024402, guid: 60740275e101ade478165ad8e3db2304, type: 3}
       propertyPath: m_Name
       value: Micro Micro
+      objectReference: {fileID: 0}
+    - target: {fileID: 7718844437064802265, guid: 60740275e101ade478165ad8e3db2304, type: 3}
+      propertyPath: isControlled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10382,11 +10389,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UItextObj: {fileID: 1883712989}
-  clientName: 
-  serverIP: 
   lobbyManager: {fileID: 931129745}
   createLobbyWindow: {fileID: 1556725665}
-  player2: {fileID: 1170390203}
+  clientName: 
+  serverIP: 
 --- !u!1001 &1263437881
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10666,7 +10672,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 43102812682024400, guid: 60740275e101ade478165ad8e3db2304, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 43102812682024400, guid: 60740275e101ade478165ad8e3db2304, type: 3}
       propertyPath: m_LocalRotation.w
@@ -10706,7 +10712,7 @@ PrefabInstance:
       objectReference: {fileID: 1250769887}
     - target: {fileID: 7718844437064802265, guid: 60740275e101ade478165ad8e3db2304, type: 3}
       propertyPath: isControlled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -13004,7 +13010,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1556725666
 RectTransform:
   m_ObjectHideFlags: 0

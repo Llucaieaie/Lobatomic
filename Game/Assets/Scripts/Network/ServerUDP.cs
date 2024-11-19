@@ -8,131 +8,89 @@ using System.Collections.Generic;
 
 public class ServerUDP : MonoBehaviour
 {
-    // Public fields
     public GameObject UItextObj;
-    public string hostName = "";
     public LobbyManager lobbyManager;
     public GameObject createLobbyWindow;
-    public GameObject player1;
+    public string hostName = "";
 
-    // Private fields
-    Socket socket;
-    TextMeshProUGUI UItext;
-    string serverText;
-
+    private Socket socket;
+    private Thread receiveThread;
     private List<EndPoint> clients = new List<EndPoint>();
+    private TextMeshProUGUI UItext;
+    private string serverText;
 
     void Start()
     {
         UItext = UItextObj.GetComponent<TextMeshProUGUI>();
     }
+
     void Update()
     {
         UItext.text = serverText;
     }
 
-    /// <summary>
-    /// Start Server
-    /// </summary>
     public void StartServer()
     {
         serverText = "Starting UDP Server...";
-
         IPEndPoint ipep = new IPEndPoint(IPAddress.Any, 9050);
         socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
         socket.Bind(ipep);
 
-        Thread newConnection = new Thread(ReceiveClient);
-        newConnection.Start();
+        receiveThread = new Thread(ReceiveData);
+        receiveThread.Start();
 
-        if (string.IsNullOrEmpty(hostName))
-        {
-            hostName = "Dr. MiniMini";
-        }
-
+        lobbyManager.gameObject.SetActive(true);
+        lobbyManager.isHost = true;
         createLobbyWindow.SetActive(false);
     }
 
-    void SendClientConfirmation(EndPoint Remote)
+    void ReceiveData()
     {
-        string response = "Name recieved correctly";
-        byte[] data = Encoding.UTF8.GetBytes(response);
-
-        // Enviar la respuesta al cliente
-        socket.SendTo(data, 0, data.Length, SocketFlags.None, Remote);
-        serverText += "\nConfirmation sent to client";
-    }
-
-    /// <summary>
-    /// Send/Recieve
-    /// </summary>
-    void Recieve()
-    {
-        int recv;
         byte[] data = new byte[1024];
-
         IPEndPoint sender = new IPEndPoint(IPAddress.Any, 0);
-        EndPoint Remote = (EndPoint)(sender);
+        EndPoint Remote = (EndPoint)sender;
 
         while (true)
         {
-            recv = socket.ReceiveFrom(data, ref Remote);
-            string playerName = Encoding.UTF8.GetString(data, 0, recv);
-
-            serverText += $"\nRecieved message from client {Remote}: {playerName}";
-
-            Thread sendThread = new Thread(() => Send(Remote));
-            sendThread.Start();
-        }
-    }
-
-    void Send(EndPoint Remote)
-    {
-        string response = "Nombre recibido correctamente.";
-        byte[] data = Encoding.UTF8.GetBytes(response);
-
-        // Enviar la respuesta al cliente
-        socket.SendTo(data, 0, data.Length, SocketFlags.None, Remote);
-        serverText += "\nAnswer sent to client";
-    }
-
-    void ReceiveClient()
-    {
-        int recv;
-        byte[] data = new byte[1024];
-
-        IPEndPoint sender = new IPEndPoint(IPAddress.Any, 0);
-        EndPoint Remote = (EndPoint)(sender);
-
-        while (true)
-        {
-            recv = socket.ReceiveFrom(data, ref Remote);
+            int recv = socket.ReceiveFrom(data, ref Remote);
             string message = Encoding.UTF8.GetString(data, 0, recv);
 
+            // Procesar posición o mensaje
             if (message.StartsWith("POS:"))
             {
-                serverText += $"\nPosition received from {Remote}: {message}";
-                BroadcastPosition(message, Remote);
+                string[] parts = message.Substring(4).Split(',');
+                float x = float.Parse(parts[0]);
+                float y = float.Parse(parts[1]);
+                Vector3 position = new Vector3(x, y, 0);
+
+                lobbyManager.UpdatePlayerPosition(1, position); // Actualiza Player2
             }
-            else
+            else if (!clients.Contains(Remote))
             {
-                serverText += $"\nMessage received from client {Remote}: {message}";
+                clients.Add(Remote);
+                serverText += $"\nNew client connected: {Remote}";
             }
         }
     }
 
-    void BroadcastPosition(string message, EndPoint sender)
+    public void SendPosition(Vector3 position)
     {
+        if (clients.Count == 0) return;
+
+        string message = $"POS:{position.x},{position.y}";
         byte[] data = Encoding.UTF8.GetBytes(message);
 
         foreach (EndPoint client in clients)
         {
-            if (!client.Equals(sender))
-            {
-                socket.SendTo(data, data.Length, SocketFlags.None, client);
-                serverText += $"\nPosition broadcasted to {client}";
-            }
+            socket.SendTo(data, data.Length, SocketFlags.None, client);
         }
+
+        serverText += $"\nPosition sent: {position}";
+    }
+
+    private void OnDestroy()
+    {
+        receiveThread?.Abort();
+        socket?.Close();
     }
 }
-

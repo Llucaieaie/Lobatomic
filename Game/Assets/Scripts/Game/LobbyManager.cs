@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
 public class LobbyManager : MonoBehaviour
@@ -8,37 +6,49 @@ public class LobbyManager : MonoBehaviour
     public GameObject lobbyTileMap;
     public GameObject playerPrefab;
 
-    public List<GameObject> players = new List<GameObject>();
+    public GameObject Player1;
+    public GameObject Player2;
 
-    // Start is called before the first frame update
+    public ServerUDP serverUDP;
+    public ClientUDP clientUDP;
+
+    public bool isHost;
+
     void Start()
-    {
-        lobbyTileMap.SetActive(false);
-    }
-
-    // Update is called once per frame
-    void Update()
     {
         
     }
 
-    public void UpdatePlayerPosition(int playerId, Vector3 position)
+    void Update()
     {
-        if (playerId < players.Count)
+        PlayerMovementOnline player1Movement = Player1.GetComponent<PlayerMovementOnline>();
+        PlayerMovementOnline player2Movement = Player2.GetComponent<PlayerMovementOnline>();
+
+        if (isHost)
         {
-            players[playerId].transform.position = position;
+            // If host, control player1
+            if (!player1Movement.isControlled) player1Movement.isControlled = true;
+            if (player2Movement.isControlled) player2Movement.isControlled = false;
+
+            Vector3 hostPosition = Player1.transform.position;
+            serverUDP.SendPosition(hostPosition);
         }
         else
         {
-            Debug.LogWarning($"Player ID {playerId} does not exist.");
+            // If host, control player2
+            if (player1Movement.isControlled) player1Movement.isControlled = false;
+            if (!player2Movement.isControlled) player2Movement.isControlled = true;
+
+            Vector3 clientPosition = Player2.transform.position;
+            clientUDP.SendPosition(clientPosition);
         }
     }
 
-    //public void AddPlayer(string name)
-    //{
-    //    GameObject p = Instantiate(playerPrefab);
-    //    players.Add(p);
-
-    //    p.GetComponentInChildren<TMP_Text>().text = name;
-    //}
+    public void UpdatePlayerPosition(int playerId, Vector2 position)
+    {
+        if (playerId == 0)
+            Player1.transform.position = position;
+        else if (playerId == 1)
+            Player2.transform.position = position;
+    }
 }
