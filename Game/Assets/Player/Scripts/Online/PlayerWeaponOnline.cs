@@ -10,7 +10,8 @@ public class PlayerWeaponOnline : MonoBehaviour
     public AudioSource attackAudio;
     public AudioSource clashAudio;
 
-    public GameObject[] weaponColliders;
+    public BoxCollider2D[] weaponColliders;
+    public Animator[] weaponAnimators;
 
     float lastAttackTime = 0f;
     public bool canAttack;
@@ -25,7 +26,7 @@ public class PlayerWeaponOnline : MonoBehaviour
 
         for (int i = 0; i < weaponColliders.Length; i++)
         {
-            weaponColliders[i].SetActive(false);
+            weaponColliders[i].enabled = false;
         }
     }
 
@@ -58,16 +59,16 @@ public class PlayerWeaponOnline : MonoBehaviour
         switch (direction)
         {
             case AttackDirection.UP:
-                weaponColliders[0].SetActive(true);
+                weaponColliders[0].enabled = true;
                 break;
             case AttackDirection.DOWN:
-                weaponColliders[1].SetActive(true);
+                weaponColliders[1].enabled = true;
                 break;
             case AttackDirection.LEFT:
-                weaponColliders[2].SetActive(true);
+                weaponColliders[2].enabled = true;
                 break;
             case AttackDirection.RIGHT:
-                weaponColliders[3].SetActive(true);
+                weaponColliders[3].enabled = true;
                 break;
             default:
                 break;
@@ -78,16 +79,40 @@ public class PlayerWeaponOnline : MonoBehaviour
         switch (direction)
         {
             case AttackDirection.UP:
-                weaponColliders[0].SetActive(false);
+                weaponColliders[0].enabled = false;
                 break;
             case AttackDirection.DOWN:
-                weaponColliders[1].SetActive(false);
+                weaponColliders[1].enabled = false;
                 break;
             case AttackDirection.LEFT:
-                weaponColliders[2].SetActive(false);
+                weaponColliders[2].enabled = false;
                 break;
             case AttackDirection.RIGHT:
-                weaponColliders[3].SetActive(false);
+                weaponColliders[3].enabled = false;
+                break;
+            default:
+                break;
+        }
+    }
+
+    /// <summary>
+    /// Enable / Disable attack colliders
+    /// </summary>
+    void DisplayAttackAnimation(AttackDirection direction)
+    {
+        switch (direction)
+        {
+            case AttackDirection.UP:
+                weaponAnimators[0].SetTrigger("Attack");
+                break;
+            case AttackDirection.DOWN:
+                weaponAnimators[1].SetTrigger("Attack");
+                break;
+            case AttackDirection.LEFT:
+                weaponAnimators[2].SetTrigger("Attack");
+                break;
+            case AttackDirection.RIGHT:
+                weaponAnimators[3].SetTrigger("Attack");
                 break;
             default:
                 break;
@@ -112,6 +137,7 @@ public class PlayerWeaponOnline : MonoBehaviour
     IEnumerator AttackCoroutine(AttackDirection direction)
     {
         EnableTargetCollider(direction);
+        DisplayAttackAnimation(direction);
         yield return new WaitForSecondsRealtime(attackingTime);
         DisableTargetCollider(direction);
     }
