@@ -30,10 +30,15 @@ public class PlayerDataManager : MonoBehaviour
 
     public void SetPlayerValues(PlayerData newData)
     {
+        // Change nametag
         SetName(newData.Name);
+
+        // Set position
         transform.position = newData.Position;
 
-        //playerWeapon.Attack(newData.attackDirection);
+        // Attack
+        playerWeapon.Attack(newData.attackDirection);
+        newData.attackDirection = AttackDirection.NONE;
 
         data = newData;
     }

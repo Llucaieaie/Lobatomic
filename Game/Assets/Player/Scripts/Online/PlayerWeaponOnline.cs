@@ -33,10 +33,15 @@ public class PlayerWeaponOnline : MonoBehaviour
     {
         if (dataManager.isControlled)
         {
-            if (canAttack && (Input.GetKey(KeyCode.UpArrow) || Input.GetButton("UP"))) Attack(AttackDirection.UP);
-            if (canAttack && (Input.GetKey(KeyCode.DownArrow) || Input.GetButton("DOWN"))) Attack(AttackDirection.DOWN);
-            if (canAttack && (Input.GetKey(KeyCode.LeftArrow) || Input.GetButton("LEFT"))) Attack(AttackDirection.LEFT);
-            if (canAttack && (Input.GetKey(KeyCode.RightArrow) || Input.GetButton("RIGHT"))) Attack(AttackDirection.RIGHT);
+            AttackDirection direction = AttackDirection.NONE;
+
+            if (Input.GetKey(KeyCode.UpArrow) || Input.GetButton("UP")) direction = AttackDirection.UP;
+            if (Input.GetKey(KeyCode.DownArrow) || Input.GetButton("DOWN")) direction = AttackDirection.DOWN;
+            if (Input.GetKey(KeyCode.LeftArrow) || Input.GetButton("LEFT")) direction = AttackDirection.LEFT;
+            if (Input.GetKey(KeyCode.RightArrow) || Input.GetButton("RIGHT")) direction = AttackDirection.RIGHT;
+
+            Attack(direction);
+            dataManager.data.attackDirection = direction;
         }
 
         if (!canAttack && (Time.time - lastAttackTime > attackCoolDown))
@@ -94,7 +99,7 @@ public class PlayerWeaponOnline : MonoBehaviour
     /// </summary>
     public void Attack(AttackDirection direction)
     {
-        if (direction != AttackDirection.NONE)
+        if (canAttack && direction != AttackDirection.NONE)
         {
             canAttack = false;
             lastAttackTime = Time.time;
