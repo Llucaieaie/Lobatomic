@@ -41,6 +41,7 @@ public class ClientUDP : MonoBehaviour
 
         // Set lobby values =======================================
         lobbyManager.Player2.GetComponent<PlayerDataManager>().SetName(clientName);
+        lobbyManager.SetPlayerActive(0, false);
         lobbyManager.gameObject.SetActive(true);
         lobbyManager.isHost = false;
         createLobbyWindow.SetActive(false);
@@ -62,9 +63,9 @@ public class ClientUDP : MonoBehaviour
 
                 PlayerData playerData = PlayerData.Deserialize(receivedBytes);
 
-                Debug.Log($"Received PlayerData: Id={playerData.Id}, Name={playerData.Name}, Position={playerData.Position}");
-
                 lobbyManager.EnqueuePlayerData(playerData);
+
+                //Debug.Log($"Received PlayerData: Id={playerData.Id}, Name={playerData.Name}, Position={playerData.Position}");
             }
             catch (SocketException ex)
             {
@@ -80,12 +81,14 @@ public class ClientUDP : MonoBehaviour
 
     public void SendPlayerData(PlayerData playerData)
     {
+        lobbyManager.SetPlayerActive(0, true);
+
         byte[] data = PlayerData.Serialize(playerData);
 
         IPEndPoint ipep = new IPEndPoint(IPAddress.Parse(serverIP), 9050);
         socket.SendTo(data, data.Length, SocketFlags.None, ipep);
 
-        clientText += $"\nPlayerData sent: {playerData.Name} at {playerData.Position}";
+        //clientText += $"\nPlayerData sent: {playerData.Name} at {playerData.Position}";
     }
 
     private void OnDestroy()

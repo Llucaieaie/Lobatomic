@@ -41,6 +41,7 @@ public class ServerUDP : MonoBehaviour
 
         // Set lobby values =======================================
         lobbyManager.Player1.GetComponent<PlayerDataManager>().SetName(hostName);
+        lobbyManager.SetPlayerActive(1, false);
         lobbyManager.gameObject.SetActive(true);
         lobbyManager.isHost = true;
         createLobbyWindow.SetActive(false);
@@ -62,16 +63,17 @@ public class ServerUDP : MonoBehaviour
             if (!clients.Contains(Remote))
             {
                 clients.Add(Remote);
-                Debug.Log($"New client added: {Remote}");
+                
+                //Debug.Log($"New client added: {Remote}");
             }
             try
             {
                 PlayerData playerData = PlayerData.Deserialize(receivedBytes);
 
-                Debug.Log($"Received PlayerData: Id={playerData.Id}, Name={playerData.Name}, Position={playerData.Position}");
-
                 // Enqueue PlayerData instead of just position
                 lobbyManager.EnqueuePlayerData(playerData);
+
+                //Debug.Log($"Received PlayerData: Id={playerData.Id}, Name={playerData.Name}, Position={playerData.Position}");
             }
             catch (System.Exception ex)
             {
@@ -83,6 +85,8 @@ public class ServerUDP : MonoBehaviour
     public void SendPlayerData(PlayerData playerData)
     {
         if (clients.Count == 0) return;
+
+        lobbyManager.SetPlayerActive(1, true);
 
         byte[] data = PlayerData.Serialize(playerData);
 

@@ -157,9 +157,13 @@ public class PlayerWeaponOnline : MonoBehaviour
                     collision.GetComponent<Tile>().OnExplosion();
                     break;
                 case 11:
-                    float p = Random.Range(0.75f, 1.5f);
-                    clashAudio.pitch = p;
-                    clashAudio.Play();
+                    if (!clashAudio.isPlaying)
+                    {
+                        float p = Random.Range(0.75f, 1.5f);
+                        clashAudio.pitch = p;
+                        clashAudio.Play();
+                        Debug.Log("Playing clash");
+                    }
                     break;
             }
         }

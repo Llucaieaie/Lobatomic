@@ -62,7 +62,13 @@ public class LobbyManager : MonoBehaviour
             Vector3 position = playerData.Position;
         }
     }
-    
+
+    public void SetPlayerActive(int id, bool active)
+    {
+        if (id == 0) Player1.SetActive(active);
+        else Player2.SetActive(active);
+    }
+
     public void EnqueuePlayerData(PlayerData pData)
     {
         playerDataQueue.Enqueue(pData);
