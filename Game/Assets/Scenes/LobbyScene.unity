@@ -4234,7 +4234,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 239}
+  m_AnchoredPosition: {x: 0, y: 120}
   m_SizeDelta: {x: 400, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &584039464
@@ -4866,7 +4866,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -245}
+  m_AnchoredPosition: {x: 0, y: -120}
   m_SizeDelta: {x: 331, y: 72}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &653069699
@@ -10050,6 +10050,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Micro Micro
       objectReference: {fileID: 0}
+    - target: {fileID: 43102812682024403, guid: 60740275e101ade478165ad8e3db2304, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -640245332, guid: f63cb14007fe85744af9d4b8e8f2ec5a, type: 3}
+    - target: {fileID: 3182081310930774328, guid: 60740275e101ade478165ad8e3db2304, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 24e98352f5c4ce0429d8998bb1bb5572, type: 2}
     - target: {fileID: 7718844437064802265, guid: 60740275e101ade478165ad8e3db2304, type: 3}
       propertyPath: isControlled
       value: 0
@@ -13948,12 +13956,12 @@ GameObject:
   - component: {fileID: 1570270873}
   - component: {fileID: 1570270872}
   m_Layer: 5
-  m_Name: SelectCharacter
+  m_Name: (WIP) SelectCharacter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1570270871
 RectTransform:
   m_ObjectHideFlags: 0
