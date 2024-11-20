@@ -99,8 +99,7 @@ GameObject:
   - component: {fileID: 3182081310930774328}
   - component: {fileID: 8082259428490984105}
   - component: {fileID: 7718844437064802265}
-  - component: {fileID: 7063358760495409454}
-  - component: {fileID: 43102812682024407}
+  - component: {fileID: 1608481723948059978}
   - component: {fileID: -8893322007101620058}
   - component: {fileID: 43830526081761434}
   - component: {fileID: 8352730051348785530}
@@ -280,10 +279,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerMovement: {fileID: 7718844437064802265}
+  playerWeapon: {fileID: 1608481723948059978}
   data:
     Id: 0
     Name: No Name
     Position: {x: 0, y: 0, z: 0}
+    attackDirection: 0
+  isControlled: 0
 --- !u!114 &7718844437064802265
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -297,15 +299,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walkAudio: {fileID: 43830526081761434}
-  maxSpeed: 10
   animator: {fileID: 3182081310930774328}
   powerUpManager: {fileID: 0}
   lobbyManager: {fileID: 0}
-  isControlled: 0
-  serverUDP: {fileID: 0}
-  clientUDP: {fileID: 0}
+  maxSpeed: 10
   dataManager: {fileID: 0}
---- !u!114 &7063358760495409454
+--- !u!114 &1608481723948059978
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -314,37 +313,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 43102812682024402}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61b1799bdc161634288ff8cbc8b3660d, type: 3}
+  m_Script: {fileID: 11500000, guid: 5b04e1cc413cc744890759cfef55f654, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  powerUpManager: {fileID: 0}
-  mapGenerator: {fileID: 0}
-  camera: {fileID: 0}
-  happiness: {fileID: 0}
+  attackingTime: 0.25
+  attackCoolDown: 0.75
   attackAudio: {fileID: -8893322007101620058}
   clashAudio: {fileID: 8352730051348785530}
-  attackingTime: 0.25
-  attackCoolDown: 0.5
-  canAttack: 0
-  direction: 0
-  colliders:
-  - {fileID: 8153734903118873960}
-  - {fileID: 6585532278832340762}
-  - {fileID: 2355365025971627386}
-  - {fileID: 6534468340282388142}
---- !u!114 &43102812682024407
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 43102812682024402}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88556aa1848db954d8f142b282e6fae5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DisoverRad: 5
+  weaponColliders:
+  - {fileID: 1933115229826146642}
+  - {fileID: 5437051266088590920}
+  - {fileID: 1528812135568786202}
+  - {fileID: 8369739806996754871}
+  dataManager: {fileID: 0}
 --- !u!82 &-8893322007101620058
 AudioSource:
   m_ObjectHideFlags: 0
@@ -354,7 +335,7 @@ AudioSource:
   m_GameObject: {fileID: 43102812682024402}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -8338514498264850420, guid: 99c75ed1384ca5d4b84eb0bfc8518449, type: 2}
   m_audioClip: {fileID: 8300000, guid: d069b8a64b970ef499ba57fcdc315e32, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -450,7 +431,7 @@ AudioSource:
   m_GameObject: {fileID: 43102812682024402}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -8338514498264850420, guid: 99c75ed1384ca5d4b84eb0bfc8518449, type: 2}
   m_audioClip: {fileID: 8300000, guid: 3420a003fbd29cf4b847082777ebe716, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.5
@@ -546,7 +527,7 @@ AudioSource:
   m_GameObject: {fileID: 43102812682024402}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -8338514498264850420, guid: 99c75ed1384ca5d4b84eb0bfc8518449, type: 2}
   m_audioClip: {fileID: 8300000, guid: 389c377dd7812804190c11b19faa05db, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.75

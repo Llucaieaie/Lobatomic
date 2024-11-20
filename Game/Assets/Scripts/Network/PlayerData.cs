@@ -4,12 +4,22 @@ using System.IO;
 using System.Xml.Serialization;
 using UnityEngine;
 
+public enum AttackDirection
+{
+    NONE = 0,
+    UP,
+    DOWN,
+    LEFT,
+    RIGHT
+}
+
 [System.Serializable]
 public class PlayerData
 {
     public int Id = 0;
     public string Name = "No Name";
     public Vector3 Position = Vector3.zero;
+    public AttackDirection attackDirection;
 
     public PlayerData() { Id = 0; Name = "No Name"; Position = Vector3.zero; }
 

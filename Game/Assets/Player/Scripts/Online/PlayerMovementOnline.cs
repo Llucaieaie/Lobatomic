@@ -9,32 +9,26 @@
 public class PlayerMovementOnline : MonoBehaviour
 {
     public AudioSource walkAudio;
-    public float maxSpeed;
     public Animator animator;
     public PowerUpManager powerUpManager;
 
-    // Network
     public LobbyManager lobbyManager;
-    public bool isControlled; // If true, user controls this and sends position to remote. If false, user doesn't control this and recieves position from remote.
-    [HideInInspector] public ServerUDP serverUDP;
-    [HideInInspector] public ClientUDP clientUDP;
+    public float maxSpeed;
+
     [HideInInspector] public PlayerDataManager dataManager;
 
     private Rigidbody2D rb;
     private Vector2 movement;
 
-
     private void Start()
     { 
         walkAudio.Play();
-        serverUDP = GameObject.Find("ServerUDP").GetComponent<ServerUDP>();
-        clientUDP = GameObject.Find("ClientUDP").GetComponent<ClientUDP>();
         rb = GetComponent<Rigidbody2D>();
     }
 
     void Update()
     {
-        if (isControlled && lobbyManager.isActiveAndEnabled)
+        if (dataManager.isControlled && lobbyManager.isActiveAndEnabled)
         {
             // Capturamos el input del jugador
             movement = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
@@ -55,7 +49,7 @@ public class PlayerMovementOnline : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (isControlled && lobbyManager.isActiveAndEnabled)
+        if (dataManager.isControlled && lobbyManager.isActiveAndEnabled)
         {
             // Movimiento del jugador usando Rigidbody2D
             Vector2 newPosition = rb.position + movement * maxSpeed * Time.fixedDeltaTime;

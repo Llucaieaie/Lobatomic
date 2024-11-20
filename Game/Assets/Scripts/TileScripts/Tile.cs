@@ -17,6 +17,6 @@ public class Tile : MonoBehaviour
 
     public void Score(int score)
     {
-        scoreController.GetComponent<ScoreController>().AddScore(score);
+        if (scoreController != null) scoreController.GetComponent<ScoreController>().AddScore(score);
     }
 }

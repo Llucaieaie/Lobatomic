@@ -29,29 +29,26 @@ public class LobbyManager : MonoBehaviour
 
         if (isHost)
         {
-            // Si es host, controla Player1
-            if (!player1Movement.isControlled) player1Movement.isControlled = true;
-            if (player2Movement.isControlled) player2Movement.isControlled = false;
+            // If is host, control Player1
+            if (!player1Movement.dataManager.isControlled) player1Movement.dataManager.isControlled = true;
+            if (player2Movement.dataManager.isControlled) player2Movement.dataManager.isControlled = false;
 
             PlayerData playerData = Player1.GetComponent<PlayerDataManager>().data;
             serverUDP.SendPlayerData(playerData);
         }
         else
         {
-            // Si es cliente, controla Player2
-            if (player1Movement.isControlled) player1Movement.isControlled = false;
-            if (!player2Movement.isControlled) player2Movement.isControlled = true;
+            // If is client, control Player2
+            if (player1Movement.dataManager.isControlled) player1Movement.dataManager.isControlled = false;
+            if (!player2Movement.dataManager.isControlled) player2Movement.dataManager.isControlled = true;
 
             PlayerData playerData = Player2.GetComponent<PlayerDataManager>().data;
             clientUDP.SendPlayerData(playerData);
         }
 
-        // Procesar posiciones desde la cola
+        // Process data from queue
         while (playerDataQueue.TryDequeue(out PlayerData playerData))
         {
-            // Convert the position string back to Vector3
-            Vector3 position = playerData.Position;
-
             if (playerData.Id == 0)
             {
                 Player1.GetComponent<PlayerDataManager>().SetPlayerValues(playerData);
@@ -60,6 +57,9 @@ public class LobbyManager : MonoBehaviour
             {
                 Player2.GetComponent<PlayerDataManager>().SetPlayerValues(playerData);
             }
+
+            // Convert the position string back to Vector3
+            Vector3 position = playerData.Position;
         }
     }
     

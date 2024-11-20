@@ -2,24 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-enum direction
-{
-    UP, 
-    DOWN, 
-    LEFT, 
-    RIGHT
-}
-
 public class PlayerWeapon : MonoBehaviour
 {
     //public GameObject weapon;
     public PowerUpManager powerUpManager;
     public MapGenerator mapGenerator;
-    public GameObject camera;
+    public GameObject playerCam;
     public HappinessBar happiness;
 
     public AudioSource attackAudio;
-
     public AudioSource clashAudio;
 
     [Range(0.1f, 1f)] public float attackingTime;
@@ -29,10 +20,61 @@ public class PlayerWeapon : MonoBehaviour
 
     private bool attackAudioFrenesi = false;
 
-    [SerializeField] private direction direction;
-    public BoxCollider2D[] colliders;
+    [SerializeField] private AttackDirection direction;
+    public GameObject[] weaponColliders;
 
     List<GameObject> tilesInside = new List<GameObject>(); //New list with the tiles inside weaponCollider
+
+    //Start & Update -----------------------------------------------------------------------------------------
+    void Start()
+    {
+        attackAudio = GetComponent<AudioSource>();
+
+        canAttack = true;
+        for (int i = 0; i < weaponColliders.Length; i++)
+        {
+            weaponColliders[i].SetActive(false);
+        }
+        playerCam = GameObject.Find("Gameplay Camera");
+    }
+
+    void Update()
+    {
+        if ((Input.GetKey(KeyCode.UpArrow) || Input.GetButton("UP")) && canAttack)
+        {
+            direction = AttackDirection.UP;
+            StartCoroutine(Attack());
+            canAttack = false;
+        }
+        if ((Input.GetKey(KeyCode.DownArrow) || Input.GetButton("DOWN")) && canAttack)
+        {
+            direction = AttackDirection.DOWN;
+            StartCoroutine(Attack());
+            canAttack = false;
+        }
+        if ((Input.GetKey(KeyCode.LeftArrow) || Input.GetButton("LEFT")) && canAttack)
+        {
+            direction = AttackDirection.LEFT;
+            StartCoroutine(Attack());
+            canAttack = false;
+        }
+        if ((Input.GetKey(KeyCode.RightArrow) || Input.GetButton("RIGHT")) && canAttack)
+        {
+            direction = AttackDirection.RIGHT;
+            StartCoroutine(Attack());
+            canAttack = false;
+        }
+
+        if (Input.GetKeyUp(KeyCode.UpArrow)) { attackAudio.loop = false; attackAudioFrenesi = false; }
+        if (Input.GetKeyUp(KeyCode.DownArrow)) { attackAudio.loop = false; attackAudioFrenesi = false; }
+        if (Input.GetKeyUp(KeyCode.LeftArrow)) { attackAudio.loop = false; attackAudioFrenesi = false; }
+        if (Input.GetKeyUp(KeyCode.RightArrow)) { attackAudio.loop = false; attackAudioFrenesi = false; }
+
+        if (powerUpManager != null)
+        {
+            if (!powerUpManager.activeFrenesi) { attackAudio.loop = false; attackAudioFrenesi = false; }
+        }
+    }
 
     //Functions ----------------------------------------------------------------------------------------------
     public IEnumerator StartCooldown(float cd)
@@ -46,17 +88,19 @@ public class PlayerWeapon : MonoBehaviour
     {
         switch (direction)
         {
-            case direction.UP:
-                colliders[0].enabled = true;
+            case AttackDirection.UP:
+                weaponColliders[0].SetActive(true);
                 break;
-            case direction.DOWN:
-                colliders[1].enabled = true;
+            case AttackDirection.DOWN:
+                weaponColliders[1].SetActive(true);
                 break;
-            case direction.LEFT:
-                colliders[2].enabled = true;
+            case AttackDirection.LEFT:
+                weaponColliders[2].SetActive(true);
                 break;
-            case direction.RIGHT:
-                colliders[3].enabled = true;
+            case AttackDirection.RIGHT:
+                weaponColliders[3].SetActive(true);
+                break;
+            default:
                 break;
         }
     }
@@ -64,17 +108,19 @@ public class PlayerWeapon : MonoBehaviour
     {
         switch (direction)
         {
-            case direction.UP:
-                colliders[0].enabled = false;
+            case AttackDirection.UP:
+                weaponColliders[0].SetActive(false);
                 break;
-            case direction.DOWN:
-                colliders[1].enabled = false;
+            case AttackDirection.DOWN:
+                weaponColliders[1].SetActive(false);
                 break;
-            case direction.LEFT:
-                colliders[2].enabled = false;
+            case AttackDirection.LEFT:
+                weaponColliders[2].SetActive(false);
                 break;
-            case direction.RIGHT:
-                colliders[3].enabled = false;
+            case AttackDirection.RIGHT:
+                weaponColliders[3].SetActive(false);
+                break;
+            default:
                 break;
         }
     }
@@ -95,58 +141,6 @@ public class PlayerWeapon : MonoBehaviour
         tilesInside.Clear();
     }
 
-    //Start & Update -----------------------------------------------------------------------------------------
-    void Start()
-    {
-        attackAudio = GetComponent<AudioSource>();
-
-        canAttack = true;
-        for (int i = 0; i < colliders.Length; i++)
-        {
-            colliders[i].enabled = false;
-        }
-        //camera = GameObject.Find("Gameplay Camera");
-        camera = Camera.main.gameObject;
-    }
-
-    void Update()
-    {
-        if ((Input.GetKey(KeyCode.UpArrow) || Input.GetButton("UP")) && canAttack)
-        {
-            direction = direction.UP;
-            StartCoroutine(Attack());
-            canAttack = false;
-        }
-        if ((Input.GetKey(KeyCode.DownArrow) || Input.GetButton("DOWN")) && canAttack)
-        {
-            direction = direction.DOWN;
-            StartCoroutine(Attack());
-            canAttack = false;
-        }
-        if ((Input.GetKey(KeyCode.LeftArrow) || Input.GetButton("LEFT")) && canAttack)
-        {
-            direction = direction.LEFT;
-            StartCoroutine(Attack());
-            canAttack = false;
-        }
-        if ((Input.GetKey(KeyCode.RightArrow) || Input.GetButton("RIGHT")) && canAttack)
-        {
-            direction = direction.RIGHT;
-            StartCoroutine(Attack());
-            canAttack = false;
-        }
-
-        if (Input.GetKeyUp(KeyCode.UpArrow)) { attackAudio.loop = false; attackAudioFrenesi = false; }
-        if (Input.GetKeyUp(KeyCode.DownArrow)) { attackAudio.loop = false; attackAudioFrenesi = false; }
-        if (Input.GetKeyUp(KeyCode.LeftArrow)) { attackAudio.loop = false; attackAudioFrenesi = false; }
-        if (Input.GetKeyUp(KeyCode.RightArrow)) { attackAudio.loop = false; attackAudioFrenesi = false; }
-
-        if (powerUpManager != null)
-        {
-            if (!powerUpManager.activeFrenesi) { attackAudio.loop = false; attackAudioFrenesi = false; }
-        }
-    }
-
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.layer != 0 && collision.gameObject.tag == "Tile")
@@ -160,25 +154,25 @@ public class PlayerWeapon : MonoBehaviour
                 case 6:
                     happiness.destroyHappyTile();
                     collision.gameObject.GetComponent<HappyTile>().OnExplosion();
-                    StartCoroutine(camera.GetComponent<CameraManager>().StartShake(2, 0.3f));
+                    StartCoroutine(playerCam.GetComponent<CameraManager>().StartShake(2, 0.3f));
                     break;
                 case 7:
                     happiness.destroySadTile();
                     collision.gameObject.GetComponent<SadTile>().OnExplosion();
-                    StartCoroutine(camera.GetComponent<CameraManager>().StartShake(2, 0.3f));
+                    StartCoroutine(playerCam.GetComponent<CameraManager>().StartShake(2, 0.3f));
                     break;
                 case 8:
                     collision.gameObject.GetComponent<ExplosiveTile>().OnExplosion();
-                    StartCoroutine(camera.GetComponent<CameraManager>().StartShake(5, 0.3f));
+                    StartCoroutine(playerCam.GetComponent<CameraManager>().StartShake(5, 0.3f));
                     break;
                 case 9:
                     powerUpManager.NewPowerUp();
                     collision.gameObject.GetComponent<PowerUpTile>().OnExplosion();
-                    StartCoroutine(camera.GetComponent<CameraManager>().StartShake(2, 0.3f));
+                    StartCoroutine(playerCam.GetComponent<CameraManager>().StartShake(2, 0.3f));
                     break;
                 case 10:
                     collision.gameObject.GetComponent<NormalTile>().OnExplosion();
-                    StartCoroutine(camera.GetComponent<CameraManager>().StartShake(2, 0.3f));
+                    StartCoroutine(playerCam.GetComponent<CameraManager>().StartShake(2, 0.3f));
                     break;
                 case 11:
                     float p = Random.Range(0.75f, 1.5f);
