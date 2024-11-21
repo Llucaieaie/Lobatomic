@@ -34,7 +34,7 @@ public class PlayerDataManager : MonoBehaviour
         SetName(newData.Name);
 
         // Set position
-        transform.position = newData.Position;
+        GetComponent<Rigidbody>().MovePosition(newData.Position);
 
         // Attack
         playerWeapon.Attack(newData.attackDirection);

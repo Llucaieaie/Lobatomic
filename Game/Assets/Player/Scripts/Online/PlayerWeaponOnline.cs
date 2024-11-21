@@ -136,8 +136,8 @@ public class PlayerWeaponOnline : MonoBehaviour
     }
     IEnumerator AttackCoroutine(AttackDirection direction)
     {
-        EnableTargetCollider(direction);
         DisplayAttackAnimation(direction);
+        EnableTargetCollider(direction);
         yield return new WaitForSecondsRealtime(attackingTime);
         DisableTargetCollider(direction);
     }

@@ -24,26 +24,24 @@ public class LobbyManager : MonoBehaviour
 
     void Update()
     {
-        PlayerMovementOnline player1Movement = Player1.GetComponent<PlayerMovementOnline>();
-        PlayerMovementOnline player2Movement = Player2.GetComponent<PlayerMovementOnline>();
+        PlayerDataManager player1DataManager = Player1.GetComponent<PlayerDataManager>();
+        PlayerDataManager player2DataManager = Player2.GetComponent<PlayerDataManager>();
 
         if (isHost)
         {
             // If is host, control Player1
-            if (!player1Movement.dataManager.isControlled) player1Movement.dataManager.isControlled = true;
-            if (player2Movement.dataManager.isControlled) player2Movement.dataManager.isControlled = false;
+            if (!player1DataManager.isControlled) player1DataManager.isControlled = true;
+            if (player2DataManager.isControlled) player2DataManager.isControlled = false;
 
-            PlayerData playerData = Player1.GetComponent<PlayerDataManager>().data;
-            serverUDP.SendPlayerData(playerData);
+            serverUDP.SendPlayerData(player1DataManager.data);
         }
         else
         {
             // If is client, control Player2
-            if (player1Movement.dataManager.isControlled) player1Movement.dataManager.isControlled = false;
-            if (!player2Movement.dataManager.isControlled) player2Movement.dataManager.isControlled = true;
+            if (player1DataManager.isControlled) player1DataManager.isControlled = false;
+            if (!player2DataManager.isControlled) player2DataManager.isControlled = true;
 
-            PlayerData playerData = Player2.GetComponent<PlayerDataManager>().data;
-            clientUDP.SendPlayerData(playerData);
+            clientUDP.SendPlayerData(player2DataManager.data);
         }
 
         // Process data from queue
@@ -51,15 +49,12 @@ public class LobbyManager : MonoBehaviour
         {
             if (playerData.Id == 0)
             {
-                Player1.GetComponent<PlayerDataManager>().SetPlayerValues(playerData);
+                player1DataManager.SetPlayerValues(playerData);
             }
             else if (playerData.Id == 1)
             {
-                Player2.GetComponent<PlayerDataManager>().SetPlayerValues(playerData);
+                player2DataManager.SetPlayerValues(playerData);
             }
-
-            // Convert the position string back to Vector3
-            Vector3 position = playerData.Position;
         }
     }
 
