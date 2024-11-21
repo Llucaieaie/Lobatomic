@@ -4,20 +4,23 @@ using System.Text;
 using UnityEngine;
 using System.Threading;
 using TMPro;
+using System.Collections;
 
 public class ClientUDP : MonoBehaviour
 {
     public GameObject UItextObj;
     public LobbyManager lobbyManager;
     public GameObject createLobbyWindow;
+    public GameObject invalidIPMessage;
+
     public string clientName = "";
     public string serverIP = "";
-
+    
     private Socket socket;
     private Thread receiveThread;
     private TextMeshProUGUI UItext;
     private string clientText;
-
+    
     void Start()
     {
         UItext = UItextObj.GetComponent<TextMeshProUGUI>();
@@ -31,20 +34,28 @@ public class ClientUDP : MonoBehaviour
     public void StartClient()
     {
         // Configurar la dirección y el socket
-        IPEndPoint localEndPoint = new IPEndPoint(IPAddress.Any, 9051); // Cliente usa un puerto local diferente
-        socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
-        socket.Bind(localEndPoint); // Asociar el socket al puerto local
+        IPEndPoint localEndPoint = new IPEndPoint(IPAddress.Parse(serverIP), 9050);
+        if (localEndPoint.Address.ToString() == "0.0.0.0")
+        {
+            StartCoroutine(ShowErrorMessage());
+        }
+        else
+        {
+            socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+            socket.Bind(localEndPoint); // Asociar el socket al puerto local
 
-        // Iniciar hilo de recepción
-        receiveThread = new Thread(ReceiveData);
-        receiveThread.Start();
 
-        // Set lobby values =======================================
-        lobbyManager.Player2.GetComponent<PlayerDataManager>().SetName(clientName);
-        lobbyManager.SetPlayerActive(0, false);
-        lobbyManager.gameObject.SetActive(true);
-        lobbyManager.isHost = false;
-        createLobbyWindow.SetActive(false);
+            // Iniciar hilo de recepción
+            receiveThread = new Thread(ReceiveData);
+            receiveThread.Start();
+
+            // Set lobby values =======================================
+            lobbyManager.Player2.GetComponent<PlayerDataManager>().SetName(clientName);
+            lobbyManager.SetPlayerActive(0, false);
+            lobbyManager.gameObject.SetActive(true);
+            lobbyManager.isHost = false;
+            createLobbyWindow.SetActive(false);
+        }
     }
 
     void ReceiveData()
@@ -95,5 +106,12 @@ public class ClientUDP : MonoBehaviour
     {
         receiveThread?.Abort();
         socket?.Close();
+    }
+
+    IEnumerator ShowErrorMessage()
+    {
+        invalidIPMessage.SetActive(true);
+        yield return new WaitForSeconds(2);
+        invalidIPMessage.SetActive(false);
     }
 }
