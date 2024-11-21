@@ -34,12 +34,13 @@ public class ClientUDP : MonoBehaviour
     public void StartClient()
     {
         // Configurar la dirección y el socket
-        IPEndPoint localEndPoint = new IPEndPoint(IPAddress.Parse(serverIP), 9050);
-        if (localEndPoint.Address.ToString() == "0.0.0.0")
-        {
-            StartCoroutine(ShowErrorMessage());
-        }
-        else
+        IPEndPoint localEndPoint = new IPEndPoint(IPAddress.Parse(serverIP), 9051);
+        Debug.Log(localEndPoint);
+        //if (localEndPoint.Address.ToString() == "0.0.0.0")
+        //{
+        //    StartCoroutine(ShowErrorMessage());
+        //}
+        //else
         {
             socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
             socket.Bind(localEndPoint); // Asociar el socket al puerto local
