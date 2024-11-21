@@ -55,7 +55,7 @@ public class PlayerMovementOnline : MonoBehaviour
             Vector2 newPosition = rb.position + movement * maxSpeed * Time.fixedDeltaTime;
             rb.MovePosition(newPosition);
 
-            dataManager.data.Position = rb.position;
         }
+        dataManager.data.Position = rb.position;
     }
 }
