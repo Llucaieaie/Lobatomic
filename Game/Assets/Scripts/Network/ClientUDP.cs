@@ -5,6 +5,7 @@ using UnityEngine;
 using System.Threading;
 using TMPro;
 using System.Collections;
+using System;
 
 public class ClientUDP : MonoBehaviour
 {
@@ -34,17 +35,13 @@ public class ClientUDP : MonoBehaviour
     public void StartClient()
     {
         // Configurar la dirección y el socket
-        IPEndPoint localEndPoint = new IPEndPoint(IPAddress.Parse(serverIP), 9051);
-        Debug.Log(localEndPoint);
-        //if (localEndPoint.Address.ToString() == "0.0.0.0")
-        //{
-        //    StartCoroutine(ShowErrorMessage());
-        //}
-        //else
+
+        try
         {
+            IPEndPoint localEndPoint = new IPEndPoint(IPAddress.Parse(serverIP), 9051);
+            Debug.Log(localEndPoint);
             socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
             socket.Bind(localEndPoint); // Asociar el socket al puerto local
-
 
             // Iniciar hilo de recepción
             receiveThread = new Thread(ReceiveData);
@@ -56,6 +53,10 @@ public class ClientUDP : MonoBehaviour
             lobbyManager.gameObject.SetActive(true);
             lobbyManager.isHost = false;
             createLobbyWindow.SetActive(false);
+        }
+        catch (Exception e)
+        {
+            StartCoroutine(ShowErrorMessage());
         }
     }
 
