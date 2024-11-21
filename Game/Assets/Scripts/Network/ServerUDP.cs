@@ -15,7 +15,7 @@ public class ServerUDP : MonoBehaviour
 
     private Socket socket;
     private Thread receiveThread;
-    private List<EndPoint> clients = new List<EndPoint>();
+    private EndPoint client;
     private TextMeshProUGUI UItext;
     private string serverText;
 
@@ -59,13 +59,9 @@ public class ServerUDP : MonoBehaviour
             byte[] receivedBytes = new byte[recv];
             System.Array.Copy(data, receivedBytes, recv);
 
-            // Check if this Remote is already in the clients list
-            if (!clients.Contains(Remote))
-            {
-                clients.Add(Remote);
-                
-                //Debug.Log($"New client added: {Remote}");
-            }
+            // Check if this Remote is already the client
+            client ??= Remote;
+
             try
             {
                 PlayerData playerData = PlayerData.Deserialize(receivedBytes);
@@ -84,16 +80,13 @@ public class ServerUDP : MonoBehaviour
 
     public void SendPlayerData(PlayerData playerData)
     {
-        if (clients.Count == 0) return;
+        if (client == null) return;
 
         lobbyManager.SetPlayerActive(1, true);
 
         byte[] data = PlayerData.Serialize(playerData);
 
-        foreach (EndPoint client in clients)
-        {
-            socket.SendTo(data, data.Length, SocketFlags.None, client);
-        }
+        socket.SendTo(data, data.Length, SocketFlags.None, client);
     }
 
     private void OnDestroy()
