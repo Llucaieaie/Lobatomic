@@ -174,6 +174,7 @@ public class ClientUDP : MonoBehaviour
     void TriggerFunction(string parameter)
     {
         Debug.Log($"TriggerFunction executed with parameter: {parameter}");
+        onlineGameManager.ClearTileList();
         playRequest = true;
     }
 

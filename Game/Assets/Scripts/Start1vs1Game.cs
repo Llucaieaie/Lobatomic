@@ -28,6 +28,7 @@ public class Start1vs1Game : MonoBehaviour
     public void StartGame()
     {
         serverUDP.SendCommandToClient("TriggerFunction", "SomeParameter");
+        onlineGameManager.ClearTileList();
         SceneManager.LoadScene("VersusScene");
     }
 }

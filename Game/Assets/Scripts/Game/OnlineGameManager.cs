@@ -71,6 +71,11 @@ public class OnlineGameManager : MonoBehaviour
         else Player2.SetActive(active);
     }
 
+    public void ClearTileList()
+    {
+        currentTiles.Clear();
+    }
+
     public void EnqueuePlayerData(PlayerData pData)
     {
         playerDataQueue.Enqueue(pData);
