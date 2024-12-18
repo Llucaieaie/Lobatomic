@@ -1944,6 +1944,54 @@ PrefabInstance:
       propertyPath: tileMap
       value: 
       objectReference: {fileID: 2105069066}
+    - target: {fileID: 4680824376799294053, guid: 4c1290a4fceb77c45b721d9261254431, type: 3}
+      propertyPath: tileStruct.Array.data[0].tile
+      value: 
+      objectReference: {fileID: 1488253802121505027, guid: 003ed7156a5e44149bb40797239a679c, type: 3}
+    - target: {fileID: 4680824376799294053, guid: 4c1290a4fceb77c45b721d9261254431, type: 3}
+      propertyPath: tileStruct.Array.data[1].tile
+      value: 
+      objectReference: {fileID: 1122887553982079625, guid: b1738e47081d6664397e45a9a04b68a1, type: 3}
+    - target: {fileID: 4680824376799294053, guid: 4c1290a4fceb77c45b721d9261254431, type: 3}
+      propertyPath: tileStruct.Array.data[2].tile
+      value: 
+      objectReference: {fileID: 8835146293047337037, guid: 1068a678354ddf2489e9b51cebe784b2, type: 3}
+    - target: {fileID: 4680824376799294053, guid: 4c1290a4fceb77c45b721d9261254431, type: 3}
+      propertyPath: tileStruct.Array.data[0].maxNum
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 4680824376799294053, guid: 4c1290a4fceb77c45b721d9261254431, type: 3}
+      propertyPath: tileStruct.Array.data[1].maxNum
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4680824376799294053, guid: 4c1290a4fceb77c45b721d9261254431, type: 3}
+      propertyPath: tileStruct.Array.data[2].maxNum
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 4680824376799294053, guid: 4c1290a4fceb77c45b721d9261254431, type: 3}
+      propertyPath: tileStruct.Array.data[0].tileType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4680824376799294053, guid: 4c1290a4fceb77c45b721d9261254431, type: 3}
+      propertyPath: tileStruct.Array.data[1].tileType
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4680824376799294053, guid: 4c1290a4fceb77c45b721d9261254431, type: 3}
+      propertyPath: tileStruct.Array.data[2].tileType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4680824376799294053, guid: 4c1290a4fceb77c45b721d9261254431, type: 3}
+      propertyPath: tileStruct.Array.data[0].appearRate
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4680824376799294053, guid: 4c1290a4fceb77c45b721d9261254431, type: 3}
+      propertyPath: tileStruct.Array.data[1].appearRate
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4680824376799294053, guid: 4c1290a4fceb77c45b721d9261254431, type: 3}
+      propertyPath: tileStruct.Array.data[2].appearRate
+      value: 50
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

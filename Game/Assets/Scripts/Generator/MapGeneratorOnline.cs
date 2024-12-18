@@ -7,23 +7,27 @@ using UnityEngine.SceneManagement;
 
 public class MapGeneratorOnline : MonoBehaviour
 {
+    // Serialized fields
     [SerializeField] TileStruct[] tileStruct;
     public Tilemap tileMap;
     public OnlineGameManager onlineGameManager;
     public List<GameObject> tiles = new List<GameObject>();
-    HashSet<Vector3Int> positionsFromTileFrame = new HashSet<Vector3Int>();
-    List<Vector3Int> occupied = new List<Vector3Int>();
-    BoundsInt bounds;
     [SerializeField] int sizeX, sizeY;
-
-    [SerializeField] GameObject button, note;
     public GameObject[] groundTiles;
-
     public int padding;
+
+    public GameObject GroundTilesParent;
+    public GameObject TilesParent;
 
     [Space]
     [SerializeField] private int seed = 0;
 
+    // Not serialized fields
+    HashSet<Vector3Int> positionsFromTileFrame = new HashSet<Vector3Int>();
+    List<Vector3Int> occupied = new List<Vector3Int>();
+    BoundsInt bounds;
+
+    private int auxTileIDIterator = 0;
 
     private void Start()
     {
@@ -62,7 +66,7 @@ public class MapGeneratorOnline : MonoBehaviour
             tileStruct[i].maxNum = (tileStruct[i].maxNumStatic * (sizeX * sizeY)) / 100;
         }
 
-        // CReate tiles
+        // Create tiles
         foreach (var position in positionsFromTileFrame)
         {
             for (int i = 0; i < tileStruct.Length; i++)
@@ -72,14 +76,16 @@ public class MapGeneratorOnline : MonoBehaviour
                 if (position.x < bounds.xMin || position.x >= bounds.xMax || position.y < bounds.yMin || position.y >= bounds.yMax)
                 {
                     occupied.Add(position);
-                    GameObject newTile = Instantiate(tileStruct[3].tile, new Vector3(position.x, position.y, 0), Quaternion.identity);
-                    newTile.GetComponent<Tile>().tileID = i + 1;
+                    GameObject newTile = Instantiate(tileStruct[0].tile, new Vector3(position.x, position.y, 0), Quaternion.identity);
+                    newTile.transform.parent = TilesParent.transform;
+                    newTile.transform.SetAsLastSibling();
 
-                    tiles.Add(Instantiate(tileStruct[3].tile, new Vector3(position.x, position.y, 0), Quaternion.identity));
+                    tiles.Add(newTile);
                 }
                 else if (!IsTiledOcccupied(position) && IsInRate(tileStruct[i]) && tileStruct[i].maxNum > tileStruct[i].tileCount)
                 {
-                    PaintTiles(position, tileStruct[i], i + 1);
+                    PaintTiles(position, tileStruct[i], auxTileIDIterator);
+                    auxTileIDIterator++;
                     tileStruct[i].tileCount++;
                 }
             }
@@ -124,7 +130,9 @@ public class MapGeneratorOnline : MonoBehaviour
     private void PaintGroundTiles(Vector3Int position)
     {
         int rand = Random.Range(0, 2);
-        tiles.Add(Instantiate(groundTiles[rand], new Vector3(position.x, position.y, 1), Quaternion.identity));
+        GameObject tile = Instantiate(groundTiles[rand], new Vector3(position.x, position.y, 1), Quaternion.identity);
+        tile.transform.parent = GroundTilesParent.transform;
+        tile.transform.SetAsLastSibling();
     }
 
     // Create tile and set ID
@@ -134,6 +142,8 @@ public class MapGeneratorOnline : MonoBehaviour
 
         GameObject newTile = Instantiate(tile.tile, new Vector3(position.x, position.y, 0), Quaternion.identity);
         newTile.GetComponent<Tile>().tileID = newID;
+        newTile.transform.parent = TilesParent.transform;
+        newTile.transform.SetAsLastSibling();
 
         tiles.Add(newTile);
     }
@@ -190,24 +200,12 @@ public class MapGeneratorOnline : MonoBehaviour
         }
         tiles.Clear();
 
-        if (SceneManager.GetActiveScene().name == "SadTutotial")
-        {
-            note.SetActive(true);
-            button.SetActive(true);
-        }
-        else
-        {
-            yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.5f);
 
-            //Player.transform.position = new Vector3(0.0f,0.0f,-1.1f);
-
-            GenerateMap(sizeX, sizeY);
-        }
+        GenerateMap(sizeX, sizeY);
     }
     public IEnumerator CleanUp()
     {
-        //camera.GetComponent<CameraManager>().MapDestroy();
-
         yield return new WaitForSeconds(0.1f);
 
         occupied.Clear();
@@ -237,16 +235,8 @@ public class MapGeneratorOnline : MonoBehaviour
         }
         tiles.Clear();
 
-        if (SceneManager.GetActiveScene().name == "HappyTutotial")
-        {
-            note.SetActive(true);
-            button.SetActive(true);
-        }
-        else
-        {
-            yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(2.5f);
 
-            SceneManager.LoadScene("DeathScene");
-        }
+        SceneManager.LoadScene("DeathScene");
     }
 }
