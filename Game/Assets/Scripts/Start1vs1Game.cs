@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class Start1vs1Game : MonoBehaviour
 {
     private Button startButton;
-    public OnlineGameManager lobbyManager;
+    public OnlineGameManager onlineGameManager;
 
     private void Start()
     {
@@ -17,10 +17,10 @@ public class Start1vs1Game : MonoBehaviour
 
     private void Update()
     {
-        //if (lobbyManager.Player1.GetComponent<PlayerDataManager>().isControlled && lobbyManager.Player2.GetComponent<PlayerDataManager>().isControlled)
-        //{
-        //    startButton.interactable = true;
-        //}
+        if (onlineGameManager.Player1.activeInHierarchy && onlineGameManager.Player2.activeInHierarchy)
+        {
+            startButton.interactable = true;
+        }
     }
 
     public void StartGame()

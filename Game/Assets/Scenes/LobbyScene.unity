@@ -10628,7 +10628,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2a25b0da999412499995ba3b3907eb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lobbyManager: {fileID: 0}
+  onlineGameManager: {fileID: 931129745}
 --- !u!82 &1206054990
 AudioSource:
   m_ObjectHideFlags: 0

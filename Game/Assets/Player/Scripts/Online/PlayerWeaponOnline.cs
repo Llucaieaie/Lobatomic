@@ -144,38 +144,42 @@ public class PlayerWeaponOnline : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject != null && collision.gameObject.layer != 0 && collision.gameObject.tag == "Tile")
+        if (dataManager.isControlled)
         {
-
-            //Destroy tiles
-            switch (collision.gameObject.layer)
+            if (collision.gameObject != null && collision.gameObject.layer != 0 && collision.gameObject.tag == "Tile")
             {
-                case 6:
-                case 7:
-                case 8:
-                case 9:
-                case 10:
-                    //collision.GetComponent<Tile>().OnExplosion();
-                    //if (dataManager.isControlled) tilesDestroyed.Add(collision.gameObject);
-                    OnlineGameManager ogm = GameObject.Find("Online Game Manager").GetComponent<OnlineGameManager>();
 
-                    int tileID = collision.GetComponent<Tile>().tileID;
+                //Destroy tiles
+                switch (collision.gameObject.layer)
+                {
+                    case 6:
+                    case 7:
+                    case 8:
+                    case 9:
+                    case 10:
+                        //collision.GetComponent<Tile>().OnExplosion();
+                        //if (dataManager.isControlled) tilesDestroyed.Add(collision.gameObject);
 
-                    if (dataManager.data.destroyedTileIDs.Contains(tileID) == false)
-                    {
-                        dataManager.data.destroyedTileIDs.Add(tileID);
-                    }
-                    ogm.DestroyTileByID(tileID);
+                        OnlineGameManager ogm = GameObject.Find("Online Game Manager").GetComponent<OnlineGameManager>();
 
-                    break;
-                case 11:
-                    if (!clashAudio.isPlaying)
-                    {
-                        float p = Random.Range(0.75f, 1.5f);
-                        clashAudio.pitch = p;
-                        clashAudio.Play();
-                    }
-                    break;
+                        int tileID = collision.GetComponent<Tile>().tileID;
+
+                        if (dataManager.data.destroyedTileIDs.Contains(tileID) == false)
+                        {
+                            dataManager.data.destroyedTileIDs.Add(tileID);
+                        }
+                        ogm.DestroyTileByID(tileID);
+
+                        break;
+                    case 11:
+                        if (!clashAudio.isPlaying)
+                        {
+                            float p = Random.Range(0.75f, 1.5f);
+                            clashAudio.pitch = p;
+                            clashAudio.Play();
+                        }
+                        break;
+                }
             }
         }
     }

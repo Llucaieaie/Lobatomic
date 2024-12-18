@@ -1,6 +1,5 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using UnityEditor.Build.Content;
 using UnityEngine;
 
 public class OnlineGameManager : MonoBehaviour
@@ -61,7 +60,7 @@ public class OnlineGameManager : MonoBehaviour
             }
 
             // Destroy tiles according to recieved data
-            //DestroyTileByID(playerData.destroyedTileIDs);
+            DestroyTileByID(playerData.destroyedTileIDs);
         }
     }
 
