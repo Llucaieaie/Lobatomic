@@ -22,6 +22,7 @@ public class ServerUDP : MonoBehaviour
     void Start()
     {
         UItext = UItextObj.GetComponent<TextMeshProUGUI>();
+        DontDestroyOnLoad(gameObject);
     }
 
     void Update()
@@ -82,6 +83,18 @@ public class ServerUDP : MonoBehaviour
 
         byte[] data = PlayerData.Serialize(playerData);
 
+        socket.SendTo(data, data.Length, SocketFlags.None, client);
+    }
+
+    public void SendCommandToClient(string command, string parameter = null)
+    {
+        if (client == null) return;
+
+        // Crea un paquete con el comando y el parámetro
+        string message = command + (parameter != null ? "|" + parameter : "");
+        byte[] data = Encoding.UTF8.GetBytes(message);
+
+        // Envía el paquete al cliente
         socket.SendTo(data, data.Length, SocketFlags.None, client);
     }
 

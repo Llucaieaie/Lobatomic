@@ -33,7 +33,7 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] TileStruct[] tileStruct;
     public Tilemap tileMap;
     public OnlineGameManager onlineGameManager;
-    public GameObject Player;
+    //public GameObject Player;
     public GameObject camera;
     public TimerController timerController;
     public List<GameObject> tiles = new List<GameObject>();
@@ -230,14 +230,14 @@ public class MapGenerator : MonoBehaviour
         {
             yield return new WaitForSeconds(0.5f);
 
-            Player.transform.position = new Vector3(0.0f,0.0f,-1.1f);
+            //Player.transform.position = new Vector3(0.0f,0.0f,-1.1f);
 
             GenerateMap(sizeX, sizeY);
         }
     }
     public IEnumerator CleanUp()
     {
-        camera.GetComponent<CameraManager>().MapDestroy();
+        //camera.GetComponent<CameraManager>().MapDestroy();
 
         yield return new WaitForSeconds(0.1f);
 

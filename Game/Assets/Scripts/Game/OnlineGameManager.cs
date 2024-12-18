@@ -21,6 +21,7 @@ public class OnlineGameManager : MonoBehaviour
     {
         Player1.GetComponent<PlayerDataManager>().data.Id = 0;
         Player2.GetComponent<PlayerDataManager>().data.Id = 1;
+        DontDestroyOnLoad(gameObject);
     }
 
     void Update()

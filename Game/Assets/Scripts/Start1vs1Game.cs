@@ -9,6 +9,8 @@ public class Start1vs1Game : MonoBehaviour
     private Button startButton;
     public OnlineGameManager onlineGameManager;
 
+    public ServerUDP serverUDP;
+
     private void Start()
     {
         startButton = GetComponent<Button>();
@@ -25,6 +27,7 @@ public class Start1vs1Game : MonoBehaviour
 
     public void StartGame()
     {
+        serverUDP.SendCommandToClient("TriggerFunction", "SomeParameter");
         SceneManager.LoadScene("VersusScene");
     }
 }

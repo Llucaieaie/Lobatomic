@@ -20,11 +20,8 @@ public class PlayerDataManager : MonoBehaviour
         playerWeapon.dataManager = this;
 
         nameTag = GetComponentInChildren<TMP_Text>();
-    }
 
-    private void OnEnable()
-    {
-        
+        DontDestroyOnLoad(gameObject);
     }
 
     // Update is called once per frame

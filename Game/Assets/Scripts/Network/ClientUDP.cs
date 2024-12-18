@@ -6,6 +6,7 @@ using System.Threading;
 using TMPro;
 using System.Collections;
 using System;
+using UnityEngine.SceneManagement;
 
 public class ClientUDP : MonoBehaviour
 {
@@ -21,15 +22,23 @@ public class ClientUDP : MonoBehaviour
     private Thread receiveThread;
     private TextMeshProUGUI UItext;
     private string clientText;
+
+    private bool playRequest = false;
     
     void Start()
     {
         UItext = UItextObj.GetComponent<TextMeshProUGUI>();
+        DontDestroyOnLoad(gameObject);
     }
 
     void Update()
     {
         UItext.text = clientText;
+        if (playRequest)
+        {
+            SceneManager.LoadScene("VersusScene");
+            playRequest = false;
+        }
     }
 
     public void StartClient()
@@ -60,6 +69,50 @@ public class ClientUDP : MonoBehaviour
         }
     }
 
+    //void ReceiveData()
+    //{
+    //    byte[] data = new byte[1024];
+    //    EndPoint remoteEndPoint = new IPEndPoint(IPAddress.Any, 0);
+
+    //    while (true)
+    //    {
+    //        try
+    //        {
+    //            // Recibir datos del servidor
+    //            int recv = socket.ReceiveFrom(data, ref remoteEndPoint);
+    //            byte[] receivedBytes = new byte[recv];
+    //            System.Array.Copy(data, receivedBytes, recv);
+
+    //            PlayerData playerData = PlayerData.Deserialize(receivedBytes);
+
+    //            onlineGameManager.EnqueuePlayerData(playerData);
+
+    //            //Debug.Log($"Received PlayerData: Id={playerData.Id}, Name={playerData.Name}, Position={playerData.Position}");
+    //        }
+    //        catch (SocketException ex)
+    //        {
+    //            Debug.LogError($"Socket error while receiving data: {ex.Message}");
+    //            break;
+    //        }
+    //        catch (System.Exception ex)
+    //        {
+    //            Debug.LogError($"Error while processing received data: {ex.Message}");
+    //        }
+    //    }
+    //}
+
+    public void SendPlayerData(PlayerData playerData)
+    {
+        onlineGameManager.SetPlayerActive(0, true);
+
+        byte[] data = PlayerData.Serialize(playerData);
+
+        IPEndPoint ipep = new IPEndPoint(IPAddress.Parse(serverIP), 9050);
+        socket.SendTo(data, data.Length, SocketFlags.None, ipep);
+
+        //clientText += $"\nPlayerData sent: {playerData.Name} at {playerData.Position}";
+    }
+
     void ReceiveData()
     {
         byte[] data = new byte[1024];
@@ -71,14 +124,25 @@ public class ClientUDP : MonoBehaviour
             {
                 // Recibir datos del servidor
                 int recv = socket.ReceiveFrom(data, ref remoteEndPoint);
-                byte[] receivedBytes = new byte[recv];
-                System.Array.Copy(data, receivedBytes, recv);
+                string message = Encoding.UTF8.GetString(data, 0, recv);
 
-                PlayerData playerData = PlayerData.Deserialize(receivedBytes);
+                if (message.Contains("|"))
+                {
+                    // Procesar como comando
+                    string[] parts = message.Split('|');
+                    string command = parts[0];
+                    string parameter = parts.Length > 1 ? parts[1] : null;
 
-                onlineGameManager.EnqueuePlayerData(playerData);
-
-                //Debug.Log($"Received PlayerData: Id={playerData.Id}, Name={playerData.Name}, Position={playerData.Position}");
+                    ExecuteCommand(command, parameter);
+                }
+                else
+                {
+                    // Procesar como PlayerData
+                    byte[] receivedBytes = new byte[recv];
+                    System.Array.Copy(data, receivedBytes, recv);
+                    PlayerData playerData = PlayerData.Deserialize(receivedBytes);
+                    onlineGameManager.EnqueuePlayerData(playerData);
+                }
             }
             catch (SocketException ex)
             {
@@ -92,16 +156,25 @@ public class ClientUDP : MonoBehaviour
         }
     }
 
-    public void SendPlayerData(PlayerData playerData)
+    void ExecuteCommand(string command, string parameter)
     {
-        onlineGameManager.SetPlayerActive(0, true);
+        switch (command)
+        {
+            case "TriggerFunction":
+                Debug.Log($"Executing TriggerFunction with parameter: {parameter}");
+                TriggerFunction(parameter);
+                break;
 
-        byte[] data = PlayerData.Serialize(playerData);
+            default:
+                Debug.LogWarning($"Unknown command received: {command}");
+                break;
+        }
+    }
 
-        IPEndPoint ipep = new IPEndPoint(IPAddress.Parse(serverIP), 9050);
-        socket.SendTo(data, data.Length, SocketFlags.None, ipep);
-
-        //clientText += $"\nPlayerData sent: {playerData.Name} at {playerData.Position}";
+    void TriggerFunction(string parameter)
+    {
+        Debug.Log($"TriggerFunction executed with parameter: {parameter}");
+        playRequest = true;
     }
 
     private void OnDestroy()
