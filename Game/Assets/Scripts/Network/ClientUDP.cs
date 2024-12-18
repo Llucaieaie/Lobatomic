@@ -24,7 +24,10 @@ public class ClientUDP : MonoBehaviour
     private string clientText;
 
     private bool playRequest = false;
-    
+    public int hostSeed = 1;
+
+    private MapGenerator mapGenerator;
+
     void Start()
     {
         UItext = UItextObj.GetComponent<TextMeshProUGUI>();
@@ -36,8 +39,14 @@ public class ClientUDP : MonoBehaviour
         UItext.text = clientText;
         if (playRequest)
         {
+            UnityEngine.Random.InitState(hostSeed);
             SceneManager.LoadScene("VersusScene");
             playRequest = false;
+
+            if (GameObject.Find("MapGenerator"))
+            {
+                mapGenerator = GameObject.Find("MapGenerator").GetComponent<MapGenerator>();
+            }
         }
     }
 
@@ -131,9 +140,15 @@ public class ClientUDP : MonoBehaviour
                     // Procesar como comando
                     string[] parts = message.Split('|');
                     string command = parts[0];
-                    string parameter = parts.Length > 1 ? parts[1] : null;
-
-                    ExecuteCommand(command, parameter);
+                    if (int.TryParse(parts[1], out int seed))
+                    {
+                        Debug.Log(seed);
+                        ExecuteCommand(command, seed);
+                    }
+                    else
+                    {
+                        Debug.LogError("Failed to parse seed as an integer.");
+                    }
                 }
                 else
                 {
@@ -156,13 +171,14 @@ public class ClientUDP : MonoBehaviour
         }
     }
 
-    void ExecuteCommand(string command, string parameter)
+
+    void ExecuteCommand(string command, int seed)
     {
         switch (command)
         {
-            case "TriggerFunction":
-                Debug.Log($"Executing TriggerFunction with parameter: {parameter}");
-                TriggerFunction(parameter);
+            case "SetSeed":
+                Debug.Log($"Executing SetSeed with seed: {seed}");
+                SetSeed(seed);
                 break;
 
             default:
@@ -171,9 +187,12 @@ public class ClientUDP : MonoBehaviour
         }
     }
 
-    void TriggerFunction(string parameter)
+    void SetSeed(int seed)
     {
-        Debug.Log($"TriggerFunction executed with parameter: {parameter}");
+        Debug.Log($"Seed set to: {seed}");
+
+        hostSeed = seed;
+
         playRequest = true;
     }
 

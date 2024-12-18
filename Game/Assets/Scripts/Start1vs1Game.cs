@@ -27,7 +27,14 @@ public class Start1vs1Game : MonoBehaviour
 
     public void StartGame()
     {
-        serverUDP.SendCommandToClient("TriggerFunction", "SomeParameter");
+        if (serverUDP.seed == 0)
+        {
+            serverUDP.seed = Random.Range(1, int.MaxValue);
+            Debug.Log("Generated Seed: " + serverUDP.seed);
+        }
+        UnityEngine.Random.InitState(serverUDP.seed);
+
+        serverUDP.SendCommandToClient("SetSeed", serverUDP.seed);
         SceneManager.LoadScene("VersusScene");
     }
 }

@@ -47,12 +47,13 @@ public class MapGenerator : MonoBehaviour
 
     public int padding;
 
-    [Space]
-    [SerializeField] private int seed = 0;
-
+    private ServerUDP server;
 
     private void Start()
     {
+        if (GameObject.Find("ServerUDP") != null)
+            server = GameObject.Find("ServerUDP").GetComponent<ServerUDP>();
+
         for (int i = 0; i < tileStruct.Length; i++)
         {
             tileStruct[i].maxNumStatic = tileStruct[i].maxNum;
@@ -66,13 +67,6 @@ public class MapGenerator : MonoBehaviour
 
     public void GenerateMap(int sizeX, int sizeY)
     {
-        if (seed == 0)
-        {
-            seed = Random.Range(1, int.MaxValue);
-            Debug.Log("Generated Seed: " + seed);
-        }
-        Random.InitState(seed);
-
         bounds = new BoundsInt(new Vector3Int(0, 0, 0) - new Vector3Int(sizeX / 2, sizeY / 2, 0),
                                             new Vector3Int(sizeX, sizeY, 0));
 

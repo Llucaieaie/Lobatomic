@@ -12,6 +12,7 @@ public class ServerUDP : MonoBehaviour
     public OnlineGameManager onlineGameManager;
     public GameObject createLobbyWindow;
     public string hostName = "";
+    public int seed = 0;
 
     private Socket socket;
     private Thread receiveThread;
@@ -86,15 +87,15 @@ public class ServerUDP : MonoBehaviour
         socket.SendTo(data, data.Length, SocketFlags.None, client);
     }
 
-    public void SendCommandToClient(string command, string parameter = null)
+    public void SendCommandToClient(string command, int seed)
     {
         if (client == null) return;
 
-        // Crea un paquete con el comando y el parámetro
-        string message = command + (parameter != null ? "|" + parameter : "");
+        // Crea un mensaje con el comando y el parámetro
+        string message = $"{command}|{seed}";
         byte[] data = Encoding.UTF8.GetBytes(message);
 
-        // Envía el paquete al cliente
+        // Envía el mensaje al cliente
         socket.SendTo(data, data.Length, SocketFlags.None, client);
     }
 
