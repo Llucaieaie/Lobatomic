@@ -1,11 +1,10 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using UnityEditor.Build.Content;
 using UnityEngine;
 
-public class LobbyManager : MonoBehaviour
+public class OnlineGameManager : MonoBehaviour
 {
-    public GameObject lobbyTileMap;
-
     public GameObject Player1;
     public GameObject Player2;
 
@@ -15,6 +14,9 @@ public class LobbyManager : MonoBehaviour
     public bool isHost;
 
     private ConcurrentQueue<PlayerData> playerDataQueue = new ConcurrentQueue<PlayerData>();
+
+    // LISTA DE TILES
+    public List<GameObject> currentTiles = new List<GameObject>();
 
     void Start()
     {
@@ -34,6 +36,7 @@ public class LobbyManager : MonoBehaviour
             if (player2DataManager.isControlled) player2DataManager.isControlled = false;
 
             serverUDP.SendPlayerData(player1DataManager.data);
+            player1DataManager.data.destroyedTileIDs.Clear();
         }
         else
         {
@@ -42,6 +45,7 @@ public class LobbyManager : MonoBehaviour
             if (!player2DataManager.isControlled) player2DataManager.isControlled = true;
 
             clientUDP.SendPlayerData(player2DataManager.data);
+            player2DataManager.data.destroyedTileIDs.Clear();
         }
 
         // Process data from queue
@@ -55,6 +59,9 @@ public class LobbyManager : MonoBehaviour
             {
                 player2DataManager.SetPlayerValues(playerData);
             }
+
+            // Destroy tiles according to recieved data
+            //DestroyTileByID(playerData.destroyedTileIDs);
         }
     }
 
@@ -67,5 +74,30 @@ public class LobbyManager : MonoBehaviour
     public void EnqueuePlayerData(PlayerData pData)
     {
         playerDataQueue.Enqueue(pData);
+    }
+
+    public void DestroyTileByID(List<int> IDList)
+    {
+        foreach (int tileID in IDList)
+        {
+            DestroyTileByID(tileID);
+        }
+    }
+
+    public void DestroyTileByID(int id)
+    {
+        for (int i = 0; i < currentTiles.Count; i++)
+        {
+            var tile = currentTiles[i]?.GetComponent<Tile>();
+            if (tile != null && tile.tileID == id)
+            {
+                Debug.Log("OGM destroyed a tile with ID " + id);
+
+                tile.OnExplosion();
+                currentTiles.RemoveAt(i);
+
+                break;
+            }
+        }
     }
 }

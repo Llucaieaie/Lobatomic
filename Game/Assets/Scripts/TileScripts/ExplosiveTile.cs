@@ -25,11 +25,15 @@ public class ExplosiveTile : Tile
 
     IEnumerator Explode()
     {
+        GameObject ogm = GameObject.Find("Online Game Manager");
+        List<GameObject> tiles = new List<GameObject>();
+
         yield return new WaitForEndOfFrame();
 
-        RaycastHit2D[] tiles = Physics2D.CircleCastAll(transform.position, 2f, Vector2.zero, 0, layerMask);
+        RaycastHit2D[] hitList = Physics2D.CircleCastAll(transform.position, 2f, Vector2.zero, 0, layerMask);
+        for (int i = 0; i < hitList.Length; i++) tiles.Add(hitList[i].transform.gameObject);
 
-        for (int i = 0; i < tiles.Length; i++)
+            for (int i = 0; i < tiles.Count; i++)
         {
             if (tiles[i].transform.gameObject.transform.position != transform.position)
             {
@@ -37,26 +41,22 @@ public class ExplosiveTile : Tile
                 {
                     case 6:
                         GameObject.Find("HappinessManager").GetComponent<HappinessBar>().destroyHappyTile();
-                        tiles[i].transform.gameObject.GetComponent<HappyTile>().OnExplosion();
                         break;
                     case 7:
                         GameObject.Find("HappinessManager").GetComponent<HappinessBar>().destroySadTile();
-                        tiles[i].transform.gameObject.GetComponent<SadTile>().OnExplosion();
                         break;
-                    case 8:
-                        tiles[i].transform.gameObject.GetComponent<ExplosiveTile>().OnExplosion();
-                        break;
-                    case 9:
-                        tiles[i].transform.gameObject.GetComponent<PowerUpTile>().OnExplosion();
-                        break;
-                    case 10:
-                        tiles[i].transform.gameObject.GetComponent<NormalTile>().OnExplosion();
+                    default: 
                         break;
                 }
+
+                Tile tileComp = tiles[i].transform.gameObject.GetComponent<Tile>();
+                if (ogm != null) ogm.GetComponent<OnlineGameManager>().DestroyTileByID(tileComp.tileID);
+                else tileComp.OnExplosion();
             }
         }
 
         yield return new WaitForEndOfFrame();
+
         Destroy(this.gameObject);
     }
 

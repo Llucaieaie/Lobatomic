@@ -10,7 +10,7 @@ using System;
 public class ClientUDP : MonoBehaviour
 {
     public GameObject UItextObj;
-    public LobbyManager lobbyManager;
+    public OnlineGameManager onlineGameManager;
     public GameObject createLobbyWindow;
     public GameObject invalidIPMessage;
 
@@ -47,11 +47,11 @@ public class ClientUDP : MonoBehaviour
             receiveThread = new Thread(ReceiveData);
             receiveThread.Start();
 
-            // Set lobby values =======================================
-            lobbyManager.Player2.GetComponent<PlayerDataManager>().SetName(clientName);
-            lobbyManager.SetPlayerActive(0, false);
-            lobbyManager.gameObject.SetActive(true);
-            lobbyManager.isHost = false;
+            // Set ogm values =======================================
+            onlineGameManager.Player2.GetComponent<PlayerDataManager>().SetName(clientName);
+            onlineGameManager.SetPlayerActive(0, false);
+            onlineGameManager.gameObject.SetActive(true);
+            onlineGameManager.isHost = false;
             createLobbyWindow.SetActive(false);
         }
         catch (Exception e)
@@ -76,7 +76,7 @@ public class ClientUDP : MonoBehaviour
 
                 PlayerData playerData = PlayerData.Deserialize(receivedBytes);
 
-                lobbyManager.EnqueuePlayerData(playerData);
+                onlineGameManager.EnqueuePlayerData(playerData);
 
                 //Debug.Log($"Received PlayerData: Id={playerData.Id}, Name={playerData.Name}, Position={playerData.Position}");
             }
@@ -94,7 +94,7 @@ public class ClientUDP : MonoBehaviour
 
     public void SendPlayerData(PlayerData playerData)
     {
-        lobbyManager.SetPlayerActive(0, true);
+        onlineGameManager.SetPlayerActive(0, true);
 
         byte[] data = PlayerData.Serialize(playerData);
 

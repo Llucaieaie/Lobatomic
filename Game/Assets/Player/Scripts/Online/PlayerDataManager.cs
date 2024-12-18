@@ -31,7 +31,7 @@ public class PlayerDataManager : MonoBehaviour
     public void SetPlayerValues(PlayerData newData)
     {
         // Change nametag
-        SetName(newData.Name);
+        if (newData.Name != data.Name) SetName(newData.Name);
 
         // Set position
         GetComponent<Rigidbody2D>().MovePosition(newData.Position);

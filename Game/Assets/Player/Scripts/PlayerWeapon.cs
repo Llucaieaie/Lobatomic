@@ -153,25 +153,25 @@ public class PlayerWeapon : MonoBehaviour
             {
                 case 6:
                     happiness.destroyHappyTile();
-                    collision.gameObject.GetComponent<HappyTile>().OnExplosion();
+                    collision.gameObject.GetComponent<Tile>().OnExplosion();
                     StartCoroutine(playerCam.GetComponent<CameraManager>().StartShake(2, 0.3f));
                     break;
                 case 7:
                     happiness.destroySadTile();
-                    collision.gameObject.GetComponent<SadTile>().OnExplosion();
+                    collision.gameObject.GetComponent<Tile>().OnExplosion();
                     StartCoroutine(playerCam.GetComponent<CameraManager>().StartShake(2, 0.3f));
                     break;
                 case 8:
-                    collision.gameObject.GetComponent<ExplosiveTile>().OnExplosion();
+                    collision.gameObject.GetComponent<Tile>().OnExplosion();
                     StartCoroutine(playerCam.GetComponent<CameraManager>().StartShake(5, 0.3f));
                     break;
                 case 9:
                     powerUpManager.NewPowerUp();
-                    collision.gameObject.GetComponent<PowerUpTile>().OnExplosion();
+                    collision.gameObject.GetComponent<Tile>().OnExplosion();
                     StartCoroutine(playerCam.GetComponent<CameraManager>().StartShake(2, 0.3f));
                     break;
                 case 10:
-                    collision.gameObject.GetComponent<NormalTile>().OnExplosion();
+                    collision.gameObject.GetComponent<Tile>().OnExplosion();
                     StartCoroutine(playerCam.GetComponent<CameraManager>().StartShake(2, 0.3f));
                     break;
                 case 11:

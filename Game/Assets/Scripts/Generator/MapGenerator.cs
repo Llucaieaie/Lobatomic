@@ -32,7 +32,7 @@ public class MapGenerator : MonoBehaviour
 {
     [SerializeField] TileStruct[] tileStruct;
     public Tilemap tileMap;
-
+    public OnlineGameManager onlineGameManager;
     public GameObject Player;
     public GameObject camera;
     public TimerController timerController;
@@ -59,6 +59,9 @@ public class MapGenerator : MonoBehaviour
         }
 
         GenerateMap(sizeX, sizeX);
+
+        GameObject ogm = GameObject.Find("Online Game Manager");
+        if (ogm != null) onlineGameManager = ogm.GetComponent<OnlineGameManager>();
     }
 
     public void GenerateMap(int sizeX, int sizeY)
@@ -85,6 +88,7 @@ public class MapGenerator : MonoBehaviour
             tileStruct[i].maxNum = (tileStruct[i].maxNumStatic * (sizeX * sizeY)) / 100;
         }
 
+        // CReate tiles
         foreach (var position in positionsFromTileFrame)
         {
             for (int i = 0; i < tileStruct.Length; i++)
@@ -94,15 +98,18 @@ public class MapGenerator : MonoBehaviour
                 if (position.x < bounds.xMin || position.x >= bounds.xMax || position.y < bounds.yMin || position.y >= bounds.yMax)
                 {
                     occupied.Add(position);
+                    GameObject newTile = Instantiate(tileStruct[3].tile, new Vector3(position.x, position.y, 0), Quaternion.identity);
+                    newTile.GetComponent<Tile>().tileID = i+1;
+
+                    // Add tile to online game manager
+                    if (onlineGameManager != null) { onlineGameManager.currentTiles.Add(newTile); }
+
                     tiles.Add(Instantiate(tileStruct[3].tile, new Vector3(position.x, position.y, 0), Quaternion.identity));
                 }
-
-                if (!IsTiledOcccupied(position) && IsInRate(tileStruct[i]) && tileStruct[i].maxNum > tileStruct[i].tileCount)
+                else if (!IsTiledOcccupied(position) && IsInRate(tileStruct[i]) && tileStruct[i].maxNum > tileStruct[i].tileCount)
                 {
-
-                    PaintTiles(position, tileStruct[i]);
+                    PaintTiles(position, tileStruct[i], i+1);
                     tileStruct[i].tileCount++;
-
                 }
             }
         }
@@ -147,10 +154,18 @@ public class MapGenerator : MonoBehaviour
         tiles.Add(Instantiate(groundTiles[rand], new Vector3(position.x, position.y, 1), Quaternion.identity));
     }
 
-    public void PaintTiles(Vector3Int position, TileStruct tile)
+    // Create tile and set ID
+    public void PaintTiles(Vector3Int position, TileStruct tile, int newID)
     {
         occupied.Add(position);
-        tiles.Add(Instantiate(tile.tile, new Vector3(position.x, position.y, 0), Quaternion.identity));
+
+        GameObject newTile = Instantiate(tile.tile, new Vector3(position.x, position.y, 0), Quaternion.identity);
+        newTile.GetComponent<Tile>().tileID = newID;
+
+        // add to online game manager
+        if (onlineGameManager != null) { onlineGameManager.currentTiles.Add(newTile); }
+
+        tiles.Add(newTile);
     }
 
     private bool IsInRate(TileStruct tile)

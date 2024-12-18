@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
+    public int tileID = 0;
     public ParticleSystem destroyParticle;
     [HideInInspector]
     public GameObject scoreController;
 
     public virtual void OnExplosion()
     {
-        destroyParticle.Play();
+        if (destroyParticle != null) destroyParticle.Play();
         Destroy(gameObject);
     }
 

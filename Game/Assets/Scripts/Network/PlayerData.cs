@@ -21,6 +21,9 @@ public class PlayerData
     public Vector3 Position = Vector3.zero;
     public AttackDirection attackDirection;
 
+    // LISTA DE TILES DESTRUIDAS
+    public List<int> destroyedTileIDs = new List<int>();
+
     public PlayerData() { Id = 0; Name = "No Name"; Position = Vector3.zero; }
 
     // Serialize PlayerData to XML

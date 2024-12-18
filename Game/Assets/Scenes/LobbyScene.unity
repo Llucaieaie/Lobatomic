@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UItextObj: {fileID: 1681397586}
-  lobbyManager: {fileID: 931129745}
+  onlineGameManager: {fileID: 931129745}
   createLobbyWindow: {fileID: 1556725665}
   hostName: 
 --- !u!1001 &14068893
@@ -2106,7 +2106,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 34554393099280154, guid: 1068a678354ddf2489e9b51cebe784b2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7
+      value: -12
       objectReference: {fileID: 0}
     - target: {fileID: 34554393099280154, guid: 1068a678354ddf2489e9b51cebe784b2, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2144,6 +2144,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7278735349183813720, guid: 1068a678354ddf2489e9b51cebe784b2, type: 3}
+      propertyPath: tileID
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 8835146293047337037, guid: 1068a678354ddf2489e9b51cebe784b2, type: 3}
       propertyPath: m_Name
       value: NormalTile (3)
@@ -2156,6 +2160,11 @@ PrefabInstance:
 --- !u!4 &318852946 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 34554393099280154, guid: 1068a678354ddf2489e9b51cebe784b2, type: 3}
+  m_PrefabInstance: {fileID: 318852945}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &318852947 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8835146293047337037, guid: 1068a678354ddf2489e9b51cebe784b2, type: 3}
   m_PrefabInstance: {fileID: 318852945}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &326338391
@@ -2506,6 +2515,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7278735349183813720, guid: 1068a678354ddf2489e9b51cebe784b2, type: 3}
+      propertyPath: tileID
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 8835146293047337037, guid: 1068a678354ddf2489e9b51cebe784b2, type: 3}
       propertyPath: m_Name
       value: NormalTile (1)
@@ -2518,6 +2531,11 @@ PrefabInstance:
 --- !u!4 &340619876 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 34554393099280154, guid: 1068a678354ddf2489e9b51cebe784b2, type: 3}
+  m_PrefabInstance: {fileID: 340619875}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &340619877 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8835146293047337037, guid: 1068a678354ddf2489e9b51cebe784b2, type: 3}
   m_PrefabInstance: {fileID: 340619875}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &343311412
@@ -2599,6 +2617,16 @@ Transform:
   - {fileID: 1735140750}
   m_Father: {fileID: 359899004}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &353364431 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1122887553982079625, guid: b1738e47081d6664397e45a9a04b68a1, type: 3}
+  m_PrefabInstance: {fileID: 543298143}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &353364437 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8214559547034226610, guid: b1738e47081d6664397e45a9a04b68a1, type: 3}
+  m_PrefabInstance: {fileID: 543298143}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &356957820
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4062,6 +4090,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7278735349183813720, guid: 1068a678354ddf2489e9b51cebe784b2, type: 3}
+      propertyPath: tileID
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8835146293047337037, guid: 1068a678354ddf2489e9b51cebe784b2, type: 3}
       propertyPath: m_Name
       value: NormalTile (2)
@@ -4076,6 +4108,76 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 34554393099280154, guid: 1068a678354ddf2489e9b51cebe784b2, type: 3}
   m_PrefabInstance: {fileID: 541644067}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &541644069 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8835146293047337037, guid: 1068a678354ddf2489e9b51cebe784b2, type: 3}
+  m_PrefabInstance: {fileID: 541644067}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &543298143
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 883445438}
+    m_Modifications:
+    - target: {fileID: -3510888860683471738, guid: b1738e47081d6664397e45a9a04b68a1, type: 3}
+      propertyPath: tileID
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 1122887553982079625, guid: b1738e47081d6664397e45a9a04b68a1, type: 3}
+      propertyPath: m_Name
+      value: ExplosiveTiles (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1122887553982079625, guid: b1738e47081d6664397e45a9a04b68a1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8214559547034226610, guid: b1738e47081d6664397e45a9a04b68a1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8214559547034226610, guid: b1738e47081d6664397e45a9a04b68a1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8214559547034226610, guid: b1738e47081d6664397e45a9a04b68a1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8214559547034226610, guid: b1738e47081d6664397e45a9a04b68a1, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8214559547034226610, guid: b1738e47081d6664397e45a9a04b68a1, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8214559547034226610, guid: b1738e47081d6664397e45a9a04b68a1, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8214559547034226610, guid: b1738e47081d6664397e45a9a04b68a1, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8214559547034226610, guid: b1738e47081d6664397e45a9a04b68a1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8214559547034226610, guid: b1738e47081d6664397e45a9a04b68a1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8214559547034226610, guid: b1738e47081d6664397e45a9a04b68a1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b1738e47081d6664397e45a9a04b68a1, type: 3}
 --- !u!1001 &547921416
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6526,6 +6628,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7278735349183813720, guid: 1068a678354ddf2489e9b51cebe784b2, type: 3}
+      propertyPath: tileID
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 8835146293047337037, guid: 1068a678354ddf2489e9b51cebe784b2, type: 3}
       propertyPath: m_Name
       value: NormalTile (5)
@@ -6538,6 +6644,11 @@ PrefabInstance:
 --- !u!4 &778263116 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 34554393099280154, guid: 1068a678354ddf2489e9b51cebe784b2, type: 3}
+  m_PrefabInstance: {fileID: 778263115}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &778263117 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8835146293047337037, guid: 1068a678354ddf2489e9b51cebe784b2, type: 3}
   m_PrefabInstance: {fileID: 778263115}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &801600411
@@ -7438,6 +7549,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7278735349183813720, guid: 1068a678354ddf2489e9b51cebe784b2, type: 3}
+      propertyPath: tileID
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8835146293047337037, guid: 1068a678354ddf2489e9b51cebe784b2, type: 3}
       propertyPath: m_Name
       value: NormalTile (7)
@@ -7450,6 +7565,11 @@ PrefabInstance:
 --- !u!4 &851655862 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 34554393099280154, guid: 1068a678354ddf2489e9b51cebe784b2, type: 3}
+  m_PrefabInstance: {fileID: 851655861}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &851655863 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8835146293047337037, guid: 1068a678354ddf2489e9b51cebe784b2, type: 3}
   m_PrefabInstance: {fileID: 851655861}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &853220468
@@ -7954,6 +8074,8 @@ Transform:
   - {fileID: 1716836734}
   - {fileID: 1592357064}
   - {fileID: 996375693}
+  - {fileID: 1027049050}
+  - {fileID: 353364437}
   m_Father: {fileID: 359899004}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &883957753
@@ -8411,7 +8533,7 @@ GameObject:
   - component: {fileID: 931129744}
   - component: {fileID: 931129745}
   m_Layer: 0
-  m_Name: LobbyManager
+  m_Name: Online Game Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8441,15 +8563,33 @@ MonoBehaviour:
   m_GameObject: {fileID: 931129743}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 455a82e0640cefb49babfd4bd0827733, type: 3}
+  m_Script: {fileID: 11500000, guid: c78ba32c57738b44a8bf273c22bbee5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lobbyTileMap: {fileID: 359899003}
   Player1: {fileID: 1327943693}
   Player2: {fileID: 1170390203}
   serverUDP: {fileID: 13726699}
   clientUDP: {fileID: 1250769887}
-  isHost: 1
+  isHost: 0
+  currentTiles:
+  - {fileID: 1387227144}
+  - {fileID: 1943690709}
+  - {fileID: 1271782891}
+  - {fileID: 340619877}
+  - {fileID: 541644069}
+  - {fileID: 318852947}
+  - {fileID: 940374643}
+  - {fileID: 778263117}
+  - {fileID: 2095702642}
+  - {fileID: 851655863}
+  - {fileID: 1914477756}
+  - {fileID: 1734784987}
+  - {fileID: 1195455651}
+  - {fileID: 1716836735}
+  - {fileID: 1592357065}
+  - {fileID: 996375694}
+  - {fileID: 1027049049}
+  - {fileID: 353364431}
 --- !u!1001 &940374641
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8498,6 +8638,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7278735349183813720, guid: 1068a678354ddf2489e9b51cebe784b2, type: 3}
+      propertyPath: tileID
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 8835146293047337037, guid: 1068a678354ddf2489e9b51cebe784b2, type: 3}
       propertyPath: m_Name
       value: NormalTile (4)
@@ -8510,6 +8654,11 @@ PrefabInstance:
 --- !u!4 &940374642 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 34554393099280154, guid: 1068a678354ddf2489e9b51cebe784b2, type: 3}
+  m_PrefabInstance: {fileID: 940374641}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &940374643 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8835146293047337037, guid: 1068a678354ddf2489e9b51cebe784b2, type: 3}
   m_PrefabInstance: {fileID: 940374641}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &946625722
@@ -9016,6 +9165,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 883445438}
     m_Modifications:
+    - target: {fileID: -3510888860683471738, guid: b1738e47081d6664397e45a9a04b68a1, type: 3}
+      propertyPath: tileID
+      value: 16
+      objectReference: {fileID: 0}
     - target: {fileID: 1122887553982079625, guid: b1738e47081d6664397e45a9a04b68a1, type: 3}
       propertyPath: m_Name
       value: ExplosiveTiles (3)
@@ -9072,6 +9225,11 @@ PrefabInstance:
 --- !u!4 &996375693 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8214559547034226610, guid: b1738e47081d6664397e45a9a04b68a1, type: 3}
+  m_PrefabInstance: {fileID: 996375692}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &996375694 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1122887553982079625, guid: b1738e47081d6664397e45a9a04b68a1, type: 3}
   m_PrefabInstance: {fileID: 996375692}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1006854246
@@ -9259,6 +9417,16 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 703127078138060907, guid: 4438e18e05ea7ec4e8e089267374757f, type: 3}
   m_PrefabInstance: {fileID: 1025370190}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1027049049 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1122887553982079625, guid: b1738e47081d6664397e45a9a04b68a1, type: 3}
+  m_PrefabInstance: {fileID: 2039530541}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1027049050 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8214559547034226610, guid: b1738e47081d6664397e45a9a04b68a1, type: 3}
+  m_PrefabInstance: {fileID: 2039530541}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1037673580
 PrefabInstance:
@@ -10066,6 +10234,10 @@ PrefabInstance:
     - target: {fileID: 7718844437064802265, guid: 60740275e101ade478165ad8e3db2304, type: 3}
       propertyPath: lobbyManager
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7718844437064802265, guid: 60740275e101ade478165ad8e3db2304, type: 3}
+      propertyPath: onlineGameManager
+      value: 
       objectReference: {fileID: 931129745}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10336,6 +10508,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 883445438}
     m_Modifications:
+    - target: {fileID: -3510888860683471738, guid: b1738e47081d6664397e45a9a04b68a1, type: 3}
+      propertyPath: tileID
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 1122887553982079625, guid: b1738e47081d6664397e45a9a04b68a1, type: 3}
       propertyPath: m_Name
       value: ExplosiveTiles
@@ -10394,6 +10570,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8214559547034226610, guid: b1738e47081d6664397e45a9a04b68a1, type: 3}
   m_PrefabInstance: {fileID: 1195455649}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1195455651 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1122887553982079625, guid: b1738e47081d6664397e45a9a04b68a1, type: 3}
+  m_PrefabInstance: {fileID: 1195455649}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1206054987
 GameObject:
   m_ObjectHideFlags: 0
@@ -10447,7 +10628,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2a25b0da999412499995ba3b3907eb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lobbyManager: {fileID: 931129745}
+  lobbyManager: {fileID: 0}
 --- !u!82 &1206054990
 AudioSource:
   m_ObjectHideFlags: 0
@@ -11253,7 +11434,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UItextObj: {fileID: 1883712989}
-  lobbyManager: {fileID: 931129745}
+  onlineGameManager: {fileID: 931129745}
   createLobbyWindow: {fileID: 1556725665}
   invalidIPMessage: {fileID: 1274870656}
   clientName: 
@@ -11368,6 +11549,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7278735349183813720, guid: 1068a678354ddf2489e9b51cebe784b2, type: 3}
+      propertyPath: tileID
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8835146293047337037, guid: 1068a678354ddf2489e9b51cebe784b2, type: 3}
       propertyPath: m_Name
       value: NormalTile (1)
@@ -11380,6 +11565,11 @@ PrefabInstance:
 --- !u!4 &1271782890 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 34554393099280154, guid: 1068a678354ddf2489e9b51cebe784b2, type: 3}
+  m_PrefabInstance: {fileID: 1271782889}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1271782891 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8835146293047337037, guid: 1068a678354ddf2489e9b51cebe784b2, type: 3}
   m_PrefabInstance: {fileID: 1271782889}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1274870656
@@ -11789,6 +11979,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7718844437064802265, guid: 60740275e101ade478165ad8e3db2304, type: 3}
       propertyPath: lobbyManager
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7718844437064802265, guid: 60740275e101ade478165ad8e3db2304, type: 3}
+      propertyPath: onlineGameManager
       value: 
       objectReference: {fileID: 931129745}
     m_RemovedComponents: []
@@ -12379,6 +12573,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7278735349183813720, guid: 1068a678354ddf2489e9b51cebe784b2, type: 3}
+      propertyPath: tileID
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8835146293047337037, guid: 1068a678354ddf2489e9b51cebe784b2, type: 3}
       propertyPath: m_Name
       value: NormalTile
@@ -12391,6 +12589,11 @@ PrefabInstance:
 --- !u!4 &1387227143 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 34554393099280154, guid: 1068a678354ddf2489e9b51cebe784b2, type: 3}
+  m_PrefabInstance: {fileID: 1387227142}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1387227144 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8835146293047337037, guid: 1068a678354ddf2489e9b51cebe784b2, type: 3}
   m_PrefabInstance: {fileID: 1387227142}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1388851096
@@ -14512,6 +14715,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 883445438}
     m_Modifications:
+    - target: {fileID: -3510888860683471738, guid: b1738e47081d6664397e45a9a04b68a1, type: 3}
+      propertyPath: tileID
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 1122887553982079625, guid: b1738e47081d6664397e45a9a04b68a1, type: 3}
       propertyPath: m_Name
       value: ExplosiveTiles (2)
@@ -14568,6 +14775,11 @@ PrefabInstance:
 --- !u!4 &1592357064 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8214559547034226610, guid: b1738e47081d6664397e45a9a04b68a1, type: 3}
+  m_PrefabInstance: {fileID: 1592357063}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1592357065 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1122887553982079625, guid: b1738e47081d6664397e45a9a04b68a1, type: 3}
   m_PrefabInstance: {fileID: 1592357063}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1592524284
@@ -14766,7 +14978,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1606229406}
   m_Layer: 0
-  m_Name: === LOBBY MANAGER ===
+  m_Name: === GAME MANAGER ===
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16024,6 +16236,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 883445438}
     m_Modifications:
+    - target: {fileID: -3510888860683471738, guid: b1738e47081d6664397e45a9a04b68a1, type: 3}
+      propertyPath: tileID
+      value: 14
+      objectReference: {fileID: 0}
     - target: {fileID: 1122887553982079625, guid: b1738e47081d6664397e45a9a04b68a1, type: 3}
       propertyPath: m_Name
       value: ExplosiveTiles (1)
@@ -16082,6 +16298,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8214559547034226610, guid: b1738e47081d6664397e45a9a04b68a1, type: 3}
   m_PrefabInstance: {fileID: 1716836733}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1716836735 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1122887553982079625, guid: b1738e47081d6664397e45a9a04b68a1, type: 3}
+  m_PrefabInstance: {fileID: 1716836733}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1734784985
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16130,6 +16351,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7278735349183813720, guid: 1068a678354ddf2489e9b51cebe784b2, type: 3}
+      propertyPath: tileID
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 8835146293047337037, guid: 1068a678354ddf2489e9b51cebe784b2, type: 3}
       propertyPath: m_Name
       value: NormalTile (9)
@@ -16142,6 +16367,11 @@ PrefabInstance:
 --- !u!4 &1734784986 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 34554393099280154, guid: 1068a678354ddf2489e9b51cebe784b2, type: 3}
+  m_PrefabInstance: {fileID: 1734784985}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1734784987 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8835146293047337037, guid: 1068a678354ddf2489e9b51cebe784b2, type: 3}
   m_PrefabInstance: {fileID: 1734784985}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1735140749
@@ -18017,7 +18247,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 34554393099280154, guid: 1068a678354ddf2489e9b51cebe784b2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 34554393099280154, guid: 1068a678354ddf2489e9b51cebe784b2, type: 3}
       propertyPath: m_LocalPosition.y
@@ -18055,6 +18285,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7278735349183813720, guid: 1068a678354ddf2489e9b51cebe784b2, type: 3}
+      propertyPath: tileID
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 8835146293047337037, guid: 1068a678354ddf2489e9b51cebe784b2, type: 3}
       propertyPath: m_Name
       value: NormalTile (8)
@@ -18067,6 +18301,11 @@ PrefabInstance:
 --- !u!4 &1914477755 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 34554393099280154, guid: 1068a678354ddf2489e9b51cebe784b2, type: 3}
+  m_PrefabInstance: {fileID: 1914477754}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1914477756 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8835146293047337037, guid: 1068a678354ddf2489e9b51cebe784b2, type: 3}
   m_PrefabInstance: {fileID: 1914477754}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1926971949
@@ -18448,6 +18687,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7278735349183813720, guid: 1068a678354ddf2489e9b51cebe784b2, type: 3}
+      propertyPath: tileID
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8835146293047337037, guid: 1068a678354ddf2489e9b51cebe784b2, type: 3}
       propertyPath: m_Name
       value: NormalTile
@@ -18460,6 +18703,11 @@ PrefabInstance:
 --- !u!4 &1943690708 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 34554393099280154, guid: 1068a678354ddf2489e9b51cebe784b2, type: 3}
+  m_PrefabInstance: {fileID: 1943690707}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1943690709 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8835146293047337037, guid: 1068a678354ddf2489e9b51cebe784b2, type: 3}
   m_PrefabInstance: {fileID: 1943690707}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1974276411
@@ -19082,6 +19330,71 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3505140278529612530, guid: 003ed7156a5e44149bb40797239a679c, type: 3}
   m_PrefabInstance: {fileID: 2026387700}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2039530541
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 883445438}
+    m_Modifications:
+    - target: {fileID: -3510888860683471738, guid: b1738e47081d6664397e45a9a04b68a1, type: 3}
+      propertyPath: tileID
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 1122887553982079625, guid: b1738e47081d6664397e45a9a04b68a1, type: 3}
+      propertyPath: m_Name
+      value: ExplosiveTiles (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1122887553982079625, guid: b1738e47081d6664397e45a9a04b68a1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8214559547034226610, guid: b1738e47081d6664397e45a9a04b68a1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8214559547034226610, guid: b1738e47081d6664397e45a9a04b68a1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8214559547034226610, guid: b1738e47081d6664397e45a9a04b68a1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8214559547034226610, guid: b1738e47081d6664397e45a9a04b68a1, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8214559547034226610, guid: b1738e47081d6664397e45a9a04b68a1, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8214559547034226610, guid: b1738e47081d6664397e45a9a04b68a1, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8214559547034226610, guid: b1738e47081d6664397e45a9a04b68a1, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8214559547034226610, guid: b1738e47081d6664397e45a9a04b68a1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8214559547034226610, guid: b1738e47081d6664397e45a9a04b68a1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8214559547034226610, guid: b1738e47081d6664397e45a9a04b68a1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b1738e47081d6664397e45a9a04b68a1, type: 3}
 --- !u!1001 &2060457965
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19905,7 +20218,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: JUGAR
+  m_text: PLAY
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 71b5afedd6385884db2bc0bdd0058df1, type: 2}
   m_sharedMaterial: {fileID: -5885315602980458996, guid: 71b5afedd6385884db2bc0bdd0058df1, type: 2}
@@ -20030,6 +20343,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7278735349183813720, guid: 1068a678354ddf2489e9b51cebe784b2, type: 3}
+      propertyPath: tileID
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 8835146293047337037, guid: 1068a678354ddf2489e9b51cebe784b2, type: 3}
       propertyPath: m_Name
       value: NormalTile (6)
@@ -20042,6 +20359,11 @@ PrefabInstance:
 --- !u!4 &2095702641 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 34554393099280154, guid: 1068a678354ddf2489e9b51cebe784b2, type: 3}
+  m_PrefabInstance: {fileID: 2095702640}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2095702642 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8835146293047337037, guid: 1068a678354ddf2489e9b51cebe784b2, type: 3}
   m_PrefabInstance: {fileID: 2095702640}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2117653299

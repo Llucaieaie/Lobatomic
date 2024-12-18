@@ -9,7 +9,7 @@ using System.Collections.Generic;
 public class ServerUDP : MonoBehaviour
 {
     public GameObject UItextObj;
-    public LobbyManager lobbyManager;
+    public OnlineGameManager onlineGameManager;
     public GameObject createLobbyWindow;
     public string hostName = "";
 
@@ -39,11 +39,11 @@ public class ServerUDP : MonoBehaviour
         receiveThread = new Thread(ReceiveData);
         receiveThread.Start();
 
-        // Set lobby values =======================================
-        lobbyManager.Player1.GetComponent<PlayerDataManager>().SetName(hostName);
-        lobbyManager.SetPlayerActive(1, false);
-        lobbyManager.gameObject.SetActive(true);
-        lobbyManager.isHost = true;
+        // Set ogm values =======================================
+        onlineGameManager.Player1.GetComponent<PlayerDataManager>().SetName(hostName);
+        onlineGameManager.SetPlayerActive(1, false);
+        onlineGameManager.gameObject.SetActive(true);
+        onlineGameManager.isHost = true;
         createLobbyWindow.SetActive(false);
     }
 
@@ -59,17 +59,13 @@ public class ServerUDP : MonoBehaviour
             byte[] receivedBytes = new byte[recv];
             System.Array.Copy(data, receivedBytes, recv);
 
-            // Check if this Remote is already the client
             client ??= Remote;
 
             try
             {
                 PlayerData playerData = PlayerData.Deserialize(receivedBytes);
 
-                // Enqueue PlayerData instead of just position
-                lobbyManager.EnqueuePlayerData(playerData);
-
-                //Debug.Log($"Received PlayerData: Id={playerData.Id}, Name={playerData.Name}, Position={playerData.Position}");
+                onlineGameManager.EnqueuePlayerData(playerData);
             }
             catch (System.Exception ex)
             {
@@ -82,7 +78,7 @@ public class ServerUDP : MonoBehaviour
     {
         if (client == null) return;
 
-        lobbyManager.SetPlayerActive(1, true);
+        onlineGameManager.SetPlayerActive(1, true);
 
         byte[] data = PlayerData.Serialize(playerData);
 

@@ -12,7 +12,7 @@ public class PlayerMovementOnline : MonoBehaviour
     public Animator animator;
     public PowerUpManager powerUpManager;
 
-    public LobbyManager lobbyManager;
+    public OnlineGameManager onlineGameManager;
     public float maxSpeed;
 
     [HideInInspector] public PlayerDataManager dataManager;
@@ -28,7 +28,7 @@ public class PlayerMovementOnline : MonoBehaviour
 
     void Update()
     {
-        if (dataManager.isControlled && lobbyManager.isActiveAndEnabled)
+        if (dataManager.isControlled && onlineGameManager.isActiveAndEnabled)
         {
             // Capturamos el input del jugador
             movement = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
@@ -49,7 +49,7 @@ public class PlayerMovementOnline : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (dataManager.isControlled && lobbyManager.isActiveAndEnabled)
+        if (dataManager.isControlled && onlineGameManager.isActiveAndEnabled)
         {
             // Movimiento del jugador usando Rigidbody2D
             Vector2 newPosition = rb.position + movement * maxSpeed * Time.fixedDeltaTime;
