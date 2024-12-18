@@ -5,32 +5,11 @@ using UnityEngine.Tilemaps;
 using Random = UnityEngine.Random;
 using UnityEngine.SceneManagement;
 
-public enum TileType
-{
-    HAPPY=0,
-    INMUNE,
-    NORMAL,
-    POWER_UP,
-    SAD,
-    EXPLOSIVE,
-    VOID,
-}
-
-[System.Serializable]
-public struct TileStruct
-{
-    public GameObject tile;
-    public TileType tileType;
-    public int maxNum, tileCount, appearRate;
-    public int maxNumStatic;
-};
-
-public class MapGenerator : MonoBehaviour
+public class MapGeneratorOnline : MonoBehaviour
 {
     [SerializeField] TileStruct[] tileStruct;
     public Tilemap tileMap;
-    public GameObject camera;
-    public TimerController timerController;
+    public OnlineGameManager onlineGameManager;
     public List<GameObject> tiles = new List<GameObject>();
     HashSet<Vector3Int> positionsFromTileFrame = new HashSet<Vector3Int>();
     List<Vector3Int> occupied = new List<Vector3Int>();
@@ -52,6 +31,9 @@ public class MapGenerator : MonoBehaviour
         {
             tileStruct[i].maxNumStatic = tileStruct[i].maxNum;
         }
+
+        GameObject ogm = GameObject.Find("Online Game Manager");
+        if (ogm != null) onlineGameManager = ogm.GetComponent<OnlineGameManager>();
 
         GenerateMap(sizeX, sizeX);
     }
@@ -91,17 +73,19 @@ public class MapGenerator : MonoBehaviour
                 {
                     occupied.Add(position);
                     GameObject newTile = Instantiate(tileStruct[3].tile, new Vector3(position.x, position.y, 0), Quaternion.identity);
-                    newTile.GetComponent<Tile>().tileID = i+1;
+                    newTile.GetComponent<Tile>().tileID = i + 1;
 
                     tiles.Add(Instantiate(tileStruct[3].tile, new Vector3(position.x, position.y, 0), Quaternion.identity));
                 }
                 else if (!IsTiledOcccupied(position) && IsInRate(tileStruct[i]) && tileStruct[i].maxNum > tileStruct[i].tileCount)
                 {
-                    PaintTiles(position, tileStruct[i], i+1);
+                    PaintTiles(position, tileStruct[i], i + 1);
                     tileStruct[i].tileCount++;
                 }
             }
         }
+
+        onlineGameManager.currentTiles = new List<GameObject>(tiles);
     }
 
     private void SaveZone()
@@ -201,12 +185,11 @@ public class MapGenerator : MonoBehaviour
         {
             if (tiles[i] != null)
             {
-               Destroy(tiles[i].gameObject);
+                Destroy(tiles[i].gameObject);
             }
         }
         tiles.Clear();
 
-        timerController.TimeCount += 20;
         if (SceneManager.GetActiveScene().name == "SadTutotial")
         {
             note.SetActive(true);
@@ -223,7 +206,7 @@ public class MapGenerator : MonoBehaviour
     }
     public IEnumerator CleanUp()
     {
-        camera.GetComponent<CameraManager>().MapDestroy();
+        //camera.GetComponent<CameraManager>().MapDestroy();
 
         yield return new WaitForSeconds(0.1f);
 

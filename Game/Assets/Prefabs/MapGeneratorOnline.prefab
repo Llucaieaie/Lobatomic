@@ -1,0 +1,153 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &623727904181834370
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2023701062016412200}
+  - component: {fileID: 7127047112421167243}
+  - component: {fileID: 4069528125709575049}
+  - component: {fileID: 4680824376799294053}
+  m_Layer: 0
+  m_Name: MapGeneratorOnline
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2023701062016412200
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 623727904181834370}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.563041, y: 0.57622457, z: -0.010194343}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!68 &7127047112421167243
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 623727904181834370}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: -0.5, y: 0}
+  - {x: 0.5, y: 0}
+  m_AdjacentStartPoint: {x: 0, y: 0}
+  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0
+--- !u!50 &4069528125709575049
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 623727904181834370}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!114 &4680824376799294053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 623727904181834370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 642830212c9caa848b4f733b9aefc055, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tileStruct:
+  - tile: {fileID: 1122887553982079625, guid: b1738e47081d6664397e45a9a04b68a1, type: 3}
+    tileType: 5
+    maxNum: 10
+    tileCount: 0
+    appearRate: 5
+    maxNumStatic: 0
+  - tile: {fileID: 8835146293047337037, guid: 1068a678354ddf2489e9b51cebe784b2, type: 3}
+    tileType: 2
+    maxNum: 50
+    tileCount: 0
+    appearRate: 50
+    maxNumStatic: 0
+  - tile: {fileID: 1488253802121505027, guid: 003ed7156a5e44149bb40797239a679c, type: 3}
+    tileType: 1
+    maxNum: 30
+    tileCount: 0
+    appearRate: 30
+    maxNumStatic: 0
+  - tile: {fileID: 8835146293047337037, guid: 1068a678354ddf2489e9b51cebe784b2, type: 3}
+    tileType: 6
+    maxNum: 10
+    tileCount: 0
+    appearRate: 10
+    maxNumStatic: 0
+  tileMap: {fileID: 0}
+  onlineGameManager: {fileID: 0}
+  tiles: []
+  sizeX: 45
+  sizeY: 45
+  button: {fileID: 0}
+  note: {fileID: 0}
+  groundTiles:
+  - {fileID: 7123767876524449978, guid: 4438e18e05ea7ec4e8e089267374757f, type: 3}
+  - {fileID: 2761505256534072843, guid: e7d5c2a44b73c6b489e7579aafa2faf8, type: 3}
+  padding: 5
+  seed: 0
