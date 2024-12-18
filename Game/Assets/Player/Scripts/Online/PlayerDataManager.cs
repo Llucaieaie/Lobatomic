@@ -11,7 +11,7 @@ public class PlayerDataManager : MonoBehaviour
     [HideInInspector] public PlayerData data = new PlayerData();
 
     TMP_Text nameTag;
-    public bool isControlled;  // If true, user controls this and sends data to remote. If false, user doesn't control this and recieves data from remote.
+    public bool isControlled; // If true, user controls this and sends data to remote. If false, user doesn't control this and recieves data from remote.
 
     // Start is called before the first frame update
     void Start()
@@ -22,10 +22,16 @@ public class PlayerDataManager : MonoBehaviour
         nameTag = GetComponentInChildren<TMP_Text>();
     }
 
+    private void OnEnable()
+    {
+        
+    }
+
     // Update is called once per frame
     void Update()
     {
-
+        Camera playerCam = GetComponentInChildren<Camera>();
+        if (playerCam.enabled != isControlled) playerCam.enabled = isControlled;
     }
 
     public void SetPlayerValues(PlayerData newData)

@@ -144,42 +144,43 @@ public class PlayerWeaponOnline : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (dataManager.isControlled)
+
+        if (collision.gameObject != null && collision.gameObject.layer != 0 && collision.gameObject.tag == "Tile")
         {
-            if (collision.gameObject != null && collision.gameObject.layer != 0 && collision.gameObject.tag == "Tile")
+
+            //Destroy tiles
+            switch (collision.gameObject.layer)
             {
+                case 6:
+                case 7:
+                case 8:
+                case 9:
+                case 10:
+                    //collision.GetComponent<Tile>().OnExplosion();
+                    //if (dataManager.isControlled) tilesDestroyed.Add(collision.gameObject);
 
-                //Destroy tiles
-                switch (collision.gameObject.layer)
-                {
-                    case 6:
-                    case 7:
-                    case 8:
-                    case 9:
-                    case 10:
-                        //collision.GetComponent<Tile>().OnExplosion();
-                        //if (dataManager.isControlled) tilesDestroyed.Add(collision.gameObject);
+                    OnlineGameManager ogm = GameObject.Find("Online Game Manager").GetComponent<OnlineGameManager>();
 
-                        OnlineGameManager ogm = GameObject.Find("Online Game Manager").GetComponent<OnlineGameManager>();
+                    int tileID = collision.GetComponent<Tile>().tileID;
 
-                        int tileID = collision.GetComponent<Tile>().tileID;
-
+                    if (dataManager.isControlled)
+                    {
                         if (dataManager.data.destroyedTileIDs.Contains(tileID) == false)
                         {
                             dataManager.data.destroyedTileIDs.Add(tileID);
                         }
-                        ogm.DestroyTileByID(tileID);
+                    }
+                    ogm.DestroyTileByID(tileID);
 
-                        break;
-                    case 11:
-                        if (!clashAudio.isPlaying)
-                        {
-                            float p = Random.Range(0.75f, 1.5f);
-                            clashAudio.pitch = p;
-                            clashAudio.Play();
-                        }
-                        break;
-                }
+                    break;
+                case 11:
+                    if (!clashAudio.isPlaying)
+                    {
+                        float p = Random.Range(0.75f, 1.5f);
+                        clashAudio.pitch = p;
+                        clashAudio.Play();
+                    }
+                    break;
             }
         }
     }

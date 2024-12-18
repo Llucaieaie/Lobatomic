@@ -1055,7 +1055,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!20 &148119995
 Camera:
   m_ObjectHideFlags: 0
@@ -10219,6 +10219,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Micro Micro
       objectReference: {fileID: 0}
+    - target: {fileID: 43102812682024402, guid: 60740275e101ade478165ad8e3db2304, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 43102812682024403, guid: 60740275e101ade478165ad8e3db2304, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -11968,6 +11972,14 @@ PrefabInstance:
     - target: {fileID: 43102812682024402, guid: 60740275e101ade478165ad8e3db2304, type: 3}
       propertyPath: m_Name
       value: Mini Mini
+      objectReference: {fileID: 0}
+    - target: {fileID: 43102812682024402, guid: 60740275e101ade478165ad8e3db2304, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1968260823002069188, guid: 60740275e101ade478165ad8e3db2304, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7718844437064802265, guid: 60740275e101ade478165ad8e3db2304, type: 3}
       propertyPath: clientUDP
