@@ -71,6 +71,11 @@ public class OnlineGameManager : MonoBehaviour
         else Player2.SetActive(active);
     }
 
+    public void ClearTileList()
+    {
+        currentTiles.Clear();
+    }
+
     public void EnqueuePlayerData(PlayerData pData)
     {
         playerDataQueue.Enqueue(pData);
@@ -86,18 +91,23 @@ public class OnlineGameManager : MonoBehaviour
 
     public void DestroyTileByID(int id)
     {
-        for (int i = 0; i < currentTiles.Count; i++)
+        List<GameObject> tilesToRemove = new List<GameObject>();
+
+        foreach (var tileObj in currentTiles)
         {
-            var tile = currentTiles[i]?.GetComponent<Tile>();
+            var tile = tileObj?.GetComponent<Tile>();
             if (tile != null && tile.tileID == id)
             {
                 Debug.Log("OGM destroyed a tile with ID " + id);
 
                 tile.OnExplosion();
-                currentTiles.RemoveAt(i);
-
-                break;
+                tilesToRemove.Add(tileObj); // Mark for elimination
             }
+        }
+
+        foreach (var tileObj in tilesToRemove)
+        {
+            currentTiles.Remove(tileObj);
         }
     }
 }

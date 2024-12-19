@@ -35,6 +35,7 @@ public class Start1vs1Game : MonoBehaviour
         UnityEngine.Random.InitState(serverUDP.seed);
 
         serverUDP.SendCommandToClient("SetSeed", serverUDP.seed);
+        onlineGameManager.ClearTileList();
         SceneManager.LoadScene("VersusScene");
     }
 }

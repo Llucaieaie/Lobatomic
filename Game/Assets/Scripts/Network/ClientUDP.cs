@@ -193,6 +193,7 @@ public class ClientUDP : MonoBehaviour
 
         hostSeed = seed;
 
+        onlineGameManager.ClearTileList();
         playRequest = true;
     }
 
