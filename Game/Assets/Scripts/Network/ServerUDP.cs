@@ -5,6 +5,7 @@ using UnityEngine;
 using System.Threading;
 using TMPro;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class ServerUDP : MonoBehaviour
 {
@@ -20,15 +21,29 @@ public class ServerUDP : MonoBehaviour
     private TextMeshProUGUI UItext;
     private string serverText;
 
+    public GameObject PlayerDisconnectedPopUpPrefab;
+    bool playerDisconnected;
+
     void Start()
     {
         UItext = UItextObj.GetComponent<TextMeshProUGUI>();
         DontDestroyOnLoad(gameObject);
+        playerDisconnected = false;
     }
 
     void Update()
     {
         UItext.text = serverText;
+
+        if (playerDisconnected)
+        {
+            Debug.Log("Player disconnected");
+            playerDisconnected = false;
+
+            SceneManager.LoadScene("LobbyScene");
+            Canvas canvas = FindObjectOfType<Canvas>();
+            Instantiate(PlayerDisconnectedPopUpPrefab, canvas.transform);
+        }
     }
 
     public void StartServer()
@@ -58,7 +73,16 @@ public class ServerUDP : MonoBehaviour
 
         while (true)
         {
-            int recv = socket.ReceiveFrom(data, ref Remote);
+            int recv = 0;
+            try
+            {
+                recv = socket.ReceiveFrom(data, ref Remote);
+            }
+            catch 
+            {
+                playerDisconnected = true;
+                return;
+            }
             byte[] receivedBytes = new byte[recv];
             System.Array.Copy(data, receivedBytes, recv);
 

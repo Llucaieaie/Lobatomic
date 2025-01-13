@@ -38,7 +38,6 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -172,6 +171,7 @@ MonoBehaviour:
   createLobbyWindow: {fileID: 1835091294}
   hostName: 
   seed: 0
+  PlayerDisconnectedPopUpPrefab: {fileID: 136181529503860339, guid: 902ddd85ec186b541b8d258ae3702c9d, type: 3}
 --- !u!1001 &14068893
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8709,6 +8709,8 @@ MonoBehaviour:
   - {fileID: 996375694}
   - {fileID: 1027049049}
   - {fileID: 353364431}
+  occupiedTilePositions: []
+  SmapGenerator: {fileID: 0}
 --- !u!1001 &940374641
 PrefabInstance:
   m_ObjectHideFlags: 0
