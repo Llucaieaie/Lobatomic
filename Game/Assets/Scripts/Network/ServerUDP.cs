@@ -43,6 +43,7 @@ public class ServerUDP : MonoBehaviour
 
         // Set ogm values =======================================
         onlineGameManager.Player1.GetComponent<PlayerDataManager>().SetName(hostName);
+        onlineGameManager.SetCurrentTilesLists(onlineGameManager.currentTiles);
         onlineGameManager.SetPlayerActive(1, false);
         onlineGameManager.gameObject.SetActive(true);
         onlineGameManager.isHost = true;

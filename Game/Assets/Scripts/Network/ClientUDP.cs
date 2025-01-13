@@ -67,48 +67,17 @@ public class ClientUDP : MonoBehaviour
 
             // Set ogm values =======================================
             onlineGameManager.Player2.GetComponent<PlayerDataManager>().SetName(clientName);
+            onlineGameManager.SetCurrentTilesLists(onlineGameManager.currentTiles);
             onlineGameManager.SetPlayerActive(0, false);
             onlineGameManager.gameObject.SetActive(true);
             onlineGameManager.isHost = false;
             createLobbyWindow.SetActive(false);
         }
-        catch (Exception e)
+        catch
         {
             StartCoroutine(ShowErrorMessage());
         }
     }
-
-    //void ReceiveData()
-    //{
-    //    byte[] data = new byte[1024];
-    //    EndPoint remoteEndPoint = new IPEndPoint(IPAddress.Any, 0);
-
-    //    while (true)
-    //    {
-    //        try
-    //        {
-    //            // Recibir datos del servidor
-    //            int recv = socket.ReceiveFrom(data, ref remoteEndPoint);
-    //            byte[] receivedBytes = new byte[recv];
-    //            System.Array.Copy(data, receivedBytes, recv);
-
-    //            PlayerData playerData = PlayerData.Deserialize(receivedBytes);
-
-    //            onlineGameManager.EnqueuePlayerData(playerData);
-
-    //            //Debug.Log($"Received PlayerData: Id={playerData.Id}, Name={playerData.Name}, Position={playerData.Position}");
-    //        }
-    //        catch (SocketException ex)
-    //        {
-    //            Debug.LogError($"Socket error while receiving data: {ex.Message}");
-    //            break;
-    //        }
-    //        catch (System.Exception ex)
-    //        {
-    //            Debug.LogError($"Error while processing received data: {ex.Message}");
-    //        }
-    //    }
-    //}
 
     public void SendPlayerData(PlayerData playerData)
     {

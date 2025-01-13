@@ -19,7 +19,7 @@ public class OnlineGameManager : MonoBehaviour
     public List<GameObject> currentTiles = new List<GameObject>();
     public List<Vector3Int> occupiedTilePositions = new List<Vector3Int>();
 
-    public MapGeneratorOnline SmapGenerator;
+    public MapGeneratorOnline mapGenerator;
 
     void Start()
     {
@@ -75,9 +75,21 @@ public class OnlineGameManager : MonoBehaviour
         else Player2.SetActive(active);
     }
 
+    public void SetCurrentTilesLists(List<GameObject> list)
+    {
+        currentTiles = new List<GameObject>(list);
+        
+        foreach (var tileGO in currentTiles)
+        {
+            Vector3Int tilePos = new Vector3Int((int)tileGO.transform.position.x, (int)tileGO.transform.position.y, (int)tileGO.transform.position.z);
+            occupiedTilePositions.Add(tilePos);
+        }
+    }
+
     public void ClearTileList()
     {
         currentTiles.Clear();
+        occupiedTilePositions.Clear();
     }
 
     public void EnqueuePlayerData(PlayerData pData)
@@ -101,7 +113,7 @@ public class OnlineGameManager : MonoBehaviour
         {
             currentTiles[index].GetComponent<Tile>().OnExplosion();
             currentTiles.Remove(currentTiles[index]);
-            
+            occupiedTilePositions.Remove(pos);
         }
     }
 }

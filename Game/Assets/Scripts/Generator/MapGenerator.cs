@@ -29,7 +29,6 @@ public class MapGenerator : MonoBehaviour
 {
     [SerializeField] TileStruct[] tileStruct;
     public Tilemap tileMap;
-    public GameObject camera;
     public TimerController timerController;
     public List<GameObject> tiles = new List<GameObject>();
     HashSet<Vector3Int> positionsFromTileFrame = new HashSet<Vector3Int>();
@@ -215,7 +214,7 @@ public class MapGenerator : MonoBehaviour
     }
     public IEnumerator CleanUp()
     {
-        camera.GetComponent<CameraManager>().MapDestroy();
+        GetComponent<Camera>().GetComponent<CameraManager>().MapDestroy();
 
         yield return new WaitForSeconds(0.1f);
 

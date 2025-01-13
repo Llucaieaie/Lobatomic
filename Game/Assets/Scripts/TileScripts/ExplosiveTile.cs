@@ -24,8 +24,6 @@ public class ExplosiveTile : Tile
 
     IEnumerator Explode()
     {
-        Debug.Log("HOLA?");
-
         GameObject ogm = GameObject.Find("Online Game Manager");
 
         // Wait 2 frames because of OnlineGameManager
@@ -33,15 +31,17 @@ public class ExplosiveTile : Tile
         yield return new WaitForEndOfFrame();
 
         RaycastHit2D[] hitList = Physics2D.CircleCastAll(transform.position, 2f, Vector2.zero, 0, layerMask);
+        foreach (var hit in hitList)
+        {
+            Debug.Log(hit.collider.name);
+        }
+
         for (int i = 0; i < hitList.Length; i++)
         {
-            Debug.Log("QUE");
-
             Tile tile = hitList[i].transform.GetComponent<Tile>();
             bool destroyTile = false;
-            if (tile.transform.gameObject.transform.position != transform.position)
+            if (tile != null && tile.transform.position != transform.position)
             {
-                Debug.Log("BBBB");
                 switch (tile.transform.gameObject.layer)
                 {
                     case 6:
@@ -63,10 +63,10 @@ public class ExplosiveTile : Tile
 
                 if (destroyTile)
                 {
-                    Debug.Log("AAAAA");
                     if (ogm != null)
                     {
-                        //ogm.GetComponent<OnlineGameManager>().DestroyTileByID(tile.tileID);
+                        Vector3Int tilePos = new Vector3Int((int)tile.transform.position.x, (int)tile.transform.position.y, (int)tile.transform.position.z);
+                        ogm.GetComponent<OnlineGameManager>().DestroyTileAtPosition(tilePos);
                     }
                     else tile.OnExplosion();
                 }
