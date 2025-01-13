@@ -36,8 +36,9 @@ public class PlayerDataManager : MonoBehaviour
         // Change nametag
         if (newData.Name != data.Name) SetName(newData.Name);
 
-        // Set position
-        GetComponent<Rigidbody2D>().MovePosition(newData.Position);
+        // Set interpolated position
+        Vector3 newPos = Vector3.Lerp(playerMovement.lastFramePosition, newData.Position, 0.8f);
+        GetComponent<Rigidbody2D>().MovePosition(newPos);
 
         // Attack
         playerWeapon.Attack(newData.attackDirection);

@@ -30,6 +30,31 @@ public class OnlineGameManager : MonoBehaviour
 
     void Update()
     {
+        // Send data with artificial lag between 0ms and 800ms
+        Invoke("SendData", Random.Range(0f, 100));
+
+        PlayerDataManager player1DataManager = Player1.GetComponent<PlayerDataManager>();
+        PlayerDataManager player2DataManager = Player2.GetComponent<PlayerDataManager>();
+
+        // Process data from queue
+        while (playerDataQueue.TryDequeue(out PlayerData playerData))
+        {
+            if (playerData.Id == 0)
+            {
+                player1DataManager.SetPlayerValues(playerData);
+            }
+            else if (playerData.Id == 1)
+            {
+                player2DataManager.SetPlayerValues(playerData);
+            }
+
+            // Destroy tiles according to recieved data
+            DestroyTileAtPosition(playerData.destroyedTilePos);
+        }
+    }
+
+    void SendData()
+    {
         PlayerDataManager player1DataManager = Player1.GetComponent<PlayerDataManager>();
         PlayerDataManager player2DataManager = Player2.GetComponent<PlayerDataManager>();
 
@@ -50,22 +75,6 @@ public class OnlineGameManager : MonoBehaviour
 
             clientUDP.SendPlayerData(player2DataManager.data);
             player2DataManager.data.destroyedTilePos.Clear();
-        }
-
-        // Process data from queue
-        while (playerDataQueue.TryDequeue(out PlayerData playerData))
-        {
-            if (playerData.Id == 0)
-            {
-                player1DataManager.SetPlayerValues(playerData);
-            }
-            else if (playerData.Id == 1)
-            {
-                player2DataManager.SetPlayerValues(playerData);
-            }
-
-            // Destroy tiles according to recieved data
-            DestroyTileAtPosition(playerData.destroyedTilePos);
         }
     }
 

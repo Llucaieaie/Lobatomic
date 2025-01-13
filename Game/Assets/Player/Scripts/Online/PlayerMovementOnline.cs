@@ -20,10 +20,14 @@ public class PlayerMovementOnline : MonoBehaviour
     private Rigidbody2D rb;
     private Vector2 movement;
 
+    public Vector3 lastFramePosition;
+
     private void Start()
     { 
         walkAudio.Play();
         rb = GetComponent<Rigidbody2D>();
+
+        lastFramePosition = rb.position;
     }
 
     void Update()
@@ -47,11 +51,15 @@ public class PlayerMovementOnline : MonoBehaviour
         }
     }
 
+    private void LateUpdate()
+    {
+        lastFramePosition = rb.position;
+    }
+
     private void FixedUpdate()
     {
         if (dataManager.isControlled && onlineGameManager.isActiveAndEnabled)
         {
-            // Movimiento del jugador usando Rigidbody2D
             Vector2 newPosition = rb.position + movement * maxSpeed * Time.fixedDeltaTime;
             rb.MovePosition(newPosition);
 
