@@ -26,19 +26,16 @@ public class ExplosiveTile : Tile
     {
         GameObject ogm = GameObject.Find("Online Game Manager");
 
-        // Wait 2 frames because of OnlineGameManager
-        yield return new WaitForEndOfFrame();
         yield return new WaitForEndOfFrame();
 
-        RaycastHit2D[] hitList = Physics2D.CircleCastAll(transform.position, 2f, Vector2.zero, 0, layerMask);
-        foreach (var hit in hitList)
-        {
-            Debug.Log(hit.collider.name);
-        }
+        RaycastHit2D[] tiles = Physics2D.CircleCastAll(transform.position, 2f, Vector2.zero, 0, layerMask);
 
-        for (int i = 0; i < hitList.Length; i++)
+        for (int i = 0; i < tiles.Length; i++)
         {
-            Tile tile = hitList[i].transform.GetComponent<Tile>();
+            Tile tile = tiles[i].transform.GetComponent<Tile>();
+
+            Debug.Log(tile.name);
+
             bool destroyTile = false;
             if (tile != null && tile.transform.position != transform.position)
             {
