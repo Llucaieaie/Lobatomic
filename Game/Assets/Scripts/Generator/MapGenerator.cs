@@ -85,7 +85,6 @@ public class MapGenerator : MonoBehaviour
                 {
                     occupied.Add(position);
                     GameObject newTile = Instantiate(tileStruct[3].tile, new Vector3(position.x, position.y, 0), Quaternion.identity);
-                    newTile.GetComponent<Tile>().tileID = i+1;
 
                     tiles.Add(Instantiate(tileStruct[3].tile, new Vector3(position.x, position.y, 0), Quaternion.identity));
                 }
@@ -143,7 +142,6 @@ public class MapGenerator : MonoBehaviour
         occupied.Add(position);
 
         GameObject newTile = Instantiate(tile.tile, new Vector3(position.x, position.y, 0), Quaternion.identity);
-        newTile.GetComponent<Tile>().tileID = newID;
 
         tiles.Add(newTile);
     }

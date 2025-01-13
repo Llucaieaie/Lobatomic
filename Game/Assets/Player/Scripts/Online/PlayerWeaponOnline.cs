@@ -156,21 +156,18 @@ public class PlayerWeaponOnline : MonoBehaviour
                 case 8:
                 case 9:
                 case 10:
-                    //collision.GetComponent<Tile>().OnExplosion();
-                    //if (dataManager.isControlled) tilesDestroyed.Add(collision.gameObject);
 
                     OnlineGameManager ogm = GameObject.Find("Online Game Manager").GetComponent<OnlineGameManager>();
-
-                    int tileID = collision.GetComponent<Tile>().tileID;
+                    TilePosition tilePos = new TilePosition((int)collision.transform.position.x, (int)collision.transform.position.y, (int)collision.transform.position.z);
 
                     if (dataManager.isControlled)
                     {
-                        if (dataManager.data.destroyedTileIDs.Contains(tileID) == false)
+                        if (!dataManager.data.destroyedTilePos.Contains(tilePos))
                         {
-                            dataManager.data.destroyedTileIDs.Add(tileID);
+                            dataManager.data.destroyedTilePos.Add(tilePos);
                         }
                     }
-                    ogm.DestroyTileByID(tileID);
+                    ogm.DestroyTileAtPosition(tilePos.GetPos());
 
                     break;
                 case 11:

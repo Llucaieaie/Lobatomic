@@ -1,15 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 using Random = UnityEngine.Random;
 using UnityEngine.SceneManagement;
+using System.Linq;
+using TMPro;
 
 public class MapGeneratorOnline : MonoBehaviour
 {
     // Serialized fields
     [SerializeField] TileStruct[] tileStruct;
-    public Tilemap tileMap;
     public OnlineGameManager onlineGameManager;
     public List<GameObject> tiles = new List<GameObject>();
     [SerializeField] int sizeX, sizeY;
@@ -24,10 +24,10 @@ public class MapGeneratorOnline : MonoBehaviour
 
     // Not serialized fields
     HashSet<Vector3Int> positionsFromTileFrame = new HashSet<Vector3Int>();
-    List<Vector3Int> occupied = new List<Vector3Int>();
+    public List<Vector3Int> occupied = new List<Vector3Int>();
     BoundsInt bounds;
 
-    private int auxTileIDIterator = 0;
+    
 
     private void Start()
     {
@@ -84,14 +84,13 @@ public class MapGeneratorOnline : MonoBehaviour
                 }
                 else if (!IsTiledOcccupied(position) && IsInRate(tileStruct[i]) && tileStruct[i].maxNum > tileStruct[i].tileCount)
                 {
-                    PaintTiles(position, tileStruct[i], auxTileIDIterator);
-                    auxTileIDIterator++;
                     tileStruct[i].tileCount++;
                 }
             }
         }
 
         onlineGameManager.currentTiles = new List<GameObject>(tiles);
+        onlineGameManager.occupiedTilePositions = new List<Vector3Int>(occupied);
     }
 
     private void SaveZone()
@@ -141,7 +140,7 @@ public class MapGeneratorOnline : MonoBehaviour
         occupied.Add(position);
 
         GameObject newTile = Instantiate(tile.tile, new Vector3(position.x, position.y, 0), Quaternion.identity);
-        newTile.GetComponent<Tile>().tileID = newID;
+        //newTile.GetComponent<Tile>().tileID = newID;
         newTile.transform.parent = TilesParent.transform;
         newTile.transform.SetAsLastSibling();
 

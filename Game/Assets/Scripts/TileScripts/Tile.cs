@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
-    public int tileID = 0;
+    //public int tileID = 0;
     public ParticleSystem destroyParticle;
     [HideInInspector]
     public GameObject scoreController;

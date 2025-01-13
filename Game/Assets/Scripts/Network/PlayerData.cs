@@ -14,6 +14,26 @@ public enum AttackDirection
 }
 
 [System.Serializable]
+public struct TilePosition
+{
+    public int x;
+    public int y;
+    public int z;
+
+    public TilePosition(int x, int y, int z)
+    {
+        this.x = x;
+        this.y = y;
+        this.z = z;
+    }
+
+    public Vector3Int GetPos()
+    {
+        return new Vector3Int(x, y, z);
+    }
+}
+
+[System.Serializable]
 public class PlayerData
 {
     public int Id = 0;
@@ -22,7 +42,7 @@ public class PlayerData
     public AttackDirection attackDirection;
 
     // LISTA DE TILES DESTRUIDAS
-    public List<int> destroyedTileIDs = new List<int>();
+    public List<TilePosition> destroyedTilePos = new List<TilePosition>();
 
     public PlayerData() { Id = 0; Name = "No Name"; Position = Vector3.zero; }
 

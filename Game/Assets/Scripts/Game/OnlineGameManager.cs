@@ -1,5 +1,6 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class OnlineGameManager : MonoBehaviour
@@ -16,6 +17,9 @@ public class OnlineGameManager : MonoBehaviour
 
     // LISTA DE TILES
     public List<GameObject> currentTiles = new List<GameObject>();
+    public List<Vector3Int> occupiedTilePositions = new List<Vector3Int>();
+
+    public MapGeneratorOnline SmapGenerator;
 
     void Start()
     {
@@ -36,7 +40,7 @@ public class OnlineGameManager : MonoBehaviour
             if (player2DataManager.isControlled) player2DataManager.isControlled = false;
 
             serverUDP.SendPlayerData(player1DataManager.data);
-            player1DataManager.data.destroyedTileIDs.Clear();
+            player1DataManager.data.destroyedTilePos.Clear();
         }
         else
         {
@@ -45,7 +49,7 @@ public class OnlineGameManager : MonoBehaviour
             if (!player2DataManager.isControlled) player2DataManager.isControlled = true;
 
             clientUDP.SendPlayerData(player2DataManager.data);
-            player2DataManager.data.destroyedTileIDs.Clear();
+            player2DataManager.data.destroyedTilePos.Clear();
         }
 
         // Process data from queue
@@ -61,7 +65,7 @@ public class OnlineGameManager : MonoBehaviour
             }
 
             // Destroy tiles according to recieved data
-            DestroyTileByID(playerData.destroyedTileIDs);
+            DestroyTileAtPosition(playerData.destroyedTilePos);
         }
     }
 
@@ -81,33 +85,23 @@ public class OnlineGameManager : MonoBehaviour
         playerDataQueue.Enqueue(pData);
     }
 
-    public void DestroyTileByID(List<int> IDList)
+    // Las funciones se han actualizado para usar la posicion de la tile en vez de una ID para optimizar
+    public void DestroyTileAtPosition(List<TilePosition> pList)
     {
-        foreach (int tileID in IDList)
+        for (int i = 0; i < pList.Count; i++)
         {
-            DestroyTileByID(tileID);
+            DestroyTileAtPosition(pList[i].GetPos());
         }
     }
 
-    public void DestroyTileByID(int id)
+    public void DestroyTileAtPosition(Vector3Int pos)
     {
-        List<GameObject> tilesToRemove = new List<GameObject>();
-
-        foreach (var tileObj in currentTiles)
+        int index = occupiedTilePositions.Select((pos, index) => new { pos, index }).FirstOrDefault(item => item.pos == pos)?.index ?? -1;
+        if (index != -1)
         {
-            var tile = tileObj?.GetComponent<Tile>();
-            if (tile != null && tile.tileID == id)
-            {
-                Debug.Log("OGM destroyed a tile with ID " + id);
-
-                tile.OnExplosion();
-                tilesToRemove.Add(tileObj); // Mark for elimination
-            }
-        }
-
-        foreach (var tileObj in tilesToRemove)
-        {
-            currentTiles.Remove(tileObj);
+            currentTiles[index].GetComponent<Tile>().OnExplosion();
+            currentTiles.Remove(currentTiles[index]);
+            
         }
     }
 }
